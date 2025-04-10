@@ -16,4 +16,5 @@ public class PacienteRepository {
     public PacienteEntity findByID(Long id){
         return em.find(PacienteEntity.class,id);
     }
+
 }

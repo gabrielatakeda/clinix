@@ -72,4 +72,16 @@ public class PacienteEntity {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "PacienteEntity{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", idade='" + idade + '\'' +
+                ", data=" + data +
+                ", medico=" + medico +
+                '}';
+    }
+
 }

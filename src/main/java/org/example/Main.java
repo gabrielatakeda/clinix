@@ -3,6 +3,7 @@ package org.example;
 import org.example.Entity.PacienteEntity;
 import org.example.Repository.CustomizerFactory;
 import org.example.Repository.PacienteRepository;
+import org.example.service.PacienteService;
 
 import javax.persistence.EntityManager;
 
@@ -12,11 +13,12 @@ public class Main {
         EntityManager em = CustomizerFactory.getEntityManager();
         PacienteRepository pacienteRepository = new PacienteRepository(em);
 
+        PacienteService pacienteService = new PacienteService();
+
         PacienteEntity paciente = pacienteRepository.findByID(5L);
 
         if (paciente != null) {
-            System.out.println(paciente.getId());
-            System.out.println(paciente.getNome());
+            pacienteService.exibirConsulta(paciente);
         } else {
             System.out.println("Paciente not found or returned as null");
         }
