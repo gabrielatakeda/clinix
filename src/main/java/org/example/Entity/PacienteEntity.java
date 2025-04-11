@@ -23,14 +23,18 @@ public class PacienteEntity {
     @Column(name = "data")
     private LocalDate data;
 
+    @Column(name = "fk_usuario")
+    private Long fk_usuario;
+
     public PacienteEntity(){}
 
-    public PacienteEntity(Long id, String nome, int idade, String medico, LocalDate data) {
+    public PacienteEntity(Long id, String nome, int idade, String medico, LocalDate data, Long fk_usuario) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.medico = medico;
         this.data = data;
+        this.fk_usuario = fk_usuario;
     }
 
     public Long getId() {
@@ -53,6 +57,10 @@ public class PacienteEntity {
         return data;
     }
 
+    public Long getFk_usuario() {
+        return fk_usuario;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -71,6 +79,10 @@ public class PacienteEntity {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public void setFk_usuario(Long fk_usuario) {
+        this.fk_usuario = fk_usuario;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class PacienteService {
 
     public PacienteEntity exibirConsulta(PacienteEntity pacienteEntity){
 
-        System.out.println("id: " + pacienteEntity.getId() +
+        System.out.println("\nid: " + pacienteEntity.getId() +
                 "\nnome: " + pacienteEntity.getNome() +
                 "\nidade: " + pacienteEntity.getIdade() +
                 "\ndata: " + pacienteEntity.getData() +
