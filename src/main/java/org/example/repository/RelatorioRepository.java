@@ -12,9 +12,14 @@ public class RelatorioRepository {
         this.em = em;
     }
 
-    public RelatorioRepository(){}
-
     public RelatorioEntity buscarId(Long id){
         return em.find(RelatorioEntity.class, id);
     }
+
+    public void salvar(RelatorioEntity relatorio) {
+        em.getTransaction().begin();
+        em.persist(relatorio);
+        em.getTransaction().commit();
+    }
+
 }

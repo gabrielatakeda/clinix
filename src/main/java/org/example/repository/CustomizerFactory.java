@@ -1,12 +1,13 @@
 package org.example.repository;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.security.auth.login.Configuration;
+
 
 public class CustomizerFactory {
-
-    private static final EntityManagerFactory emf;
+    private static EntityManagerFactory emf = null;
 
     static {
         SessionFactory sessionFactory = new Configuration()
@@ -15,12 +16,11 @@ public class CustomizerFactory {
         emf = sessionFactory.unwrap(EntityManagerFactory.class);
     }
 
-    public static EntityManager getEntityManager(){
+    public static EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public static void fechar(){
+    public static void fechar() {
         emf.close();
     }
-
 }
