@@ -1,11 +1,10 @@
-package org.example.entity;
+package org.example.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity(name = "paciente")
+@Entity
+@Table(name = "pessoa")
 public class PacienteEntity {
 
     @Id
@@ -13,78 +12,88 @@ public class PacienteEntity {
     private Long id;
 
     @Column(name = "nome")
-    private String nomeCompleto;
+    private String nome;
 
-    @Column(name = "cpf", unique = true)
-    private String cpf;
+    @Column(name = "idade")
+    private int idade;
 
-    @Column(name = "data_nascimento")
-    private LocalDate dataNascimento;
+    @Column(name = "medico")
+    private String medico;
 
-    @Column(name = "telefone")
-    private String telefone;
+    @Column(name = "data")
+    private LocalDate data;
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EnderecoEntity> enderecos = new ArrayList<>();
+    @Column(name = "fk_usuario")
+    private Long fk_usuario;
 
-    public PacienteEntity(){ //Construtor vazio
+    public PacienteEntity(){}
 
-    }
-
-    public PacienteEntity(Long id, String nomeCompleto, String cpf, LocalDate dataNascimento, String telefone, List<EnderecoEntity> enderecos){
+    public PacienteEntity(Long id, String nome, int idade, String medico, LocalDate data, Long fk_usuario) {
         this.id = id;
-        this.nomeCompleto = nomeCompleto;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.telefone = telefone;
-        this.enderecos = enderecos;
+        this.nome = nome;
+        this.idade = idade;
+        this.medico = medico;
+        this.data = data;
+        this.fk_usuario = fk_usuario;
     }
 
     public Long getId() {
         return id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public Long getFk_usuario() {
+        return fk_usuario;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
-    public String getCpf() {
-        return cpf;
+    public void setMedico(String medico) {
+        this.medico = medico;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public void setFk_usuario(Long fk_usuario) {
+        this.fk_usuario = fk_usuario;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    @Override
+    public String toString() {
+        return "PacienteEntity{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", idade='" + idade + '\'' +
+                ", data=" + data +
+                ", medico=" + medico +
+                '}';
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public List<EnderecoEntity> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<EnderecoEntity> enderecos) {
-        this.enderecos = enderecos;
-    }
 }

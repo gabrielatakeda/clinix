@@ -1,31 +1,30 @@
-package org.example.repository;
+package org.example.Repository;
+
 
 import org.hibernate.SessionFactory;
-
 import org.hibernate.cfg.Configuration;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-
 public class CustomizerFactory {
-    private static EntityManagerFactory emf = null;
 
+    private static final EntityManagerFactory emf;
 
     static {
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
+
         emf = sessionFactory.unwrap(EntityManagerFactory.class);
     }
 
-    public static EntityManager getEntityManager() {
-
+    public static EntityManager getEntityManager (){
         return emf.createEntityManager();
     }
 
-    public static void fechar() {
+    public static void fechar(){
         emf.close();
     }
 
 }
-

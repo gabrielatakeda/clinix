@@ -1,83 +1,64 @@
-package org.example.entity;
+package org.example.Entity;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = 'consulta')
-@Table(name = 'consulta')
+@Entity
+@Table(name = "consulta")
 public class ConsultaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = 'id_consulta')
-    private Long id_consulta;
+    private Long ID_Consulta;
 
-    @ManyToOne
-    @JoinColumn(name = 'id_paciente')
-    private PacienteEntity paciente;
+    @Column(name = "nome")
+    private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = 'id_medico')
-    private MedicoEntity medico;
+    @Column(name = "data")
+    private LocalDateTime localDateTime;
 
-    @Column(name = 'data_hora')
-    private LocalDateTime dataHora;
-
-    @Column(name = 'status')
-    private String status;
-
-    @Column(name = 'motivo')
+    @Column(name = "motivo")
     private String motivo;
 
-    public ConsultaEntity(Long id_consulta, PacienteEntity paciente, MedicoEntity medico, LocalDateTime dataHora, String status, String motivo) {
-        this.id_consulta = id_consulta;
-        this.paciente = paciente;
-        this.medico = medico;
-        this.dataHora = dataHora;
-        this.status = status;
+    @Column(name = "status")
+    private String status;
+
+
+    public ConsultaEntity (){
+
+    }
+
+    public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, String motivo) {
+        this.ID_Consulta = ID_Consulta;
+        this.nome = nome;
+        this.localDateTime = localDateTime;
         this.motivo = motivo;
     }
 
-    public ConsultaEntity(){}
 
-    public Long getId_consulta() {
-        return id_consulta;
+    public Long getId() {
+        return ID_Consulta;
     }
 
-    public void setId_consulta(Long id_consulta) {
-        this.id_consulta = id_consulta;
+    public void setId(Long id) {
+        this.ID_Consulta = ID_Consulta;
     }
 
-    public PacienteEntity getPaciente() {
-        return paciente;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPaciente(PacienteEntity paciente) {
-        this.paciente = paciente;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public MedicoEntity getMedico() {
-        return medico;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setMedico(MedicoEntity medico) {
-        this.medico = medico;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime data_hora) {
-        this.dataHora = data_hora;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public String getMotivo() {
@@ -87,4 +68,6 @@ public class ConsultaEntity {
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
+
+
 }

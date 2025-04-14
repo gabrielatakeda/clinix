@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuService {
@@ -124,6 +125,15 @@ public class MenuService {
 
             case 4:
                 System.out.println("Prontuarios");
+                ConsultaRepository consultaRepository = new ConsultaRepository(em);
+
+                ConsultaService consultaService = new ConsultaService();
+
+                List<org.example.Entity.ConsultaEntity> consultas = consultaService.findByNome();
+
+                for (org.example.Entity.ConsultaEntity consulta : consultas){
+                    consultaService.exibirConsultas(consulta);
+                }
                 break;
             case 5:
                 ProdutoServices produtoServices;

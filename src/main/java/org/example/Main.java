@@ -16,7 +16,7 @@ import org.example.entity.EnderecoEntity;
 import org.example.entity.PacienteEntity;
 import org.example.repository.CustomizerFactory;
 import org.example.repository.PacienteRepository;
-import org.example.service.PacienteService;
+
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -68,6 +68,11 @@ public class Main {
   
         //polyana
         PacienteService pacienteService = new PacienteService();
+
+        //joao martinazzo
+        ConsultaRepository consultaRepository = new ConsultaRepository(em);
+
+        ConsultaService consultaService = new ConsultaService();
 
         while (executando) {
 
