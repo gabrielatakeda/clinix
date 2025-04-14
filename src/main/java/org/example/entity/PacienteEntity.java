@@ -86,5 +86,5 @@ public class PacienteEntity {
 
     public void setEnderecos(List<EnderecoEntity> enderecos) {
         this.enderecos = enderecos;
-    }
+    }
 }
