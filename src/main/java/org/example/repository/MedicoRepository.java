@@ -6,7 +6,7 @@ import org.example.entity.PacienteEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class MedicoRepository {
+public class MedicoRepository{
     private EntityManager em;
 
     public MedicoRepository(EntityManager em){
@@ -17,25 +17,25 @@ public class MedicoRepository {
         return em.find(MedicoEntity.class, id);
     }
 
-    public void salvar(MedicoEntity medico) {
+    public void salvar(MedicoEntity medico){
         em.getTransaction().begin();
         em.persist(medico);
         em.getTransaction().commit();
     }
 
-    public void atualizar(MedicoEntity medico) {
+    public void atualizar(MedicoEntity medico){
         em.getTransaction().begin();
         em.merge(medico);
         em.getTransaction().commit();
     }
 
-    public void remover(MedicoEntity medico) {
+    public void remover(MedicoEntity medico){
         em.getTransaction().begin();
         em.remove(em.contains(medico) ? medico : em.merge(medico));
         em.getTransaction().commit();
     }
 
-    public List<MedicoEntity> buscarTodos() {
+    public List<MedicoEntity> buscarTodos(){
         return em.createQuery("SELECT m FROM medico m", MedicoEntity.class).getResultList();
     }
 }

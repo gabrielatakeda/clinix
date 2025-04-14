@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "paciente")
-public class PacienteEntity {
+public class PacienteEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,51 +40,51 @@ public class PacienteEntity {
         this.enderecos = enderecos;
     }
 
-    public Long getId() {
+    public Long getId(){
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    public String getNomeCompleto() {
+    public String getNomeCompleto(){
         return nomeCompleto;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
+    public void setNomeCompleto(String nomeCompleto){
         this.nomeCompleto = nomeCompleto;
     }
 
-    public String getCpf() {
+    public String getCpf(){
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(String cpf){
         this.cpf = cpf;
     }
 
-    public LocalDate getDataNascimento() {
+    public LocalDate getDataNascimento(){
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento){
         this.dataNascimento = dataNascimento;
     }
 
-    public String getTelefone() {
+    public String getTelefone(){
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone){
         this.telefone = telefone;
     }
 
-    public List<EnderecoEntity> getEnderecos() {
+    public List<EnderecoEntity> getEnderecos(){
         return enderecos;
     }
 
-    public void setEnderecos(List<EnderecoEntity> enderecos) {
+    public void setEnderecos(List<EnderecoEntity> enderecos){
         this.enderecos = enderecos;
     }
 }

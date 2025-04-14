@@ -17,11 +17,8 @@
         <property name="format_sql">true</property> <!-- Show SQL formatted -->
 
         <mapping class="org.example.entity.PacienteEntity"/>
-<<<<<<< HEAD
-=======
         <mapping class="org.example.entity.EnderecoEntity"/>
         <mapping class="org.example.entity.MedicoEntity"/>
->>>>>>> 749756b (Atualizações das classes)
 
     </session-factory>
 </hibernate-configuration>

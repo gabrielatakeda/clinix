@@ -8,14 +8,14 @@ import org.example.entity.EnderecoEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class PacienteService {
+public class PacienteService{
 
     EntityManager em = CustomizerFactory.getEntityManager();
     PacienteRepository pacienteRepository = new PacienteRepository(em);
 
     public PacienteEntity salvarPaciente(PacienteEntity paciente, List<EnderecoEntity> endereços){
         PacienteEntity existente = pacienteRepository.buscarPorCpf(paciente.getCpf());
-        if (existente != null) {
+        if(existente != null){
             System.out.println("CPF já cadastrado! Paciente existente: " + existente.getNomeCompleto());
             return existente;
         }
@@ -34,36 +34,36 @@ public class PacienteService {
         return new PacienteEntity();
     }
 
-    public List<PacienteEntity> buscarTodos() {
+    public List<PacienteEntity> buscarTodos(){
         return pacienteRepository.buscarTodos();
     }
 
-    public PacienteEntity buscarPorCpf(String cpf) {
+    public PacienteEntity buscarPorCpf(String cpf){
         return pacienteRepository.buscarPorCpf(cpf);
     }
 
-    public void atualizarPaciente(Long id, String novoNome) {
+    public void atualizarPaciente(Long id, String novoNome){
         PacienteEntity paciente = pacienteRepository.buscarPorId(id);
-        if (paciente != null) {
+        if(paciente != null){
             paciente.setNomeCompleto(novoNome);
             pacienteRepository.atualizar(paciente);
             System.out.println("Paciente atualizado com sucesso!");
-        } else {
+        }else{
             System.out.println("Paciente com ID " + id + " não encontrado.");
         }
     }
 
-    public void removerPaciente(Long id) {
+    public void removerPaciente(Long id){
         PacienteEntity paciente = pacienteRepository.buscarPorId(id);
-        if (paciente != null) {
+        if(paciente != null){
             pacienteRepository.remover(paciente);
             System.out.println("Paciente removido com sucesso!");
-        } else {
+        }else{
             System.out.println("Paciente com ID " + id + " não encontrado.");
         }
     }
 
-    public List<PacienteEntity> listarPacientes() {
+    public List<PacienteEntity> listarPacientes(){
         return pacienteRepository.buscarTodos();
     }
 }

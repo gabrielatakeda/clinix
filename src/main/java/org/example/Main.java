@@ -8,14 +8,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main{
+    public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
         PacienteService pacienteService = new PacienteService();
         MedicoService medicoService = new MedicoService();
 
-        while (true) {
+        while(true){
             System.out.println("\n=== MENU PRINCIPAL ===");
             System.out.println("1 - Gerenciar Pacientes");
             System.out.println("2 - Gerenciar Médicos");
@@ -23,7 +23,7 @@ public class Main {
             System.out.print("Escolha uma opção: ");
             String escolha = sc.nextLine();
 
-            switch (escolha) {
+            switch(escolha){
                 case "1":
                     menuPaciente(sc, pacienteService);
                     break;
@@ -40,8 +40,8 @@ public class Main {
         }
     }
 
-    private static void menuPaciente(Scanner sc, PacienteService service) {
-        while (true) {
+    private static void menuPaciente(Scanner sc, PacienteService service){
+        while(true){
             System.out.println("\n=== MENU PACIENTE ===");
             System.out.println("1 - Cadastrar paciente");
             System.out.println("2 - Listar pacientes");
@@ -51,16 +51,16 @@ public class Main {
             System.out.print("Escolha uma opção: ");
             String opcao = sc.nextLine();
 
-            switch (opcao) {
+            switch(opcao){
                 case "1":
                     cadastrarPaciente(sc, service);
                     break;
                 case "2":
                     var lista = service.listarPacientes();
-                    if (lista.isEmpty()) {
+                    if(lista.isEmpty()){
                         System.out.println("Nenhum paciente encontrado.");
-                    } else {
-                        for (PacienteEntity p : lista) {
+                    }else{
+                        for(PacienteEntity p : lista){
                             System.out.println("ID: " + p.getId() + ", Nome: " + p.getNomeCompleto());
                         }
                     }
@@ -85,7 +85,7 @@ public class Main {
         }
     }
 
-    private static void cadastrarPaciente(Scanner sc, PacienteService service) {
+    private static void cadastrarPaciente(Scanner sc, PacienteService service){
         System.out.print("Nome completo: ");
         String nome = sc.nextLine();
         System.out.print("CPF: ");
@@ -98,7 +98,7 @@ public class Main {
         PacienteEntity paciente = new PacienteEntity(null, nome, cpf, dataNasc, telefone, new ArrayList<>());
 
         List<EnderecoEntity> enderecos = new ArrayList<>();
-        while (true) {
+        while(true){
             System.out.print("Logradouro: ");
             String logradouro = sc.nextLine();
             System.out.print("Cidade: ");
@@ -113,15 +113,15 @@ public class Main {
             enderecos.add(new EnderecoEntity(null, logradouro, cidade, estado, numero, isPrincipal, paciente));
 
             System.out.print("Deseja adicionar outro endereço? (s/n): ");
-            if (!sc.nextLine().equalsIgnoreCase("s")) break;
+            if(!sc.nextLine().equalsIgnoreCase("s")) break;
         }
 
         PacienteEntity salvo = service.salvarPaciente(paciente, enderecos);
         System.out.println(salvo.getId() != null ? "Paciente salvo com sucesso!" : "Erro ao salvar.");
     }
 
-    private static void menuMedico(Scanner sc, MedicoService service) {
-        while (true) {
+    private static void menuMedico(Scanner sc, MedicoService service){
+        while(true){
             System.out.println("\n=== MENU MÉDICO ===");
             System.out.println("1 - Cadastrar médico");
             System.out.println("2 - Listar médicos");
@@ -131,7 +131,7 @@ public class Main {
             System.out.print("Escolha uma opção: ");
             String opcao = sc.nextLine();
 
-            switch (opcao) {
+            switch(opcao){
                 case "1":
                     System.out.print("Nome completo: ");
                     String nome = sc.nextLine();
@@ -147,10 +147,10 @@ public class Main {
                     break;
                 case "2":
                     var medicos = service.listarMedicos();
-                    if (medicos.isEmpty()) {
+                    if(medicos.isEmpty()){
                         System.out.println("Nenhum médico cadastrado.");
-                    } else {
-                        for (MedicoEntity m : medicos) {
+                    }else{
+                        for(MedicoEntity m : medicos){
                             System.out.println("ID: " + m.getId() + ", Nome: " + m.getNomeCompleto());
                         }
                     }
