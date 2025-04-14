@@ -1,16 +1,13 @@
 package org.example;
 
 
-import org.example.repository.ProdutoRepository;
+import org.example.repository.*;
 import org.example.service.ProdutoServices;
-import org.example.repository.UsuarioRepository;
 import org.example.service.UsuarioServices;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.example.entity.RelatorioEntity;
-import org.example.repository.CustomizerFactory;
-import org.example.repository.RelatorioRepository;
 import org.example.service.RelatorioService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,40 +37,8 @@ public class Main {
         //gabriela takeda
         EntityManager em = CustomizerFactory.getEntityManager();
         RelatorioRepository relatorioRepository = new RelatorioRepository(em);
-      
+        ConsultaRepository consultaRepository = new ConsultaRepository(em);
         
-
-     
-       
-
-        while (true) {
-            System.out.println("\n=== Controle de Estoque ===");
-            System.out.println("1 - Cadastrar Produto");
-            System.out.println("2 - Listar Estoque");
-            System.out.println("3 - Atualizar Quantidade");
-            System.out.println("4 - Remover Produto");
-            System.out.println("5 - Sair");
-
-        Scanner scanner = new Scanner(System.in);
-       switch (opcao) {
-                case 1:
-                    produtoServices.cadastrarProduto();
-                    break;
-                case 2:
-                    produtoServices.listarProdutos();
-                    break;
-                case 3:
-                    produtoServices.atualizarQuantidade();
-                    break;
-                case 4:
-                    produtoServices.removerProduto();
-                    break;
-                case 5:
-                    System.out.println("Saindo...");
-
-
-        
-
 
 
         while (executando) {
@@ -108,6 +73,7 @@ public class Main {
 
                     if (usuarioServices.autenticarUsuario(loginOuCpf, senha)) {
                         System.out.println("\nLogin bem-sucedido!");
+                        M
                         return;
                     } else {
                         System.out.println("\nLogin falhou. Verifique suas credenciais.");
