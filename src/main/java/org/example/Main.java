@@ -1,6 +1,6 @@
 package org.example;
 
-<<<<<<< HEAD
+
 import org.example.entity.EnderecoEntity;
 import org.example.entity.PacienteEntity;
 import org.example.repository.CustomizerFactory;
@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-=======
+
 import org.example.entity.*;
 import org.example.service.PacienteService;
 import org.example.service.MedicoService;
@@ -21,12 +21,10 @@ import org.example.service.MedicoService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
->>>>>>> 749756b (Atualizações das classes)
 
 public class Main {
     public static void main(String[] args) {
 
-<<<<<<< HEAD
         PacienteService pacienteService = new PacienteService();
         Scanner sc = new Scanner(System.in);
 
@@ -108,7 +106,7 @@ public class Main {
         pacienteService.salvarPaciente(pacienteTeste, listaEndereco);
 
         sc.close();
-=======
+
         Scanner sc = new Scanner(System.in);
         PacienteService pacienteService = new PacienteService();
         MedicoService medicoService = new MedicoService();
@@ -271,6 +269,5 @@ public class Main {
                     System.out.println("Opção inválida!");
             }
         }
->>>>>>> 749756b (Atualizações das classes)
     }
 }
