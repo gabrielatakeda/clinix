@@ -33,10 +33,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Inicializa Hibernate
+        Scanner sc = new Scanner(System.in);
+        boolean executando = true;
         //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
 
         //joao vitor
+        //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         Session session = factory.openSession();
 
@@ -63,7 +65,7 @@ public class Main {
             System.out.println("3 - Sair");
             System.out.print("Escolha uma opção: ");
 
-            String entrada = scanner.nextLine();
+            String entrada = sc.nextLine();
 
 
             if (!entrada.matches("\\d+")) {
@@ -80,15 +82,15 @@ public class Main {
 
                 case 2:
                     System.out.print("\nDigite seu e-mail ou CPF: ");
-                    String loginOuCpf = scanner.nextLine();
+                    String loginOuCpf = sc.nextLine();
 
                     System.out.print("Senha: ");
-                    String senha = scanner.nextLine();
+                    String senha = sc.nextLine();
 
                     if (usuarioServices.autenticarUsuario(loginOuCpf, senha)) {
                         System.out.println("\nLogin bem-sucedido!");
-                        M
-                        return;
+
+
                     } else {
                         System.out.println("\nLogin falhou. Verifique suas credenciais.");
                     }
@@ -97,7 +99,7 @@ public class Main {
                 case 3:
                     System.out.println("\nSaindo...");
 
-                    scanner.close();
+                    sc.close();
                     session.close();
                     factory.close();
                     System.exit(0);
@@ -106,90 +108,7 @@ public class Main {
                     System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
                     break;
 
-
-       
-
-        System.out.println("=== MENU DE INSERÇÃO DE PACIENTE ===");
-
-        System.out.print("ID do paciente: ");
-        long pacienteId = sc.nextLong();
-        sc.nextLine(); // limpa o buffer
-
-        System.out.print("Nome completo: ");
-        String nomeCompleto = sc.nextLine();
-
-        System.out.print("CPF: ");
-        String cpf = sc.nextLine();
-
-        System.out.print("Data de nascimento (dd/MM/yyyy): ");
-        String dataString = sc.nextLine();
-        LocalDate dataNascimento = null;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            dataNascimento = LocalDate.parse(dataString, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Data inválida! Use o formato dd/MM/yyyy.");
-            return; // encerra o programa ou volta ao menu
-        }
-
-        System.out.print("Telefone: ");
-        String telefone = sc.nextLine();
-
-        var pacienteTeste = new PacienteEntity(
-                null,
-                nomeCompleto,
-                cpf,
-                dataNascimento,
-                telefone, // telefone de exemplo
-                new ArrayList<>() // lista de endereços vazia
-        );
-
-        var listaEndereco = new ArrayList<EnderecoEntity>();
-        String opcao;
-
-        do {
-            System.out.println("\n=== INSERÇÃO DE ENDEREÇO ===");
-
-            System.out.print("Logradouro: ");
-            String logradouro = sc.nextLine();
-
-            System.out.print("Cidade: ");
-            String cidade = sc.nextLine();
-
-            System.out.print("Estado: ");
-            String estado = sc.nextLine();
-
-            System.out.print("Número: ");
-            int numero = sc.nextInt();
-            sc.nextLine(); // limpa o buffer
-
-            System.out.print("Esse é o endereço principal? (s/n): ");
-            String principalInput = sc.nextLine();
-            boolean isPrincipal = principalInput.equalsIgnoreCase("s");
-
-            listaEndereco.add(new EnderecoEntity(
-                    null, logradouro, cidade, estado, numero, isPrincipal, pacienteTeste
-            ));
-
-            System.out.print("Deseja adicionar outro endereço? (s/n): ");
-            opcao = sc.nextLine();
-
-        } while(opcao.equalsIgnoreCase("s"));
-
-        var salvo = pacienteService.salvarPaciente(pacienteTeste, listaEndereco);
-
-        if (salvo.getId() != null) {
-            System.out.println("Paciente salvo com sucesso! ID: " + salvo.getId());
-        } else {
-            System.out.println("Paciente não foi salvo. CPF já existe!");
-        }
-
-        pacienteService.salvarPaciente(pacienteTeste, listaEndereco);
-
-        sc.close();
-
             }
         }
-
     }
 }
