@@ -5,10 +5,10 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name="connection.url">jdbc:postgresql://localhost/myDBName</property> <!-- BD Mane -->
+        <property name="connection.url">jdbc:postgresql://localhost:5432/clinix</property> <!-- BD Mane -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
         <property name="connection.username">postgres</property> <!-- DB User -->
-        <property name="connection.password">12345</property> <!-- DB Password -->
+        <property name="connection.password">nevefofa</property> <!-- DB Password -->
 
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> <!-- DB Dialect -->
         <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
@@ -16,7 +16,7 @@
         <property name="show_sql">true</property> <!-- Show SQL in console -->
         <property name="format_sql">true</property> <!-- Show SQL formatted -->
 
-        <mapping class="beans.Task"/>
+        <mapping class="org.example.entity.RelatorioEntity"/>
 
     </session-factory>
 </hibernate-configuration>
