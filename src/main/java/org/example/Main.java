@@ -21,16 +21,28 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean executando = true;
+
 
         // Inicializa Hibernate
+        //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
+
+        //joao vitor
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         Session session = factory.openSession();
 
         UsuarioRepository usuarioRepository = new UsuarioRepository(session);
         UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
-        Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        //gabriela takeda
+        EntityManager em = CustomizerFactory.getEntityManager();
+        RelatorioRepository relatorioRepository = new RelatorioRepository(em);
+
+
+
+        while (executando) {
+
             System.out.println("\n=== Sistema de Login ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Login");
@@ -73,88 +85,6 @@ public class Main {
                     factory.close();
                     System.exit(0);
                     break;
-
-        Scanner sc = new Scanner(System.in);
-        EntityManager em = CustomizerFactory.getEntityManager();
-
-        RelatorioService relatorioService = new RelatorioService();
-
-        RelatorioRepository relatorioRepository = new RelatorioRepository(em);
-
-        boolean executando = true;
-
-        while (executando) {
-            System.out.println("\n======= MENU DE RELATÓRIOS =======");
-            System.out.println("1 - Relatório de Consultas por Médico");
-            System.out.println("2 - Relatório de Pacientes por Médico");
-            System.out.println("3 - Relatório de Exames Realizados");
-            System.out.println("4 - Relatório de Estoque de Insumos Médicos");
-            System.out.println("5 - Relatório de Consultas por Paciente");
-            System.out.println("6 - Relatório de Prontuários por Paciente");
-            System.out.println("0 - Sair");
-            System.out.print("Escolha uma opção: ");
-            int opcao = sc.nextInt();
-            sc.nextLine(); // limpar o buffer
-
-            switch (opcao) {
-                case 1:
-                    System.out.print("Digite o CRM do médico: ");
-                    String crm = sc.nextLine();
-                    System.out.print("Data de início (AAAA-MM-DD): ");
-                    LocalDate inicio1 = LocalDate.parse(sc.nextLine());
-                    System.out.print("Data de fim (AAAA-MM-DD): ");
-                    LocalDate fim1 = LocalDate.parse(sc.nextLine());
-
-                    relatorioService.gerarRelatorioConsultasPorMedico(crm,
-                            inicio1.atStartOfDay(),
-                            fim1.atTime(23, 59, 59));
-                    break;
-
-                case 2:
-                    System.out.print("Digite o CRM do médico: ");
-                    String crm2 = sc.nextLine();
-                    relatorioService.gerarRelatorioPacientesPorMedico(crm2);
-                    break;
-
-                case 3:
-                    System.out.print("Data de início (AAAA-MM-DD): ");
-                    LocalDate inicio3 = LocalDate.parse(sc.nextLine());
-                    System.out.print("Data de fim (AAAA-MM-DD): ");
-                    LocalDate fim3 = LocalDate.parse(sc.nextLine());
-                    relatorioService.gerarRelatorioExamesRealizados(
-                            inicio3.atStartOfDay(),
-                            fim3.atTime(23, 59, 59));
-                    break;
-
-                case 4:
-                    relatorioService.gerarRelatorioEstoque();
-                    break;
-
-                case 5:
-                    System.out.print("Digite o CPF do paciente: ");
-                    String cpf = sc.nextLine();
-                    relatorioService.gerarRelatorioConsultasPorPaciente(cpf);
-                    break;
-
-                case 6:
-                    System.out.print("Digite o CPF do paciente: ");
-                    String cpf2 = sc.nextLine();
-                    relatorioService.gerarRelatorioProntuariosPorPaciente(cpf2);
-                    break;
-
-                case 0:
-                    executando = false;
-                    System.out.println("Saindo do sistema...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-            }
-        }
-
-        sc.close();
-
-
                 default:
                     System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
                     break;
