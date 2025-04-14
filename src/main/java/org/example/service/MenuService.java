@@ -21,8 +21,9 @@ public class MenuService {
         System.out.println("3- Agendar consulta.");
         System.out.println("4- Prontuarios.");
         System.out.println("5- Estoque de insumos.");
-        System.out.println("6- Relatorios.");
-        System.out.println("7- Sair ");
+        System.out.println("6- Exames");
+        System.out.println("7- Relatorios.");
+        System.out.println("8- Sair ");
         System.out.print("Escolha uma opção: ");
 
         int opcao = sc.nextInt();
@@ -160,6 +161,9 @@ public class MenuService {
                 }
                 break;
             case 6:
+                System.out.println("Exame");
+                break;
+            case 7:
                 boolean saida = true;
                 while (saida) {
                     System.out.println("\n=== Relatorios. ===");
@@ -195,7 +199,7 @@ public class MenuService {
                 }
                 break;
 
-            case 7:
+            case 8:
                 System.out.println("\nSaindo...");
                 sc.close();
 //                session.close();
