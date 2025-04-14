@@ -26,9 +26,9 @@ public class RelatorioPacienteMedicoService extends RelatorioService {
             System.out.println("Nenhum paciente encontrado para este medico.");
         } else{
             for(ConsultaEntity consulta : pacientePorMedico) {
-                System.out.println("Paciente: " + consulta.getPaciente().getNome());
+                System.out.println("Paciente: " + consulta.getPaciente().getNomeCompleto());
                 System.out.println("CPF: " + consulta.getPaciente().getCpf());
-                System.out.println("Data da consulta: " + consulta.getDataConsulta());
+                System.out.println("Data da consulta: " + consulta.getDataHora());
 
             }
         }

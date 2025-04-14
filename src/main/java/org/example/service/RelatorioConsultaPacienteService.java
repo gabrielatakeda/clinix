@@ -30,7 +30,7 @@ public class RelatorioConsultaPacienteService extends RelatorioService{
                 System.out.println("Medico: " + consulta.getMedico());
                 System.out.println("Motivo: " + consulta.getMotivo());
                 System.out.println("Status: " + consulta.getStatus());
-                System.out.println("Médico: " + consulta.getMedico().getNome());
+                System.out.println("Médico: " + consulta.getMedico().getNomeCompleto());
                 System.out.println("------------------------");
         }
     }
