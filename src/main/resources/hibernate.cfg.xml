@@ -1,22 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
     <session-factory>
 
-        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property> <!-- BD Mane -->
+        <!--
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property> 
+        <property name="connection.driver_class">org.postgresql.Driver</property> 
+        <property name="connection.username">postgres</property> 
+        <property name="connection.password">nevefofa</property> 
+        -->
+   
+        <!--
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/clinix</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">triotwix123</property>
+        -->
+
+        <property name="connection.url">jdbc:postgresql://localhost:5432/clinix</property> <!-- BD Mane -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
         <property name="connection.username">postgres</property> <!-- DB User -->
         <property name="connection.password">nevefofa</property> <!-- DB Password -->
 
-        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> <!-- DB Dialect -->
-        <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
 
-        <property name="show_sql">true</property> <!-- Show SQL in console -->
-        <property name="format_sql">true</property> <!-- Show SQL formatted -->
+        <!-- Dialeto do PostgreSQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
 
+
+        <!-- Estratégia de atualização do schema -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Classes mapeadas -->
+        <mapping class="org.example.entity.UsuarioEntity"/>
+        <mapping class="org.example.entity.RelatorioEntity"/>
+        <mapping class="org.example.entity.ProdutoEntity"/>
         <mapping class="org.example.entity.PacienteEntity"/>
+        <mapping class="org.example.entity.MedicoEntity"/>
 
     </session-factory>
 </hibernate-configuration>

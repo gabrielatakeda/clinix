@@ -1,64 +1,67 @@
 package org.example.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.*;
 
-@Table(name = "medico")
-@Entity(name = "medico)")
-public class MedicoEntity { //Classe Médico com os atributos
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(name = "medico")
+public class MedicoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ID;
+    private Long id;
 
     @Column(name = "nome")
-    private String nome;
+    private String nomeCompleto;
 
-
-    private String cpf;
-    private String especialidade;
-    private String telefone;
-    private String email;
     @Column(name = "crm", unique = true)
     private String crm;
 
-    public MedicoEntity(){ //Construtor vazio
+    @Column(name = "especialidade")
+    private String especialidade;
+
+    @Column(name = "telefone")
+    private String telefone;
+
+    @OneToMany(mappedBy = "medico")
+    private List<ConsultaEntity> consultas = new ArrayList<>();
+
+    public MedicoEntity(){
 
     }
 
-    public MedicoEntity(int ID, String nome, String cpf, String especialidade, String telefone, String email, String crm) {
-        this.ID = ID;
-        this.nome = nome;
-        this.cpf = cpf;
+    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone, List<ConsultaEntity> consultas) {
+        this.id = id;
+        this.nomeCompleto = nomeCompleto;
+        this.crm = crm;
         this.especialidade = especialidade;
         this.telefone = telefone;
-        this.email = email;
+        this.consultas = consultas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
         this.crm = crm;
-    }
-
-    //Metodos Getters e Setters
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getEspecialidade() {
@@ -77,19 +80,12 @@ public class MedicoEntity { //Classe Médico com os atributos
         this.telefone = telefone;
     }
 
-    public String getEmail() {
-        return email;
+    public List<ConsultaEntity> getConsultas() {
+        return consultas;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCrm() {
-        return crm;
-    }
-
-    public void setCrm(String crm) {
-        this.crm = crm;
+    public void setConsultas(List<ConsultaEntity> consultas) {
+        this.consultas = consultas;
     }
 }
+
