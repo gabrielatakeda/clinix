@@ -1,6 +1,6 @@
-package org.example.repository;
+package org.example.Repository;
 
-import org.example.entity.ConsultaEntity;
+import org.example.Entity.ConsultaEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -32,18 +32,8 @@ public class ConsultaRepository {
         em.getTransaction().commit();
     }
 
-    public List<ConsultaEntity> buscarTodos() {
-        return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
-    }
-
-    public List<ConsultaEntity>buscarPorNomeInicial(String nome){
-        return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.nome LIKE :nome",ConsultaEntity.class)
-                .setParameter("nome", nome + "%")
-                .getResultList();
-    }
-
     public List<ConsultaEntity> buscarPacientesPorMedico(String crm) {
-        String jpql = "SELECT p FROM ConsultaEntity p WHERE p.id_medico.crm = :crm";
+        String jpql = "SELECT c FROM ConsultaEntity c WHERE c.medico.crm = :crm";
         return em.createQuery(jpql, ConsultaEntity.class)
                 .setParameter("crm", crm)
                 .getResultList();
@@ -51,8 +41,18 @@ public class ConsultaRepository {
 
     public List<ConsultaEntity> buscarConsultasPorPaciente(String cpf) {
         return em.createQuery(
-                        "SELECT c FROM ConsultaEntity c WHERE c.id_paciente.cpf = :cpf", ConsultaEntity.class)
+                        "SELECT c FROM ConsultaEntity c WHERE c.paciente.cpf = :cpf", ConsultaEntity.class)
                 .setParameter("cpf", cpf)
+                .getResultList();
+    }
+
+    public List<ConsultaEntity> buscarTodos() {
+        return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
+    }
+
+    public List<ConsultaEntity>buscarPorNomeInicial(String nome){
+        return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.nome LIKE :nome",ConsultaEntity.class)
+                .setParameter("nome", nome + "%")
                 .getResultList();
     }
 
