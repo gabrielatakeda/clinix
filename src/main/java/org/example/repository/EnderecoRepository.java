@@ -20,4 +20,19 @@ public class EnderecoRepository {
         em.persist(endereco);
         em.getTransaction().commit();
     }
+<<<<<<< HEAD
+=======
+
+    public void atualizar(EnderecoEntity endereco) {
+        em.getTransaction().begin();
+        em.merge(endereco);
+        em.getTransaction().commit();
+    }
+
+    public void remover(EnderecoEntity endereco) {
+        em.getTransaction().begin();
+        em.remove(em.contains(endereco) ? endereco : em.merge(endereco));
+        em.getTransaction().commit();
+    }
+>>>>>>> 749756b (Atualizações das classes)
 }

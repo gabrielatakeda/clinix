@@ -33,4 +33,40 @@ public class PacienteService {
         }
         return new PacienteEntity();
     }
+<<<<<<< HEAD
+=======
+
+    public List<PacienteEntity> buscarTodos() {
+        return pacienteRepository.buscarTodos();
+    }
+
+    public PacienteEntity buscarPorCpf(String cpf) {
+        return pacienteRepository.buscarPorCpf(cpf);
+    }
+
+    public void atualizarPaciente(Long id, String novoNome) {
+        PacienteEntity paciente = pacienteRepository.buscarPorId(id);
+        if (paciente != null) {
+            paciente.setNomeCompleto(novoNome);
+            pacienteRepository.atualizar(paciente);
+            System.out.println("Paciente atualizado com sucesso!");
+        } else {
+            System.out.println("Paciente com ID " + id + " não encontrado.");
+        }
+    }
+
+    public void removerPaciente(Long id) {
+        PacienteEntity paciente = pacienteRepository.buscarPorId(id);
+        if (paciente != null) {
+            pacienteRepository.remover(paciente);
+            System.out.println("Paciente removido com sucesso!");
+        } else {
+            System.out.println("Paciente com ID " + id + " não encontrado.");
+        }
+    }
+
+    public List<PacienteEntity> listarPacientes() {
+        return pacienteRepository.buscarTodos();
+    }
+>>>>>>> 749756b (Atualizações das classes)
 }
