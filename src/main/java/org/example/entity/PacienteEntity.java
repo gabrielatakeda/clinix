@@ -2,19 +2,20 @@ package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table(name = "paciente")
+@Entity(name = "paciente")
 public class PacienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ID;
+    private Long id;
 
     @Column(name = "nome")
     private String nomeCompleto;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @Column(name = "data_nascimento")
@@ -23,28 +24,28 @@ public class PacienteEntity {
     @Column(name = "telefone")
     private String telefone;
 
-    @Column(name = "endereco")
-    private String endereco;
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnderecoEntity> enderecos = new ArrayList<>();
 
     public PacienteEntity(){ //Construtor vazio
 
     }
 
-    public PacienteEntity(int ID, String nomeCompleto, String cpf, LocalDate dataNascimento, String telefone, String endereco) {
-        this.ID = ID;
+    public PacienteEntity(Long id, String nomeCompleto, String cpf, LocalDate dataNascimento, String telefone, List<EnderecoEntity> enderecos){
+        this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
-        this.endereco = endereco;
+        this.enderecos = enderecos;
     }
 
-    public int getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomeCompleto() {
@@ -79,11 +80,11 @@ public class PacienteEntity {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public List<EnderecoEntity> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setEnderecos(List<EnderecoEntity> enderecos) {
+        this.enderecos = enderecos;
     }
 }

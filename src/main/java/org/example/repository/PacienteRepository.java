@@ -9,43 +9,49 @@ public class PacienteRepository {
 
     private EntityManager em;
 
-    public PacienteRepository(){
-
-    }
-
-    public PacienteRepository(EntityManager em){
+    public PacienteRepository(EntityManager em) {
         this.em = em;
     }
 
-    public void criarPaciente(PacienteEntity paciente){
+    public PacienteEntity buscarPorId(Long id) {
+        return em.find(PacienteEntity.class, id);
+    }
+
+    public void salvar(PacienteEntity paciente) {
         em.getTransaction().begin();
         em.persist(paciente);
         em.getTransaction().commit();
     }
 
-    public List<PacienteEntity> buscarPaciente(){
-        return em.createQuery("SELECT pacientes FROM paciente pacientes", PacienteEntity.class).getResultList();
+    public List<PacienteEntity> buscarTodos() {
+        return em.createQuery("SELECT p FROM paciente p", PacienteEntity.class).getResultList();
     }
 
-    public PacienteEntity buscarPorId(int ID){
-        return em.find(PacienteEntity.class, ID);
-    }
-
-    public List<PacienteEntity> buscarPorCpf(String prefixo){
-        return em.createQuery("SELECT pacientes FROM paciente pacientes WHERE paciente.cpf LIKE :prefixo", PacienteEntity.class)
-                .setParameter("prefixo", prefixo + "%")
-                .getResultList();
-    }
-
-    public void atualizarPaciente(PacienteEntity paciente){
+    public void atualizar(PacienteEntity paciente) {
         em.getTransaction().begin();
         em.merge(paciente);
         em.getTransaction().commit();
     }
 
-    public void removerPaciente(PacienteEntity paciente){
+    public void remover(PacienteEntity paciente) {
         em.getTransaction().begin();
         em.remove(em.contains(paciente) ? paciente : em.merge(paciente));
         em.getTransaction().commit();
+    }
+
+    public List<PacienteEntity> buscarPorNomeInicial(String prefixo) {
+        return em.createQuery("SELECT p FROM paciente p WHERE p.nomeCompleto LIKE :prefixo", PacienteEntity.class)
+                .setParameter("prefixo", prefixo + "%")
+                .getResultList();
+    }
+
+    public PacienteEntity buscarPorCpf(String cpf) {
+        try {
+            return em.createQuery("SELECT p FROM paciente p WHERE p.cpf = :cpf", PacienteEntity.class)
+                    .setParameter("cpf", cpf)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null; // se não encontrar ninguém, retorna null
+        }
     }
 }
