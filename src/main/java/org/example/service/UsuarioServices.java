@@ -21,14 +21,14 @@ public class UsuarioServices {
 
             // Verifica se o CPF tem exatamente 11 números
             if (!cpf.matches("\\d{11}")) {
-                System.out.println("⚠ ERRO: CPF inválido! Digite exatamente 11 números.");
+                System.out.println("ERRO: CPF inválido! Digite exatamente 11 números.");
                 continue; // Volta para o início do loop
             }
 
             // Verifica se já existe um usuário com o mesmo CPF
             if (usuarioRepository.buscarPorCpf(cpf).isPresent()) {
-                System.out.println("⚠ ERRO: CPF já cadastrado! Use outro CPF.");
-                continue; // Retorna para o início
+                System.out.println("ERRO: CPF já cadastrado! Use outro CPF.");
+                continue;
             }
 
             System.out.print("Login (email ou nome de usuário): ");
@@ -36,8 +36,8 @@ public class UsuarioServices {
 
             // Verifica se já existe um usuário com o mesmo login
             if (usuarioRepository.buscarPorLogin(login).isPresent()) {
-                System.out.println("⚠ ERRO: Login já cadastrado! Escolha outro.");
-                continue; // Retorna para o início
+                System.out.println("ERRO: Login já cadastrado! Escolha outro.");
+                continue;
             }
 
             System.out.print("Senha: ");
@@ -46,8 +46,8 @@ public class UsuarioServices {
             UsuarioEntity novoUsuario = new UsuarioEntity(cpf, login, senha);
             usuarioRepository.salvar(novoUsuario);
 
-            System.out.println("✅ Cadastro realizado com sucesso!");
-            break; // Sai do loop se o cadastro for bem-sucedido
+            System.out.println("Cadastro realizado com sucesso!");
+            break; // Sai do loop se o cadastro for bem sucedido
         }
     }
 

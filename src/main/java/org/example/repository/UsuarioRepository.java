@@ -11,7 +11,6 @@ public class UsuarioRepository {
         this.em = em;
     }
 
-    // ✅ Buscar usuário por login (email ou nome de usuário)
     public Optional<UsuarioEntity> buscarPorLogin(String login) {
         try {
             return Optional.ofNullable(em.createQuery(
@@ -26,7 +25,6 @@ public class UsuarioRepository {
         }
     }
 
-    // ✅ Buscar usuário por CPF
     public Optional<UsuarioEntity> buscarPorCpf(String cpf) {
         try {
             return Optional.ofNullable(em.createQuery(
@@ -41,7 +39,6 @@ public class UsuarioRepository {
         }
     }
 
-    // ✅ Salvar usuário com controle de transações seguro
     public void salvar(UsuarioEntity usuario) {
         if (!em.isOpen()) {
             throw new IllegalStateException("Falha ao salvar usuário: conexão com o banco fechada!");
