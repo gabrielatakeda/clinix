@@ -14,7 +14,7 @@ public class ProdutoServices {
         this.produtoRepository = produtoRepository;
     }
 
-    public void cadastrarProduto() {
+    public void cadastrarProduto(){
         System.out.print("Nome do Produto: ");
         String nome = scanner.nextLine();
 
@@ -30,7 +30,7 @@ public class ProdutoServices {
             System.out.print("Data de Validade (YYYY-MM-DD ou deixe vazio): ");
             String dataValidadeStr = scanner.nextLine();
 
-            if (dataValidadeStr.isEmpty()) {
+            if (dataValidadeStr.isEmpty()){
                 break;
             }
 
@@ -48,27 +48,27 @@ public class ProdutoServices {
         System.out.println("Produto cadastrado com sucesso!");
     }
 
-    public void listarProdutos() {
+    public void listarProdutos(){
         List<ProdutoEntity> produtos = produtoRepository.buscarTodos();
 
-        if (produtos.isEmpty()) {
+        if (produtos.isEmpty()){
             System.out.println("Nenhum produto cadastrado.");
             return;
         }
 
         System.out.println("\n=== Estoque ===");
-        for (ProdutoEntity produto : produtos) {
+        for (ProdutoEntity produto : produtos){
             System.out.println(produto);
 
             if (produto.getQuantidade() <= produto.getNivelMinimo()) {
-                System.out.println("⚠ ALERTA: Estoque crítico! Produto próximo do esgotamento!");
+                System.out.println("ALERTA: Estoque crítico! Produto próximo do esgotamento!");
             }
 
             System.out.println("--------------------------------------------");
         }
     }
 
-    public void atualizarQuantidade() {
+    public void atualizarQuantidade(){
         System.out.print("Digite o ID do produto: ");
         Long id = scanner.nextLong();
 
@@ -77,7 +77,7 @@ public class ProdutoServices {
         scanner.nextLine();
 
         ProdutoEntity produto = produtoRepository.buscarPorId(id).orElse(null);
-        if (produto == null) {
+        if (produto == null){
             System.out.println("O produto não existe.");
             return;
         }
@@ -85,18 +85,18 @@ public class ProdutoServices {
         produtoRepository.atualizarQuantidade(id, quantidade);
         System.out.println("Quantidade atualizada!");
 
-        if (quantidade <= produto.getNivelMinimo()) {
-            System.out.println("⚠ ALERTA: Estoque crítico! Produto próximo do esgotamento!");
+        if (quantidade <= produto.getNivelMinimo()){
+            System.out.println("ALERTA: Estoque crítico! Produto próximo do esgotamento!");
         }
     }
 
-    public void removerProduto() {
+    public void removerProduto(){
         System.out.print("Digite o ID do produto a ser removido: ");
         Long id = scanner.nextLong();
         scanner.nextLine();
 
         ProdutoEntity produto = produtoRepository.buscarPorId(id).orElse(null);
-        if (produto == null) {
+        if (produto == null){
             System.out.println("O produto não existe.");
             return;
         }

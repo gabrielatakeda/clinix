@@ -37,17 +37,36 @@ public class ProdutoEntity {
     }
 
     // Getters e Setters
-    public Long getIdProduto() { return idProduto; }
-    public LocalDate getDataCadastro() { return dataCadastro; }
-    public int getQuantidade() { return quantidade; }
-    public int getNivelMinimo() { return nivelMinimo; }
-    public LocalDate getDataValidade() { return dataValidade; }
-    public String getNome() { return nome; }
+    public Long getIdProduto(){
+        return idProduto;
+    }
+    public LocalDate getDataCadastro(){
+        return dataCadastro;
+    }
+    public int getQuantidade(){
+        return quantidade;
+    }
+    public int getNivelMinimo(){
+        return nivelMinimo;
+    }
+    public LocalDate getDataValidade(){
+        return dataValidade;
+    }
+    public String getNome(){
+        return nome;
+    }
 
-    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
-    public void setNivelMinimo(int nivelMinimo) { this.nivelMinimo = nivelMinimo; }
-    public void setDataValidade(LocalDate dataValidade) { this.dataValidade = dataValidade; }
-    public void setNome(String nome) { this.nome = nome; }
+    public void setQuantidade(int quantidade){
+        this.quantidade = quantidade;
+    }
+    public void setNivelMinimo(int nivelMinimo){
+        this.nivelMinimo = nivelMinimo;
+    }
+    public void setDataValidade(LocalDate dataValidade){
+        this.dataValidade = dataValidade;
+    }
+    public void setNome(String nome){
+        this.nome = nome;}
 
     @Override
     public String toString() {
