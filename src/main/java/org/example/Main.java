@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.repository.ProdutoRepository;
+import org.example.service.ProdutoServices;
 import org.example.repository.UsuarioRepository;
 import org.example.service.UsuarioServices;
 import org.hibernate.Session;
@@ -17,14 +19,11 @@ import javax.persistence.EntityManager;
 import javax.security.auth.login.Configuration;
 import java.time.LocalDate;
 
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean executando = true;
-
-
         // Inicializa Hibernate
         //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
 
@@ -34,10 +33,46 @@ public class Main {
 
         UsuarioRepository usuarioRepository = new UsuarioRepository(session);
         UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
+      
+        ProdutoRepository produtoRepository = new ProdutoRepository(session);
+        ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
 
         //gabriela takeda
         EntityManager em = CustomizerFactory.getEntityManager();
         RelatorioRepository relatorioRepository = new RelatorioRepository(em);
+      
+        
+
+     
+       
+
+        while (true) {
+            System.out.println("\n=== Controle de Estoque ===");
+            System.out.println("1 - Cadastrar Produto");
+            System.out.println("2 - Listar Estoque");
+            System.out.println("3 - Atualizar Quantidade");
+            System.out.println("4 - Remover Produto");
+            System.out.println("5 - Sair");
+
+        Scanner scanner = new Scanner(System.in);
+       switch (opcao) {
+                case 1:
+                    produtoServices.cadastrarProduto();
+                    break;
+                case 2:
+                    produtoServices.listarProdutos();
+                    break;
+                case 3:
+                    produtoServices.atualizarQuantidade();
+                    break;
+                case 4:
+                    produtoServices.removerProduto();
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+
+
+        
 
 
 
@@ -51,13 +86,14 @@ public class Main {
 
             String entrada = scanner.nextLine();
 
+
             if (!entrada.matches("\\d+")) {
                 System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
+
                 continue;
             }
 
             int opcao = Integer.parseInt(entrada);
-
             switch (opcao) {
                 case 1:
                     usuarioServices.cadastrarUsuario(); // Retorna para o cadastro
@@ -80,6 +116,7 @@ public class Main {
 
                 case 3:
                     System.out.println("\nSaindo...");
+
                     scanner.close();
                     session.close();
                     factory.close();
@@ -88,6 +125,7 @@ public class Main {
                 default:
                     System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
                     break;
+
             }
         }
     }

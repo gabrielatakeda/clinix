@@ -28,7 +28,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.5</version>
         </dependency>
-
         <!-- Jakarta Persistence API -->
         <dependency>
             <groupId>jakarta.persistence</groupId>
