@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.hibernate.SessionFactory;
+
 import org.hibernate.cfg.Configuration;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 
 public class CustomizerFactory {
     private static EntityManagerFactory emf = null;
+
 
     static {
         SessionFactory sessionFactory = new Configuration()

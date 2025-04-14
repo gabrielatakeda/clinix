@@ -6,13 +6,20 @@
 <hibernate-configuration>
     <session-factory>
 
-        <!-- Configuração do Banco de Dados -->
-      <!--
+
+        <!--
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property> 
+        <property name="connection.driver_class">org.postgresql.Driver</property> 
+        <property name="connection.username">postgres</property> 
+        <property name="connection.password">nevefofa</property> 
+        -->
+   
+        <!--
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/clinix</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">triotwix123</property>
-      -->
+        -->
 
         <property name="connection.url">jdbc:postgresql://localhost:5432/clinix</property> <!-- BD Mane -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
@@ -23,15 +30,18 @@
         <!-- Dialeto do PostgreSQL -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
 
+
         <!-- Estratégia de atualização do schema -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <property name="hibernate.show_sql">true</property>
 
+
         <!-- Classes mapeadas -->
         <mapping class="org.example.entity.UsuarioEntity"/>
         <mapping class="org.example.entity.RelatorioEntity"/>
         <mapping class="org.example.entity.ProdutoEntity"/>
+        <mapping class="org.example.entity.PacienteEntity"/>
 
     </session-factory>
 </hibernate-configuration>
