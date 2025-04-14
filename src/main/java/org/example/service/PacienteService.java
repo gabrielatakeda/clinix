@@ -33,8 +33,6 @@ public class PacienteService {
         }
         return new PacienteEntity();
     }
-<<<<<<< HEAD
-=======
 
     public List<PacienteEntity> buscarTodos() {
         return pacienteRepository.buscarTodos();
@@ -68,5 +66,4 @@ public class PacienteService {
     public List<PacienteEntity> listarPacientes() {
         return pacienteRepository.buscarTodos();
     }
->>>>>>> 749756b (Atualizações das classes)
 }

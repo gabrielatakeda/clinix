@@ -23,20 +23,19 @@ public class MedicoEntity {
     @Column(name = "telefone")
     private String telefone;
 
-    @OneToMany(mappedBy = "medico")
-    private List<ConsultaEntity> consultas = new ArrayList<>();
+    // @OneToMany(mappedBy = "medico")
+    // private List<ConsultaEntity> consultas = new ArrayList<>();
 
-    public MedicoEntity(){
-
+    public MedicoEntity() {
     }
 
-    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone, List<ConsultaEntity> consultas) {
+    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone /*, List<ConsultaEntity> consultas */) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.crm = crm;
         this.especialidade = especialidade;
         this.telefone = telefone;
-        this.consultas = consultas;
+        // this.consultas = consultas;
     }
 
     public Long getId() {
@@ -79,13 +78,11 @@ public class MedicoEntity {
         this.telefone = telefone;
     }
 
-    public List<ConsultaEntity> getConsultas() {
-        return consultas;
-    }
+    // public List<ConsultaEntity> getConsultas() {
+    //     return consultas;
+    // }
 
-    public void setConsultas(List<ConsultaEntity> consultas) {
-        this.consultas = consultas;
-    }
+    // public void setConsultas(List<ConsultaEntity> consultas) {
+    //     this.consultas = consultas;
+    // }
 }
-
-
