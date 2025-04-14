@@ -19,10 +19,13 @@ public class CustomizerFactory {
     }
 
     public static EntityManager getEntityManager() {
+
         return emf.createEntityManager();
     }
 
     public static void fechar() {
         emf.close();
     }
+
 }
+
