@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import javax.persistence.*;
+import org.example.entity.PacienteEntity;
 
 @Entity(name = "endereco")
 public class EnderecoEntity{
@@ -87,5 +88,5 @@ public class EnderecoEntity{
 
     public void setPaciente(PacienteEntity paciente){
         this.paciente = paciente;
-    }
+    }
 }

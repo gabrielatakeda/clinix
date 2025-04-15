@@ -1,7 +1,8 @@
-package org.example.Repository;
+package org.example.repository;
 
-import org.example.Entity.PacienteEntity;
+import org.example.entity.PacienteEntity;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class PacienteRepository{

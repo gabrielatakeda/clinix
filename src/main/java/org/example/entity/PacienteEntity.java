@@ -1,8 +1,9 @@
-package org.example.Entity;
+package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "paciente")
 public class PacienteEntity{
@@ -12,35 +13,36 @@ public class PacienteEntity{
     private Long id;
 
     @Column(name = "nome")
-    private String nome;
+    private String nomeCompleto;
 
-    @Column(name = "idade")
-    private int idade;
+    @Column(name = "cpf", unique = true)
+    private String cpf;
 
-    @Column(name = "medico")
-    private String medico;
+    @Column(name = "nascimento")
+    private LocalDate dataNascimento;
 
-    @Column(name = "data")
-    private LocalDate data;
+    @Column(name = "telefone")
+    private String telefone;
 
-    @Column(name = "fk_usuario")
-    private Long fk_usuario;
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnderecoEntity> enderecos = new ArrayList<>();
 
-    public PacienteEntity(){}
+    public PacienteEntity(){ //Construtor vazio
 
-    public PacienteEntity(Long id, String nome, int idade, String medico, LocalDate data, Long fk_usuario) {
+    }
+
+    public PacienteEntity(Long id, String nomeCompleto, String cpf, LocalDate dataNascimento, String telefone, List<EnderecoEntity> enderecos){
         this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-        this.medico = medico;
-        this.data = data;
-        this.fk_usuario = fk_usuario;
+        this.nomeCompleto = nomeCompleto;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.telefone = telefone;
+        this.enderecos = enderecos;
     }
 
     public Long getId(){
         return id;
     }
-
 
     public void setId(Long id){
         this.id = id;
@@ -84,16 +86,5 @@ public class PacienteEntity{
 
     public void setEnderecos(List<EnderecoEntity> enderecos){
         this.enderecos = enderecos;
-
-    @Override
-    public String toString() {
-        return "PacienteEntity{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", idade='" + idade + '\'' +
-                ", data=" + data +
-                ", medico=" + medico +
-                '}';
     }
-
 }

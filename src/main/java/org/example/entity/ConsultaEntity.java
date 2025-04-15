@@ -1,5 +1,4 @@
-package org.example.Entity;
-
+package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,8 +14,14 @@ public class ConsultaEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "data")
+    @Column(name = "data_hora")
     private LocalDateTime localDateTime;
+
+    @Column(name = "id_medico")
+    private MedicoEntity medico;
+
+    @Column(name = "id_paciente")
+    private PacienteEntity paciente;
 
     @Column(name = "motivo")
     private String motivo;
@@ -24,24 +29,35 @@ public class ConsultaEntity {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "prescricao")
+    private String prescricao;
+
+    @Column(name = "observacoes")
+    private String observacoes;
+
+
 
     public ConsultaEntity (){
 
     }
 
-    public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, String motivo) {
+    public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
         this.ID_Consulta = ID_Consulta;
         this.nome = nome;
         this.localDateTime = localDateTime;
+        this.medico = medico;
+        this.paciente = paciente;
         this.motivo = motivo;
+        this.status = status;
+        this.prescricao = prescricao;
+        this.observacoes = observacoes;
     }
 
-
-    public Long getId() {
+    public Long getID_Consulta() {
         return ID_Consulta;
     }
 
-    public void setId(Long id) {
+    public void setID_Consulta(Long ID_Consulta) {
         this.ID_Consulta = ID_Consulta;
     }
 
@@ -69,5 +85,43 @@ public class ConsultaEntity {
         this.motivo = motivo;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPrescricao() {
+        return prescricao;
+    }
+
+    public void setPrescricao(String prescricao) {
+        this.prescricao = prescricao;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public MedicoEntity getMedico() {
+        return medico;
+    }
+
+    public void setMedico(MedicoEntity medico) {
+        this.medico = medico;
+    }
+
+    public PacienteEntity getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(PacienteEntity paciente) {
+        this.paciente = paciente;
+    }
 }

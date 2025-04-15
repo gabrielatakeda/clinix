@@ -1,13 +1,14 @@
 package org.example.service;
 
-import org.example.Entity.ConsultaEntity;
+import org.example.entity.ConsultaEntity;
 
-import org.example.Entity.PacienteEntity;
-import org.example.Repository.ConsultaRepository;
-import org.example.Repository.CustomizerFactory;
+import org.example.entity.PacienteEntity;
+import org.example.repository.ConsultaRepository;
+import org.example.repository.CustomizerFactory;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Scanner;
 
 public class ConsultaService {
 
@@ -22,7 +23,7 @@ public class ConsultaService {
 
     public ConsultaEntity exibirConsultas(ConsultaEntity consultaEntity){
 
-        System.out.println("\nid: " + consultaEntity.getId() +
+        System.out.println("\nid: " + consultaEntity.getID_Consulta() +
                 "\nnome: " + consultaEntity.getNome() +
                 "\ndata: " + consultaEntity.getLocalDateTime() +
                 "\nmotivo: " + consultaEntity.getMotivo() +
@@ -30,6 +31,14 @@ public class ConsultaService {
                 "\nprescrição: " + consultaEntity.getPrescricao());
 
         return consultaEntity;
+    }
+
+    public void printMenu(Scanner sc, ConsultaService consultaService){
+
+    }
+
+    public void printMenu(Scanner sc, PacienteService pacienteService, MedicoService medicoService){
+
     }
 
 }

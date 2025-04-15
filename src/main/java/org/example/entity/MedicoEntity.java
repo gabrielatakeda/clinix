@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "medico")
-
-
 public class MedicoEntity {
 
 

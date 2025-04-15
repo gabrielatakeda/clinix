@@ -1,6 +1,6 @@
-package org.example.Repository;
+package org.example.repository;
 
-import org.example.Entity.ConsultaEntity;
+import org.example.entity.ConsultaEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class ConsultaRepository {
 
     private EntityManager em;
 
-    public  ConsultaRepository(){}
+    public ConsultaRepository(){}
 
     public ConsultaRepository(EntityManager em) {
         this.em = em;
@@ -33,15 +33,13 @@ public class ConsultaRepository {
     }
 
     public List<ConsultaEntity> buscarPacientesPorMedico(String crm) {
-        String jpql = "SELECT c FROM ConsultaEntity c WHERE c.medico.crm = :crm";
-        return em.createQuery(jpql, ConsultaEntity.class)
+        return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.medico.crm = :crm", ConsultaEntity.class)
                 .setParameter("crm", crm)
                 .getResultList();
     }
 
     public List<ConsultaEntity> buscarConsultasPorPaciente(String cpf) {
-        return em.createQuery(
-                        "SELECT c FROM ConsultaEntity c WHERE c.paciente.cpf = :cpf", ConsultaEntity.class)
+        return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.paciente.cpf = :cpf", ConsultaEntity.class)
                 .setParameter("cpf", cpf)
                 .getResultList();
     }
