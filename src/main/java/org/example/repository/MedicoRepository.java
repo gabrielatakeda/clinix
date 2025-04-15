@@ -37,5 +37,5 @@ public class MedicoRepository{
 
     public List<MedicoEntity> buscarTodos(){
         return em.createQuery("SELECT m FROM medico m", MedicoEntity.class).getResultList();
-    }
+
 }

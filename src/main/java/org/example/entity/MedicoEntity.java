@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "medico")
-public class MedicoEntity{
+
+
+public class MedicoEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +33,7 @@ public class MedicoEntity{
     }
 
     public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone /*,List<ConsultaEntity> consultas*/){
+
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.crm = crm;
@@ -86,3 +90,4 @@ public class MedicoEntity{
     //     this.consultas = consultas;
     // }
 }
+

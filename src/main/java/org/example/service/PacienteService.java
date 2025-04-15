@@ -1,3 +1,4 @@
+
 package org.example.service;
 
 import org.example.entity.PacienteEntity;
@@ -34,6 +35,7 @@ public class PacienteService{
         return new PacienteEntity();
     }
 
+
     public List<PacienteEntity> buscarTodos(){
         return pacienteRepository.buscarTodos();
     }
@@ -66,4 +68,16 @@ public class PacienteService{
     public List<PacienteEntity> listarPacientes(){
         return pacienteRepository.buscarTodos();
     }
+
+    public PacienteEntity exibirConsulta(PacienteEntity pacienteEntity){
+
+        System.out.println("\nid: " + pacienteEntity.getId() +
+                "\nnome: " + pacienteEntity.getNome() +
+                "\nidade: " + pacienteEntity.getIdade() +
+                "\ndata: " + pacienteEntity.getData() +
+                "\nmedico: " + pacienteEntity.getMedico());
+
+        return pacienteEntity;
+    }
+
 }

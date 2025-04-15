@@ -3,9 +3,9 @@ package org.example.Entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-
-@Entity(name = "paciente")
-public class PacienteEntity{
+@Entity
+@Table(name = "pessoa")
+public class PacienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,53 +37,53 @@ public class PacienteEntity{
         this.fk_usuario = fk_usuario;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
+    public String getNome() {
+        return nome;
+    }
 
-    public void setId(Long id){
+    public int getIdade() {
+        return idade;
+    }
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public Long getFk_usuario() {
+        return fk_usuario;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNomeCompleto(){
-        return nomeCompleto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setNomeCompleto(String nomeCompleto){
-        this.nomeCompleto = nomeCompleto;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
-    public String getCpf(){
-        return cpf;
+    public void setMedico(String medico) {
+        this.medico = medico;
     }
 
-    public void setCpf(String cpf){
-        this.cpf = cpf;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
-    public LocalDate getDataNascimento(){
-        return dataNascimento;
+    public void setFk_usuario(Long fk_usuario) {
+        this.fk_usuario = fk_usuario;
     }
-
-    public void setDataNascimento(LocalDate dataNascimento){
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getTelefone(){
-        return telefone;
-    }
-
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
-    }
-
-    public List<EnderecoEntity> getEnderecos(){
-        return enderecos;
-    }
-
-    public void setEnderecos(List<EnderecoEntity> enderecos){
-        this.enderecos = enderecos;
 
     @Override
     public String toString() {

@@ -1,14 +1,12 @@
-package org.example.repository;
+package org.example.Repository;
 
-import org.example.entity.PacienteEntity;
+import org.example.Entity.PacienteEntity;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class PacienteRepository{
 
-    private EntityManager em;
-
+    private javax.persistence.EntityManager em;
     public PacienteRepository(EntityManager em){
         this.em = em;
     }
@@ -54,4 +52,5 @@ public class PacienteRepository{
             return null; //se não encontrar ninguém, retorna null
         }
     }
+
 }

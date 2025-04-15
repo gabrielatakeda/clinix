@@ -87,5 +87,5 @@ public class EnderecoEntity{
 
     public void setPaciente(PacienteEntity paciente){
         this.paciente = paciente;
-    }
+    }
 }
