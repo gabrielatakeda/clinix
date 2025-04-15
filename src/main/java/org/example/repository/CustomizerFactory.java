@@ -7,11 +7,12 @@ import org.hibernate.cfg.Configuration;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class CustomizerFactory {
+
+public class CustomizerFactory{
 
     private static final EntityManagerFactory emf;
 
-    static {
+    static{
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
@@ -27,4 +28,6 @@ public class CustomizerFactory {
         emf.close();
     }
 
+
 }
+

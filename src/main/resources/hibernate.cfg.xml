@@ -51,6 +51,7 @@
         <mapping class="org.example.entity.RelatorioEntity"/>
         <mapping class="org.example.entity.ProdutoEntity"/>
         <mapping class="org.example.entity.PacienteEntity"/>
+        <mapping class="org.example.entity.EnderecoEntity"/>
         <mapping class="org.example.entity.MedicoEntity"/>
 
 

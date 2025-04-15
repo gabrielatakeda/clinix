@@ -3,7 +3,7 @@ package org.example.entity;
 import javax.persistence.*;
 
 @Entity(name = "endereco")
-public class EnderecoEntity {
+public class EnderecoEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,9 +21,9 @@ public class EnderecoEntity {
     @JoinColumn(name = "paciente_id", nullable = false)
     private PacienteEntity paciente;
 
-    public EnderecoEntity(){}
+    public EnderecoEntity(){} //Construtor vazio
 
-    public EnderecoEntity(Long id, String logradouro, String cidade, String estado, Integer numero, boolean isPrincipal, PacienteEntity paciente) {
+    public EnderecoEntity(Long id, String logradouro, String cidade, String estado, Integer numero, boolean isPrincipal, PacienteEntity paciente){
         this.id = id;
         this.logradouro = logradouro;
         this.cidade = cidade;
@@ -33,59 +33,59 @@ public class EnderecoEntity {
         this.paciente = paciente;
     }
 
-    public Long getId() {
+    public Long getId(){
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    public String getLogradouro() {
+    public String getLogradouro(){
         return logradouro;
     }
 
-    public void setLogradouro(String logradouro) {
+    public void setLogradouro(String logradouro){
         this.logradouro = logradouro;
     }
 
-    public String getCidade() {
+    public String getCidade(){
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade){
         this.cidade = cidade;
     }
 
-    public String getEstado() {
+    public String getEstado(){
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(String estado){
         this.estado = estado;
     }
 
-    public Integer getNumero() {
+    public Integer getNumero(){
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(Integer numero){
         this.numero = numero;
     }
 
-    public boolean isPrincipal() {
+    public boolean isPrincipal(){
         return isPrincipal;
     }
 
-    public void setPrincipal(boolean principal) {
+    public void setPrincipal(boolean principal){
         isPrincipal = principal;
     }
 
-    public PacienteEntity getPaciente() {
+    public PacienteEntity getPaciente(){
         return paciente;
     }
 
-    public void setPaciente(PacienteEntity paciente) {
+    public void setPaciente(PacienteEntity paciente){
         this.paciente = paciente;
     }
 }
