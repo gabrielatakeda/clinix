@@ -18,6 +18,7 @@ public class Main {
         boolean executando = true;
         //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
 
+
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         Session session = factory.openSession();
 

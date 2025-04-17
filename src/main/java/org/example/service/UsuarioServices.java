@@ -56,7 +56,7 @@ public class UsuarioServices {
                 usuarioRepository.buscarPorCpf(loginOuCpf) :
                 usuarioRepository.buscarPorLogin(loginOuCpf));
 
-        if (usuarioOpt.isEmpty()) {
+        if (!usuarioOpt.isPresent()) {
             System.out.println("Usuário não encontrado! Verifique suas credenciais.");
             return false;
         }

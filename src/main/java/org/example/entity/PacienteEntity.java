@@ -18,7 +18,7 @@ public class PacienteEntity{
     @Column(name = "cpf", unique = true)
     private String cpf;
 
-    @Column(name = "nascimento")
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
     @Column(name = "telefone")

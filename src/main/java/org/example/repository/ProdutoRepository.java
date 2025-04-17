@@ -16,6 +16,8 @@ public class ProdutoRepository {
         return em.createQuery("SELECT p FROM ProdutoEntity p", ProdutoEntity.class).getResultList();
     }
 
+    public ProdutoRepository(){}
+
     public Optional<ProdutoEntity> buscarPorId(Long id){
         return Optional.ofNullable(em.find(ProdutoEntity.class, id));
     }

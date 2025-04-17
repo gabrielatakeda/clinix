@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.entity.EnderecoEntity;
 import org.example.entity.PacienteEntity;
 import org.example.repository.ConsultaRepository;
+import org.example.repository.ProdutoRepository;
 
 
 import java.time.LocalDate;
@@ -20,8 +21,8 @@ public class MenuService {
         boolean executando = true;
         while (executando) {
             System.out.println("\n======= MENU =======");
-            System.out.println("1- Gernciar Paciente");
-            System.out.println("2- Gerencar Medico");
+            System.out.println("1- Gerenciar Paciente");
+            System.out.println("2- Gerenciar Medico");
             System.out.println("3- Agendar consulta.");
             System.out.println("4- Prontuarios.");
             System.out.println("5- Estoque de insumos.");
@@ -59,7 +60,9 @@ public class MenuService {
                     break;
                 case 5:
                     System.out.println("Gerenciar Estoque");
-                    ProdutoServices produtoServices = new ProdutoServices();
+                    ProdutoRepository produtoRepository = new ProdutoRepository();
+                    ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
+
                     produtoServices.printMenu(sc, produtoServices);
 
                     break;

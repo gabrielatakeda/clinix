@@ -17,10 +17,12 @@ public class ConsultaEntity {
     @Column(name = "data_hora")
     private LocalDateTime localDateTime;
 
-    @Column(name = "id_medico")
+    @ManyToOne
+    @JoinColumn(name = "id_medico") // nome da coluna da FK no banco
     private MedicoEntity medico;
 
-    @Column(name = "id_paciente")
+    @ManyToOne
+    @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
     @Column(name = "motivo")
