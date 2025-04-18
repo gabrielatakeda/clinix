@@ -20,14 +20,15 @@ public class AmostrasLabRepository {
     }
 
 
-    public List<ConsultaEntity> findAll(){
-        return em.createQuery("SELECT c FROM consultorio.amostralab c", ConsultaEntity.class).getResultList();
+    public List<AmostrasLabEntity> findAll(){
+        return em.createQuery("SELECT c FROM AmostrasLabEntity c", AmostrasLabEntity.class).getResultList();
     }
 
-    public void salvar(ConsultaEntity amostra){
+    public AmostrasLabEntity salvar(AmostrasLabEntity amostra){
         em.getTransaction().begin();
         em.persist(amostra);
         em.getTransaction().commit();
+        return amostra;
     }
 
     public void atualizar (AmostrasLabEntity amostra){

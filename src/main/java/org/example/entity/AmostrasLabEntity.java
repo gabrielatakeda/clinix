@@ -2,50 +2,49 @@ package org.example.entity;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "amostralab")
+@Table(name = "amostralab",schema = "consultorio")
 public class AmostrasLabEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID_Amostra;
+    private Long id_amostralab;
 
-    @Column(name = "dataColeta")
-    private LocalDateTime dataColeta;
+    @Column(name = "datacoleta")
+    private LocalDate dataColeta;
 
-    @Column(name = "tipoExame")
+    @Column(name = "tipo")
     private String tipoExame;
 
 
     @Column(name = "resultado")
     private String resultado;
 
+
     @ManyToOne
     @JoinColumn(name = "consulta_id", nullable = false)
     private ConsultaEntity consulta;
 
-
-
     public AmostrasLabEntity(){}
 
-    public AmostrasLabEntity(Long ID_Amostra, String tipoExame, String tipoExame1, String resultado, LocalDateTime dataColeta) {
-        this.ID_Amostra = ID_Amostra;
-        this.tipoExame = tipoExame1;
+    public AmostrasLabEntity(Long id_amostralab, String tipoExame, String resultado, LocalDate dataColeta) {
+        this.id_amostralab = id_amostralab;
+        this.tipoExame = tipoExame;
         this.resultado = resultado;
         this.dataColeta = dataColeta;
     }
 
 
-
-    public Long getID_Amostra() {
-        return ID_Amostra;
+    public Long getId_amostralab() {
+        return id_amostralab;
     }
 
     public void setID_Amostra(Long ID_Amostra) {
-        this.ID_Amostra = ID_Amostra;
+        this.id_amostralab = ID_Amostra;
     }
 
     public String getTipoExame() {
@@ -64,11 +63,21 @@ public class AmostrasLabEntity {
         this.resultado = resultado;
     }
 
-    public LocalDateTime getDataColeta() {
+    public LocalDate getDataColeta() {
         return dataColeta;
     }
 
-    public void setDataColeta(LocalDateTime dataColeta) {
+    public void setDataColeta(LocalDate dataColeta) {
         this.dataColeta = dataColeta;
     }
+
+    public ConsultaEntity getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(ConsultaEntity consulta) {
+        this.consulta = consulta;
+    }
+
+
 }

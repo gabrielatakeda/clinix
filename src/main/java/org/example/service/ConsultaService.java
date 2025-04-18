@@ -15,6 +15,10 @@ public class ConsultaService {
     ConsultaRepository consultaRepository = new ConsultaRepository(em);
     Scanner scanner =  new Scanner(System.in);
 
+    public ConsultaEntity buscarPorId(Long id){
+        return consultaRepository.buscarPorId(id);
+    }
+
     public List<ConsultaEntity> findByNome(String nome){
         return em.createQuery("SELECT p FROM ConsultaEntity p WHERE p.nome = :nome", ConsultaEntity.class)
                 .setParameter("nome", nome + "%")
@@ -28,7 +32,7 @@ public class ConsultaService {
             System.out.println("\nNenhuma consulta encontrada.");
         } else {
             for (ConsultaEntity c : consultas) {
-                System.out.println("\nID: " + c.getID_Consulta());
+                System.out.print("\nID: " + c.getID_Consulta());
                 System.out.println("Data: " + c.getData_consulta());
                 System.out.println("Motivo: " + c.getMotivo());
                 System.out.println("Status: " + c.getStatus());
