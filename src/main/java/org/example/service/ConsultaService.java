@@ -44,6 +44,21 @@ public class ConsultaService {
         return consultaRepository.salvar(consulta);
     }
 
+    public List<ConsultaEntity> listarConsultas() {
+        return consultaRepository.findAll();
+    }
+
+    public void atualizarMotivoConsulta(Long id, String novoMotivo){
+        ConsultaEntity consulta = consultaRepository.buscarPorId(id);
+        if(consulta != null){
+            consulta.setMotivo(novoMotivo);
+            consultaRepository.atualizar(consulta);
+            System.out.println("Motivo da consulta atualizado com sucesso!");
+        } else {
+            System.out.println("Consulta com ID " + id + " não encontrada.");
+        }
+    }
+
 
     public void printMenu(Scanner sc, ConsultaService consultaService){
 

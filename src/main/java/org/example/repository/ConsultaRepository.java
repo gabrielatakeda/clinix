@@ -4,6 +4,8 @@ import org.example.entity.AmostrasLabEntity;
 import org.example.entity.ConsultaEntity;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ConsultaRepository {
@@ -19,15 +21,27 @@ public class ConsultaRepository {
     }
 
     public List<ConsultaEntity> findAll(){
-    return em.createQuery("SELECT c FROM consultorio.consulta c", ConsultaEntity.class).getResultList();
+    return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
     }
+
+    public ConsultaEntity buscarPorHorario(LocalDate data_consulta) {
+        try {
+            return em.createQuery(
+                            "SELECT c FROM ConsultaEntity c WHERE c.data_consulta = :horario",
+                            ConsultaEntity.class)
+                    .setParameter("horario", data_consulta)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Nenhuma consulta encontrada nesse horário
+        }
+    }
+
 
     public ConsultaEntity salvar(ConsultaEntity consulta){
         em.getTransaction().begin();
         em.persist(consulta);
         em.getTransaction().commit();
         return consulta;
-
     }
 
     public void atualizar (ConsultaEntity consulta){
