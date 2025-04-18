@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "amostra")
+@Table(name = "amostralab")
 public class AmostrasLabEntity {
 
     @Id
@@ -22,6 +22,11 @@ public class AmostrasLabEntity {
 
     @Column(name = "resultado")
     private String resultado;
+
+    @ManyToOne
+    @JoinColumn(name = "consulta_id", nullable = false)
+    private ConsultaEntity consulta;
+
 
 
     public AmostrasLabEntity(){}

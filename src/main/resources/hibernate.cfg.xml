@@ -12,6 +12,7 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <mapping class="consultorio.entity.AmostrasLabEntity"/>
+        <mapping class="org.example.entity.AmostrasLabEntity"/>
+        <mapping class="org.example.entity.ConsultaEntity"/>
     </session-factory>
 </hibernate-configuration>
