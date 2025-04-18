@@ -5,12 +5,15 @@ import org.example.repository.AmostrasLabRepository;
 import org.example.repository.CustomizerFactory;
 
 import javax.persistence.EntityManager;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AmostrasLabService {
 
     EntityManager em = CustomizerFactory.getEntityManager();
     AmostrasLabRepository amostraRepository = new AmostrasLabRepository(em);
+    // Adicione o formatter na parte superior da classe para usar em todo o código
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 
     public AmostrasLabEntity salvarAmostra(AmostrasLabEntity amostra) {
@@ -39,7 +42,7 @@ public class AmostrasLabService {
                 System.out.println("\nID: " + c.getId_amostralab());
                 System.out.println("ID Consulta: " + c.getConsulta().getID_Consulta());
                 System.out.println("Tipo do Exame: " + c.getTipoExame());
-                System.out.println("Data da Coleta: " + c.getDataColeta());
+                System.out.println("Data da Coleta: " + c.getDataColeta().format(formatter));
                 System.out.println("Resultado: " + c.getResultado());
                 System.out.println("------------------------------");
             }

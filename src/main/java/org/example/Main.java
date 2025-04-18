@@ -5,6 +5,8 @@ import org.example.entity.ConsultaEntity;
 import org.example.service.AmostrasLabService;
 import org.example.service.ConsultaService;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +26,9 @@ public class Main {
 
         List<AmostrasLabEntity> listaAmostraEntity = amostraService.listarAmostra();
 
+        // Formato que o usuário deve digitar
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
         do {
             System.out.println("\n==== MENU ====");
             System.out.println("1. Menu Consultas");
@@ -35,7 +40,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    menuConsulta(opcao, scanner, service, ListaConsultasEntity, amostraService);
+                    menuConsulta(opcao, scanner, service, ListaConsultasEntity, amostraService,formatter);
                     break;
                 case 2:
                     menuAmostra(opcao, scanner, amostraService, listaAmostraEntity, service);
@@ -52,7 +57,7 @@ public class Main {
 
     }
 
-    private static void menuConsulta(int opcao, Scanner scanner, ConsultaService service, List<ConsultaEntity> ListaConsultasEntity, AmostrasLabService amostrasLabService) {
+    private static void menuConsulta(int opcao, Scanner scanner, ConsultaService service, List<ConsultaEntity> ListaConsultasEntity, AmostrasLabService amostrasLabService,DateTimeFormatter formatter ) {
         do {
             System.out.println("\n==== MENU CONSULTAS ====");
             System.out.println("1. Cadastrar nova consulta");
@@ -66,7 +71,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    cadastrarConsulta(opcao, scanner, service, amostrasLabService);
+                    cadastrarConsulta(opcao, scanner, service, amostrasLabService, formatter);
                     break;
                 case 2:
                     atualizarMotivo(scanner, service, ListaConsultasEntity);
@@ -87,13 +92,22 @@ public class Main {
         } while (opcao != 5);
     }
 
-    private static void cadastrarConsulta(int opcao, Scanner scanner, ConsultaService service, AmostrasLabService amostrasLabService) {
+    private static void cadastrarConsulta(int opcao, Scanner scanner, ConsultaService service, AmostrasLabService amostrasLabService,DateTimeFormatter formatter ) {
         ConsultaEntity novaConsulta = new ConsultaEntity();
         AmostrasLabEntity novaAmostra = new AmostrasLabEntity();
 
 
-        System.out.print("Data da consulta (AAAA-MM-DD): ");
-        novaConsulta.setData_consulta(LocalDate.parse(scanner.nextLine()));
+        try {
+            System.out.print("Data da consulta (dd/MM/yyyy HH:mm): ");
+            String dataConsultaStr = scanner.nextLine();
+
+            LocalDateTime dataConsulta = LocalDateTime.parse(dataConsultaStr, formatter);
+
+            novaConsulta.setData_consulta(dataConsulta);
+        } catch (Exception e) {
+            System.out.println("\nErro: Formato de data inválido. Use o formato dd/MM/yyyy HH:mm.");
+            return;
+        }
 
         System.out.print("Motivo: ");
         novaConsulta.setMotivo(scanner.nextLine());
@@ -115,7 +129,8 @@ public class Main {
 
 
             novaAmostra.setDataColeta(salvo.getData_consulta()); // pega a mesma data da consulta
-            System.out.print("Data da amostra : " + novaAmostra.getDataColeta());
+            System.out.print("Data da amostra : " + novaAmostra.getDataColeta().format(formatter));
+
 
             System.out.print("\nTipo: ");
             novaAmostra.setTipoExame(scanner.nextLine());

@@ -2,6 +2,7 @@ package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ConsultaEntity {
     private Long ID_Consulta;
 
     @Column(name = "data_consulta")
-    private LocalDate data_consulta;
+    private LocalDateTime data_consulta;
 
     @Column(name = "motivo")
     private String motivo;
@@ -38,7 +39,7 @@ public class ConsultaEntity {
 
     }
 
-    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDate data_consulta, String motivo, String status, String prescricao, String observacoes) {
+    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDateTime data_consulta, String motivo, String status, String prescricao, String observacoes) {
         this.amostras = amostras;
         this.ID_Consulta = ID_Consulta;
         this.data_consulta = data_consulta;
@@ -56,11 +57,11 @@ public class ConsultaEntity {
         this.ID_Consulta = ID_Consulta;
     }
 
-    public LocalDate getData_consulta() {
+    public LocalDateTime getData_consulta() {
         return data_consulta;
     }
 
-    public void setData_consulta(LocalDate data_consulta) {
+    public void setData_consulta(LocalDateTime data_consulta) {
         this.data_consulta = data_consulta;
     }
 

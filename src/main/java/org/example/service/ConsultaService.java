@@ -4,6 +4,7 @@ import org.example.entity.ConsultaEntity;
 import org.example.repository.ConsultaRepository;
 import org.example.repository.CustomizerFactory;
 import javax.persistence.EntityManager;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +12,8 @@ public class ConsultaService {
 
     EntityManager em = CustomizerFactory.getEntityManager();
     ConsultaRepository consultaRepository = new ConsultaRepository(em);
-    Scanner scanner =  new Scanner(System.in);
+    // Adicione o formatter na parte superior da classe para usar em todo o código
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public ConsultaEntity buscarPorId(Long id){
         return consultaRepository.buscarPorId(id);
@@ -31,7 +33,7 @@ public class ConsultaService {
         } else {
             for (ConsultaEntity c : consultas) {
                 System.out.print("\nID: " + c.getID_Consulta());
-                System.out.println("Data: " + c.getData_consulta());
+                System.out.println("Data: " + c.getData_consulta().format(formatter));
                 System.out.println("Motivo: " + c.getMotivo());
                 System.out.println("Status: " + c.getStatus());
                 System.out.println("Prescrição: " + c.getPrescricao());

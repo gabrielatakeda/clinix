@@ -3,6 +3,7 @@ package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "amostralab",schema = "consultorio")
@@ -13,7 +14,7 @@ public class AmostrasLabEntity {
     private Long id_amostralab;
 
     @Column(name = "datacoleta")
-    private LocalDate dataColeta;
+    private LocalDateTime dataColeta;
 
     @Column(name = "tipo")
     private String tipoExame;
@@ -29,7 +30,7 @@ public class AmostrasLabEntity {
 
     public AmostrasLabEntity(){}
 
-    public AmostrasLabEntity(Long id_amostralab, String tipoExame, String resultado, LocalDate dataColeta) {
+    public AmostrasLabEntity(Long id_amostralab, String tipoExame, String resultado, LocalDateTime dataColeta) {
         this.id_amostralab = id_amostralab;
         this.tipoExame = tipoExame;
         this.resultado = resultado;
@@ -61,11 +62,11 @@ public class AmostrasLabEntity {
         this.resultado = resultado;
     }
 
-    public LocalDate getDataColeta() {
+    public LocalDateTime getDataColeta() {
         return dataColeta;
     }
 
-    public void setDataColeta(LocalDate dataColeta) {
+    public void setDataColeta(LocalDateTime dataColeta) {
         this.dataColeta = dataColeta;
     }
 
