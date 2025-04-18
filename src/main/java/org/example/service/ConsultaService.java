@@ -1,10 +1,8 @@
 package org.example.service;
 
 import org.example.entity.ConsultaEntity;
-
 import org.example.repository.ConsultaRepository;
 import org.example.repository.CustomizerFactory;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Scanner;

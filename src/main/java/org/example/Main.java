@@ -2,15 +2,9 @@ package org.example;
 
 import org.example.entity.AmostrasLabEntity;
 import org.example.entity.ConsultaEntity;
-import org.example.repository.ConsultaRepository;
-import org.example.repository.CustomizerFactory;
 import org.example.service.AmostrasLabService;
 import org.example.service.ConsultaService;
-
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

@@ -3,8 +3,6 @@ package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 
 @Entity
 @Table(name = "amostralab",schema = "consultorio")

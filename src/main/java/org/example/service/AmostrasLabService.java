@@ -1,9 +1,7 @@
 package org.example.service;
 
 import org.example.entity.AmostrasLabEntity;
-import org.example.entity.ConsultaEntity;
 import org.example.repository.AmostrasLabRepository;
-import org.example.repository.ConsultaRepository;
 import org.example.repository.CustomizerFactory;
 
 import javax.persistence.EntityManager;
