@@ -13,6 +13,7 @@ public class ConsultaService {
 
     EntityManager em = CustomizerFactory.getEntityManager();
     ConsultaRepository consultaRepository = new ConsultaRepository(em);
+    Scanner scanner =  new Scanner(System.in);
 
     public List<ConsultaEntity> findByNome(String nome){
         return em.createQuery("SELECT p FROM ConsultaEntity p WHERE p.nome = :nome", ConsultaEntity.class)
@@ -20,16 +21,24 @@ public class ConsultaService {
                 .getResultList();
     }
 
-    public ConsultaEntity exibirConsultas(ConsultaEntity consultaEntity){
+    public void exibirConsultas() {
+        List<ConsultaEntity> consultas = consultaRepository.findAll();
 
-        System.out.println("\nid: " + consultaEntity.getID_Consulta() +
-                "\ndata: " + consultaEntity.getData_consulta() +
-                "\nmotivo: " + consultaEntity.getMotivo() +
-                "\nobservações: " + consultaEntity.getObservacoes() +
-                "\nprescrição: " + consultaEntity.getPrescricao());
-
-        return consultaEntity;
+        if (consultas.isEmpty()) {
+            System.out.println("\nNenhuma consulta encontrada.");
+        } else {
+            for (ConsultaEntity c : consultas) {
+                System.out.println("\nID: " + c.getID_Consulta());
+                System.out.println("Data: " + c.getData_consulta());
+                System.out.println("Motivo: " + c.getMotivo());
+                System.out.println("Status: " + c.getStatus());
+                System.out.println("Prescrição: " + c.getPrescricao());
+                System.out.println("Observações: " + c.getObservacoes());
+                System.out.println("------------------------------");
+            }
+        }
     }
+
 
 
     public ConsultaEntity salvarConsulta(ConsultaEntity consulta) {
@@ -54,6 +63,16 @@ public class ConsultaService {
             consulta.setMotivo(novoMotivo);
             consultaRepository.atualizar(consulta);
             System.out.println("Motivo da consulta atualizado com sucesso!");
+        } else {
+            System.out.println("Consulta com ID " + id + " não encontrada.");
+        }
+    }
+
+    public void removerPorId(Long id) {
+        ConsultaEntity consulta = consultaRepository.buscarPorId(id);
+        if (consulta != null) {
+            consultaRepository.remover(consulta);
+            System.out.println("Consulta removida com sucesso.");
         } else {
             System.out.println("Consulta com ID " + id + " não encontrada.");
         }

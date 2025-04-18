@@ -21,20 +21,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcao;
         ConsultaService service = new ConsultaService();
-        EntityManager em = CustomizerFactory.getEntityManager();
 
-        ConsultaRepository consultaRepository = new ConsultaRepository(em);
-        ConsultaEntity consultaEntity = new ConsultaEntity();
-
-        List<ConsultaEntity> consultas = service.listarConsultas();
-
-        System.out.println(consultaRepository.buscarPorId(2L));
+        List<ConsultaEntity> ListaConsultasEntity = service.listarConsultas();
 
         do {
-            System.out.println("\n==== MENU CONSULTAS ====");
-            System.out.println("1. Cadastrar nova consulta");
-            System.out.println("2. Atualizar consulta");
-            System.out.println("3. Lis4ar todas as consultas");
+            System.out.println("\n==== MENU ====");
+            System.out.println("1. Menu Consultas");
+            System.out.println("2. Menu Amostras");
             System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -45,12 +38,46 @@ public class Main {
                     cadastrarConsulta(scanner, service);
                     break;
                 case 2:
-                    atualizarMotivo(scanner, service, consultas);
+                    menuConsulta(opcao, scanner,service,ListaConsultasEntity);
                     break;
                 case 3:
-                    listarConsultas(scanner, consultas);
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 0);
+
+
+    }
+
+    private static void menuConsulta ( int opcao, Scanner scanner, ConsultaService service, List<ConsultaEntity> ListaConsultasEntity){
+        do {
+            System.out.println("\n==== MENU CONSULTAS ====");
+            System.out.println("1. Cadastrar nova consulta");
+            System.out.println("2. Atualizar consulta");
+            System.out.println("3. Listar todas as consultas");
+            System.out.println("4. Cancelar/Deletar consulta");
+            System.out.println("5. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // limpar buffer
+
+            switch (opcao) {
+                case 1:
+                    cadastrarConsulta(scanner, service);
+                    break;
+                case 2:
+                    atualizarMotivo(scanner, service, ListaConsultasEntity);
+                    break;
+                case 3:
+                    service.exibirConsultas();
                     break;
                 case 4:
+                    DeletarConsultas(scanner, service);
+                    break;
+                case 5:
                     System.out.println("Saindo...");
                     break;
                 default:
@@ -104,22 +131,15 @@ public class Main {
     }
 
 
-    private static void listarConsultas(Scanner scanner, List<ConsultaEntity> consultas) {
-        if (consultas.isEmpty()) {
-            System.out.println("Nenhuma consulta encontrada.");
-            return;
-        } else {
+    private static void DeletarConsultas(Scanner scanner, ConsultaService service) {
 
-            for (ConsultaEntity c : consultas) {
-                System.out.println("\nID: " + c.getID_Consulta());
-                System.out.println("Data: " + c.getData_consulta());
-                System.out.println("Motivo: " + c.getMotivo());
-                System.out.println("Status: " + c.getStatus());
-                System.out.println("Prescrição: " + c.getPrescricao());
-                System.out.println("Observações: " + c.getObservacoes());
-            }
-        }
+        System.out.print("\nDigite o ID da consulta que deseja deletar: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine(); // limpar buffer
+
+        service.removerPorId(id);
     }
+
 
 
 }
