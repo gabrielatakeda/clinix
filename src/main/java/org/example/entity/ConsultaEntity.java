@@ -1,15 +1,31 @@
 package org.example.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "consulta")
+@Table(name = "consulta",schema = "consultorio")
 public class ConsultaEntity {
+
+
+    @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AmostrasLabEntity> amostras = new ArrayList<>();
+
+
+import java.time.LocalDateTime;
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID_Consulta;
+
+
+    @Column(name = "data_consulta")
+    private LocalDateTime data_consulta;
 
     @Column(name = "nome")
     private String nome;
@@ -24,6 +40,7 @@ public class ConsultaEntity {
     @ManyToOne
     @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
+
 
     @Column(name = "motivo")
     private String motivo;
@@ -42,6 +59,11 @@ public class ConsultaEntity {
     public ConsultaEntity (){
 
     }
+
+    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDateTime data_consulta, String motivo, String status, String prescricao, String observacoes) {
+        this.amostras = amostras;
+        this.ID_Consulta = ID_Consulta;
+        this.data_consulta = data_consulta;
 
     public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
         this.ID_Consulta = ID_Consulta;
@@ -63,6 +85,13 @@ public class ConsultaEntity {
         this.ID_Consulta = ID_Consulta;
     }
 
+
+    public LocalDateTime getData_consulta() {
+        return data_consulta;
+    }
+
+    public void setData_consulta(LocalDateTime data_consulta) {
+
     public String getNome() {
         return nome;
     }
@@ -77,6 +106,7 @@ public class ConsultaEntity {
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+
     }
 
     public String getMotivo() {
@@ -126,4 +156,5 @@ public class ConsultaEntity {
     public void setPaciente(PacienteEntity paciente) {
         this.paciente = paciente;
     }
+
 }
