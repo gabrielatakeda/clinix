@@ -33,7 +33,7 @@ public class ConsultaService {
         } else {
             for (ConsultaEntity c : consultas) {
                 System.out.print("\nID: " + c.getID_Consulta());
-                System.out.println("Data: " + c.getData_consulta().format(formatter));
+                System.out.println("\nData: " + c.getData_consulta().format(formatter));
                 System.out.println("Motivo: " + c.getMotivo());
                 System.out.println("Status: " + c.getStatus());
                 System.out.println("Prescrição: " + c.getPrescricao());
