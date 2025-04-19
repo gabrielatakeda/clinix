@@ -2,10 +2,13 @@ package org.example.service;
 
 import org.example.entity.EnderecoEntity;
 import org.example.entity.PacienteEntity;
+import org.example.repository.AmostrasLabRepository;
 import org.example.repository.ConsultaRepository;
+import org.example.repository.CustomizerFactory;
 import org.example.repository.ProdutoRepository;
 
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -50,7 +53,9 @@ public class MenuService {
                 case 3:
                     System.out.println("Agendar Consulta");
                     ConsultaService consultaService = new ConsultaService();
-                    consultaService.printMenu(sc, consultaService);
+                    AmostrasLabService  = new AmostrasLabService();
+
+                    consultaService.printMenu(sc, consultaService, amostraLabService, ListaConsultaEntity);
                     break;
 
                 case 4:

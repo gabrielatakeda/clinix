@@ -1,8 +1,7 @@
 package org.example.entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +12,6 @@ public class ConsultaEntity {
 
     @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AmostrasLabEntity> amostras = new ArrayList<>();
-
-
-import java.time.LocalDateTime;
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,15 +49,22 @@ import java.time.LocalDateTime;
     private String observacoes;
 
 
-
     public ConsultaEntity (){
-
     }
 
-    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDateTime data_consulta, String motivo, String status, String prescricao, String observacoes) {
+    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDateTime data_consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
         this.amostras = amostras;
         this.ID_Consulta = ID_Consulta;
         this.data_consulta = data_consulta;
+        this.nome = nome;
+        this.localDateTime = localDateTime;
+        this.medico = medico;
+        this.paciente = paciente;
+        this.motivo = motivo;
+        this.status = status;
+        this.prescricao = prescricao;
+        this.observacoes = observacoes;
+    }
 
     public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
         this.ID_Consulta = ID_Consulta;
@@ -77,6 +78,17 @@ import java.time.LocalDateTime;
         this.observacoes = observacoes;
     }
 
+
+
+
+    public List<AmostrasLabEntity> getAmostras() {
+        return amostras;
+    }
+
+    public void setAmostras(List<AmostrasLabEntity> amostras) {
+        this.amostras = amostras;
+    }
+
     public Long getID_Consulta() {
         return ID_Consulta;
     }
@@ -85,12 +97,13 @@ import java.time.LocalDateTime;
         this.ID_Consulta = ID_Consulta;
     }
 
-
     public LocalDateTime getData_consulta() {
         return data_consulta;
     }
 
     public void setData_consulta(LocalDateTime data_consulta) {
+        this.data_consulta = data_consulta;
+    }
 
     public String getNome() {
         return nome;
@@ -106,7 +119,22 @@ import java.time.LocalDateTime;
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+    }
 
+    public MedicoEntity getMedico() {
+        return medico;
+    }
+
+    public void setMedico(MedicoEntity medico) {
+        this.medico = medico;
+    }
+
+    public PacienteEntity getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(PacienteEntity paciente) {
+        this.paciente = paciente;
     }
 
     public String getMotivo() {
@@ -140,21 +168,4 @@ import java.time.LocalDateTime;
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
-
-    public MedicoEntity getMedico() {
-        return medico;
-    }
-
-    public void setMedico(MedicoEntity medico) {
-        this.medico = medico;
-    }
-
-    public PacienteEntity getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(PacienteEntity paciente) {
-        this.paciente = paciente;
-    }
-
 }
