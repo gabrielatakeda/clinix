@@ -7,14 +7,14 @@ import java.util.List;
 @Entity(name = "medico")
 public class MedicoEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //Chave primária da tabela
+    @GeneratedValue(strategy = GenerationType.AUTO) //Gera o ID automaticamente
     private Long id;
 
     @Column(name = "nome")
     private String nomeCompleto;
 
-    @Column(name = "crm", unique = true)
+    @Column(name = "crm", unique = true) //CRM é único, não pode se repetir
     private String crm;
 
     @Column(name = "especialidade")
@@ -26,10 +26,10 @@ public class MedicoEntity{
     // @OneToMany(mappedBy = "medico")
     // private List<ConsultaEntity> consultas = new ArrayList<>();
 
-    public MedicoEntity(){
+    public MedicoEntity(){ //Construtor vazio
     }
 
-    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone /*,List<ConsultaEntity> consultas*/){
+    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone /*,List<ConsultaEntity> consultas*/){ //Construtor com atributos
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.crm = crm;
@@ -38,6 +38,7 @@ public class MedicoEntity{
         //this.consultas = consultas;
     }
 
+    //Metodos getters e setters, permitem acessar e modificar os atributos
     public Long getId(){
         return id;
     }

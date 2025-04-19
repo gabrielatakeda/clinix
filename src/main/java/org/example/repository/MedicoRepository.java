@@ -13,29 +13,43 @@ public class MedicoRepository{
         this.em = em;
     }
 
-    public MedicoEntity buscarPorId(Long id){
-        return em.find(MedicoEntity.class, id);
+    public MedicoEntity buscarPorId(Long id){ //Busca um médico no banco de dados pelo id
+        return em.find(MedicoEntity.class, id); //Busca usando a chave primária (id)
     }
 
-    public void salvar(MedicoEntity medico){
+    public void salvar(MedicoEntity medico){ //Cria um novo médico no banco de dados
         em.getTransaction().begin();
         em.persist(medico);
         em.getTransaction().commit();
     }
 
-    public void atualizar(MedicoEntity medico){
+    public void atualizar(MedicoEntity medico){ //Atualiza os dados de um médico existente no banco
         em.getTransaction().begin();
         em.merge(medico);
         em.getTransaction().commit();
     }
 
-    public void remover(MedicoEntity medico){
+    public void remover(MedicoEntity medico){ //Remove um médico do banco de dados
         em.getTransaction().begin();
         em.remove(em.contains(medico) ? medico : em.merge(medico));
         em.getTransaction().commit();
     }
 
-    public List<MedicoEntity> buscarTodos(){
+    public List<MedicoEntity> buscarTodos(){ //Retorna uma lista com todos os médicos cadastrados no banco
+        //Cria uma consulta para buscar todos os médicos
         return em.createQuery("SELECT m FROM medico m", MedicoEntity.class).getResultList();
+    }
+
+    public MedicoEntity buscarPorCrm(String crm){
+        List<MedicoEntity> resultado = em.createQuery(
+                        "SELECT m FROM medico m WHERE LOWER(m.crm) = LOWER(:crm)", MedicoEntity.class)
+                .setParameter("crm", crm)
+                .getResultList();
+
+        if(resultado.isEmpty()){
+            return null;
+        }
+
+        return resultado.get(0);
     }
 }

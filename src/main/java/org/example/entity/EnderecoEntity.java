@@ -5,10 +5,11 @@ import javax.persistence.*;
 @Entity(name = "endereco")
 public class EnderecoEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Id //Chave primária da tabela
+    @GeneratedValue(strategy = GenerationType.AUTO) //Gera o ID automaticamente
+    private Long id; //Identificador único do endereço
 
+    //Atributos
     private String logradouro;
     private String cidade;
     private String estado;
@@ -17,13 +18,13 @@ public class EnderecoEntity{
     @Column(name = "isPrincipal", nullable = false, columnDefinition = "boolean default false")
     private boolean isPrincipal;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
+    @ManyToOne //Muitos endereços podem estar associados a um paciente
+    @JoinColumn(name = "paciente_id", nullable = false) //Define a coluna de chave estrangeira para o relacionamento com a entidade Paciente
     private PacienteEntity paciente;
 
     public EnderecoEntity(){} //Construtor vazio
 
-    public EnderecoEntity(Long id, String logradouro, String cidade, String estado, Integer numero, boolean isPrincipal, PacienteEntity paciente){
+    public EnderecoEntity(Long id, String logradouro, String cidade, String estado, Integer numero, boolean isPrincipal, PacienteEntity paciente){ //Construtor com todos os atributos
         this.id = id;
         this.logradouro = logradouro;
         this.cidade = cidade;
@@ -33,6 +34,7 @@ public class EnderecoEntity{
         this.paciente = paciente;
     }
 
+    //Metodos getters e setters, permitem acessar e modificar os atributos
     public Long getId(){
         return id;
     }
