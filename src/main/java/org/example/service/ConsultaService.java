@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.example.Main.*;
 
 
 public class ConsultaService {
@@ -63,7 +62,9 @@ public class ConsultaService {
                 return c; // retorna a consulta existente
             }
         }
-        return consultaRepository.salvar(consulta);
+        return consulta;
+        //precisa mesmo retornar? sabendo que a funcao salvar e void????
+        //return consultaRepository.salvar(consulta);
     }
 
     public List<ConsultaEntity> listarConsultas() {
@@ -194,7 +195,6 @@ public class ConsultaService {
             case 5:
                 System.out.println("Saindo...");
                 return;
-            break;
             default:
                 System.out.println("Opção inválida.");
                 break;

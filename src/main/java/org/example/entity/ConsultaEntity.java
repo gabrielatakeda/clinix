@@ -35,7 +35,6 @@ public class ConsultaEntity {
     @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
-
     @Column(name = "motivo")
     private String motivo;
 

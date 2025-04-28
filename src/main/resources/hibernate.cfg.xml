@@ -48,5 +48,7 @@
         <mapping class="org.example.entity.EnderecoEntity"/>
         <mapping class="org.example.entity.MedicoEntity"/>
         <mapping class="org.example.entity.ConsultaEntity"/>
+        <mapping class="org.example.entity.AmostrasLabEntity"/>
+
     </session-factory>
 </hibernate-configuration>

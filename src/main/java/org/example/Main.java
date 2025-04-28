@@ -39,15 +39,17 @@ public class Main {
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         Session session = factory.openSession();
 
+        EntityManager em = CustomizerFactory.getEntityManager();
+
         UsuarioRepository usuarioRepository = new UsuarioRepository(session);
         UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
 
         ProdutoRepository produtoRepository = new ProdutoRepository(session);
         ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
-        EntityManager em = CustomizerFactory.getEntityManager();
+
         AmostrasLabRepository amostraRepository = new AmostrasLabRepository(em);
         MenuService menu = new MenuService();
-        EntityManager em = CustomizerFactory.getEntityManager();
+
         RelatorioRepository relatorioRepository = new RelatorioRepository(em);
         ConsultaRepository consultaRepository = new ConsultaRepository(em);
         PacienteService pacienteService = new PacienteService();

@@ -38,4 +38,18 @@ public class MedicoRepository {
         return em.createQuery("SELECT m FROM medico m", MedicoEntity.class).getResultList();
 
     }
+
+    public MedicoEntity buscarPorCrm(String crm){
+        List<MedicoEntity> resultado = em.createQuery(
+                        "SELECT m FROM medico m WHERE LOWER(m.crm) = LOWER(:crm)", MedicoEntity.class)
+                .setParameter("crm", crm)
+                .getResultList();
+
+        if(resultado.isEmpty()){
+            return null;
+        }
+
+        return resultado.get(0);
+    }
+
 }

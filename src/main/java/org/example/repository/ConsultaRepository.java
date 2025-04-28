@@ -17,16 +17,12 @@ public class ConsultaRepository {
         this.em = em;
     }
 
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
-
     public ConsultaEntity buscarPorId(Long ID_Consulta){
         return em.find(ConsultaEntity.class,ID_Consulta);
+    }
+
+    public List<ConsultaEntity> findAll(){
+        return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
     }
 
     public void salvar(ConsultaEntity consulta){

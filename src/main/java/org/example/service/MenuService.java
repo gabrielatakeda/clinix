@@ -1,19 +1,12 @@
 package org.example.service;
 
-import org.example.entity.EnderecoEntity;
-import org.example.entity.PacienteEntity;
-import org.example.repository.AmostrasLabRepository;
+import org.example.service.AmostrasLabService;
 import org.example.repository.ConsultaRepository;
-import org.example.repository.CustomizerFactory;
+
 import org.example.repository.ProdutoRepository;
 
 
-import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class MenuService {
@@ -53,15 +46,15 @@ public class MenuService {
                 case 3:
                     System.out.println("Agendar Consulta");
                     ConsultaService consultaService = new ConsultaService();
-                    AmostrasLabService  = new AmostrasLabService();
+                    AmostrasLabService amostrasLabService = new AmostrasLabService();
 
-                    consultaService.printMenu(sc, consultaService, amostraLabService, ListaConsultaEntity);
+                    consultaService.printMenu(sc, consultaService, amostrasLabService);
                     break;
 
                 case 4:
                     System.out.println("Prontuarios");
                     ConsultaService prontuarioService = new ConsultaService();
-                    prontuarioService.printMenu(sc, prontuarioService);
+                    //prontuarioService.printMenu(sc, prontuarioService);
                     break;
                 case 5:
                     System.out.println("Gerenciar Estoque");

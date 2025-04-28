@@ -47,6 +47,10 @@ public class MedicoService {
         return medicoRepository.buscarPorId(id);
     }
 
+    public MedicoEntity buscarPorCrm(String crm){
+        return medicoRepository.buscarPorCrm(crm);
+    }
+
     public void removerMedico(Long id) {
         MedicoEntity medico = medicoRepository.buscarPorId(id);
         if (medico != null) {
