@@ -21,6 +21,8 @@ public class ConsultaEntity {
     @Column(name = "data_consulta")
     private LocalDateTime data_consulta;
 
+
+    //NOME DO QUE???????????
     @Column(name = "nome")
     private String nome;
 
@@ -35,46 +37,30 @@ public class ConsultaEntity {
     @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
-    @Column(name = "motivo")
-    private String motivo;
+    // @Column(name = "motivo")
+    // private String motivo;
 
     @Column(name = "status")
     private String status;
 
-    @Column(name = "prescricao")
-    private String prescricao;
+    // @Column(name = "prescricao")
+    // private String prescricao;
 
-    @Column(name = "observacoes")
-    private String observacoes;
+    // @Column(name = "observacoes")
+    // private String observacoes;
 
 
     public ConsultaEntity (){
     }
 
-    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDateTime data_consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
-        this.amostras = amostras;
+    public ConsultaEntity(Long ID_Consulta, LocalDateTime data_consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String status) {
         this.ID_Consulta = ID_Consulta;
         this.data_consulta = data_consulta;
         this.nome = nome;
         this.localDateTime = localDateTime;
         this.medico = medico;
         this.paciente = paciente;
-        this.motivo = motivo;
         this.status = status;
-        this.prescricao = prescricao;
-        this.observacoes = observacoes;
-    }
-
-    public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
-        this.ID_Consulta = ID_Consulta;
-        this.nome = nome;
-        this.localDateTime = localDateTime;
-        this.medico = medico;
-        this.paciente = paciente;
-        this.motivo = motivo;
-        this.status = status;
-        this.prescricao = prescricao;
-        this.observacoes = observacoes;
     }
 
 
@@ -136,35 +122,11 @@ public class ConsultaEntity {
         this.paciente = paciente;
     }
 
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getPrescricao() {
-        return prescricao;
-    }
-
-    public void setPrescricao(String prescricao) {
-        this.prescricao = prescricao;
-    }
-
-    public String getObservacoes() {
-        return observacoes;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
     }
 }

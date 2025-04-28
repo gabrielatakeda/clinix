@@ -5,6 +5,7 @@ import org.example.entity.ConsultaEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ConsultaRepository {
@@ -55,7 +56,6 @@ public class ConsultaRepository {
         }
     }
 
-
     public List<ConsultaEntity> buscarPacientesPorMedico(String crm) {
         return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.medico.crm = :crm", ConsultaEntity.class)
                 .setParameter("crm", crm)
@@ -78,5 +78,16 @@ public class ConsultaRepository {
                 .getResultList();
     }
 
+    public ConsultaEntity buscarConsultaPorData(LocalDateTime dataConsulta) {
+        try {
+            return em.createQuery(
+                            "SELECT c FROM ConsultaEntity c WHERE c.data_consulta = :dataConsulta",
+                            ConsultaEntity.class)
+                    .setParameter("dataConsulta", dataConsulta)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
 

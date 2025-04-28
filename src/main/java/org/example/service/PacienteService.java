@@ -46,24 +46,24 @@ public class PacienteService {
         return pacienteRepository.buscarPorCpf(cpf);
     }
 
-    public void atualizarPaciente(Long id, String novoNome) {
-        PacienteEntity paciente = pacienteRepository.buscarPorId(id);
+    public void atualizarPacienteCPF(String cpf, String novoNome) {
+        PacienteEntity paciente = pacienteRepository.buscarPorCpf(cpf);
         if (paciente != null) {
             paciente.setNomeCompleto(novoNome);
             pacienteRepository.atualizar(paciente);
             System.out.println("Paciente atualizado com sucesso!");
         } else {
-            System.out.println("Paciente com ID " + id + " não encontrado.");
+            System.out.println("Paciente com CPF " + cpf + " não encontrado.");
         }
     }
 
-    public void removerPaciente(Long id) {
-        PacienteEntity paciente = pacienteRepository.buscarPorId(id);
+    public void removerPacienteCPF(String cpf) {
+        PacienteEntity paciente = pacienteRepository.buscarPorCpf(cpf);
         if (paciente != null) {
             pacienteRepository.remover(paciente);
             System.out.println("Paciente removido com sucesso!");
         } else {
-            System.out.println("Paciente com ID " + id + " não encontrado.");
+            System.out.println("Paciente com CPF " + cpf + " não encontrado.");
         }
     }
 
@@ -97,16 +97,16 @@ public class PacienteService {
                     }
                     break;
                 case "3":
-                    System.out.print("Digite o ID do paciente para atualizar: ");
-                    Long idAtualizar = Long.parseLong(sc.nextLine());
+                    System.out.print("Digite o CPF do paciente para atualizar: ");
+                    String cpfAtualizar = sc.nextLine();
                     System.out.print("Novo nome: ");
                     String novoNome = sc.nextLine();
-                    pacienteService.atualizarPaciente(idAtualizar, novoNome);
+                    pacienteService.atualizarPacienteCPF(cpfAtualizar, novoNome);
                     break;
                 case "4":
-                    System.out.print("Digite o ID do paciente para remover: ");
-                    Long idRemover = Long.parseLong(sc.nextLine());
-                    pacienteService.removerPaciente(idRemover);
+                    System.out.print("Digite o CPF do paciente para remover: ");
+                    String cpfRemover = sc.nextLine();
+                    pacienteService.removerPacienteCPF(cpfRemover);
                     break;
                 case "0":
                     return;

@@ -18,7 +18,6 @@ public class AmostrasLabEntity {
     @Column(name = "tipo")
     private String tipoExame;
 
-
     @Column(name = "resultado")
     private String resultado;
 

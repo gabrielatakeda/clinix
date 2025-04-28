@@ -1,11 +1,8 @@
 package org.example.service;
 
-
-
 import org.example.entity.MedicoEntity;
 import org.example.repository.CustomizerFactory;
 import org.example.repository.MedicoRepository;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Scanner;
@@ -43,34 +40,44 @@ public class MedicoService {
         return medicoRepository.buscarTodos();
     }
 
-    public MedicoEntity buscarPorId(Long id) {
-        return medicoRepository.buscarPorId(id);
-    }
+//    public MedicoEntity buscarPorId(Long id) {
+//        return medicoRepository.buscarPorId(id);
+//    }
 
-    public MedicoEntity buscarPorCrm(String crm){
-        return medicoRepository.buscarPorCrm(crm);
-    }
+//    public MedicoEntity buscarPorCrm(String crm){
+//        return medicoRepository.buscarPorCrm(crm);
+//    }
 
-    public void removerMedico(Long id) {
-        MedicoEntity medico = medicoRepository.buscarPorId(id);
+    // public void removerMedico(Long id) {
+    //     MedicoEntity medico = medicoRepository.buscarPorId(id);
+    //     if (medico != null) {
+    //         medicoRepository.remover(medico);
+    //         System.out.println("Médico removido com sucesso!");
+    //     } else {
+    //         System.out.println("Médico com ID " + id + " não encontrado.");
+    //     }
+    // }
+
+    public void removerMedicoCRM(String crm) {
+        MedicoEntity medico = medicoRepository.buscarPorCrm(crm);
         if (medico != null) {
             medicoRepository.remover(medico);
             System.out.println("Médico removido com sucesso!");
         } else {
-            System.out.println("Médico com ID " + id + " não encontrado.");
+            System.out.println("Médico com CRM " + crm + " não encontrado.");
         }
     }
 
-    public void atualizarMedico(Long id, String novoNome) {
-        MedicoEntity medico = medicoRepository.buscarPorId(id);
-        if (medico != null) {
-            medico.setNomeCompleto(novoNome);
-            medicoRepository.atualizar(medico);
-            System.out.println("Médico atualizado com sucesso!");
-        } else {
-            System.out.println("Médico com ID " + id + " não encontrado.");
-        }
-    }
+    // public void atualizarMedico(Long id, String novoNome) {
+    //     MedicoEntity medico = medicoRepository.buscarPorId(id);
+    //     if (medico != null) {
+    //         medico.setNomeCompleto(novoNome);
+    //         medicoRepository.atualizar(medico);
+    //         System.out.println("Médico atualizado com sucesso!");
+    //     } else {
+    //         System.out.println("Médico com ID " + id + " não encontrado.");
+    //     }
+    // }
 
     public void atualizarMedicoCRM(String crm, String novoNome) {
         MedicoEntity medico = medicoRepository.buscarPorCrm(crm);
@@ -137,9 +144,9 @@ public class MedicoService {
                     service.atualizarMedicoCRM(crmAtualizar, novoNome);
                     break;
                 case "4":
-                    System.out.print("Digite o ID do médico para remover: ");
-                    Long idRemover = Long.parseLong(sc.nextLine());
-                    service.removerMedico(idRemover);
+                    System.out.print("Digite o CRM do médico para remover: ");
+                    String crmRemover = sc.nextLine();
+                    service.removerMedicoCRM(crmRemover);
                     break;
                 case "0":
                     return;
