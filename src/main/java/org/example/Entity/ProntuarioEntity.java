@@ -1,16 +1,15 @@
 package org.example.Entity;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "consulta")
-public class ConsultaEntity {
+@Table(name = "prontuario")
+public class ProntuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID_Consulta;
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -27,13 +26,8 @@ public class ConsultaEntity {
     @Column(name = "observacoes")
     private String observacoes;
 
-
-    public ConsultaEntity (){
-
-    }
-
-    public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, String motivo, String prescricao, String observacoes) {
-        this.ID_Consulta = ID_Consulta;
+    public ProntuarioEntity(Long id, String nome, LocalDateTime localDateTime, String motivo, String prescricao, String observacoes) {
+        this.id = id;
         this.nome = nome;
         this.localDateTime = localDateTime;
         this.motivo = motivo;
@@ -41,57 +35,52 @@ public class ConsultaEntity {
         this.observacoes = observacoes;
     }
 
-
     public Long getId() {
-        return ID_Consulta;
-    }
-
-    public void setId(Long id) {
-        this.ID_Consulta = ID_Consulta;
+        return id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
-    }
-
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
     }
 
     public String getMotivo() {
         return motivo;
     }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
     public String getPrescricao() {
         return prescricao;
-    }
-
-    public void setPrescricao(String prescricao) {
-        this.prescricao = prescricao;
     }
 
     public String getObservacoes() {
         return observacoes;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public void setPrescricao(String prescricao) {
+        this.prescricao = prescricao;
+    }
+
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
-
-
-
-
 
 }
