@@ -2,16 +2,13 @@ package org.example.service;
 
 import org.example.entity.ConsultaEntity;
 import org.example.repository.ConsultaRepository;
-
-import javax.persistence.CacheRetrieveMode;
 import java.util.List;
 
 public class RelatorioPacienteMedicoService extends RelatorioService {
 
     private String CRM;
-    private ConsultaRepository consultaRepository;
 
-    public RelatorioPacienteMedicoService(String CRM) {
+    public RelatorioPacienteMedicoService(String CRM, ConsultaRepository consultaRepository) {
         this.CRM = CRM;
         this.consultaRepository = new ConsultaRepository();
     }
@@ -26,10 +23,10 @@ public class RelatorioPacienteMedicoService extends RelatorioService {
             System.out.println("Nenhum paciente encontrado para este medico.");
         } else{
             for(ConsultaEntity consulta : pacientePorMedico) {
-                System.out.println("Paciente: " + consulta.getPaciente().getNome());
+                System.out.println("Paciente: " + consulta.getPaciente().getNomeCompleto());
                 System.out.println("CPF: " + consulta.getPaciente().getCpf());
-                System.out.println("Data da consulta: " + consulta.getDataConsulta());
-
+                System.out.println("Data da consulta: " + consulta.getLocalDateTime());
+                System.out.println("------------------------");
             }
         }
     }

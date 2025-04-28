@@ -1,5 +1,7 @@
 package org.example.entity;
 
+import jdk.jfr.Enabled;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,29 +10,28 @@ public class RelatorioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = 'id_relatorio')
-    private Long id;
+    private Long id_relatorio;
 
     @Column(name = "data_relatorio")
     private LocalDateTime dataRelatorio = LocalDateTime.now();
 
-    @Column(name = "descricao")
-    private String descricao;
+    @Column(name = "tipo")
+    private String tipo;
 
     public RelatorioEntity(){}
 
-    public RelatorioEntity(Long id, LocalDateTime dataRelatorio, String descricao) {
-        this.id = id;
+    public RelatorioEntity(Long id_relatorio, LocalDateTime dataRelatorio, String tipo) {
+        this.id_relatorio = id_relatorio;
         this.dataRelatorio = dataRelatorio;
-        this.descricao = descricao;
+        this.tipo = tipo;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_relatorio() {
+        return id_relatorio;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_relatorio(Long id_relatorio) {
+        this.id_relatorio = id_relatorio;
     }
 
     public LocalDateTime getDataRelatorio() {
@@ -41,11 +42,11 @@ public class RelatorioEntity {
         this.dataRelatorio = dataRelatorio;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

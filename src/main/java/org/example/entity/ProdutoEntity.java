@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "estoque") // Retornando para "produto"
+@Table(name = "estoque")
 public class ProdutoEntity {
 
     @Id

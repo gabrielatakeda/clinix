@@ -8,13 +8,13 @@ import java.util.List;
 public class RelatorioConsultaPacienteService extends RelatorioService{
 
     private String cpf;
-    private ConsultaRepository consultaRepository;
 
     public RelatorioConsultaPacienteService(String cpf, ConsultaRepository consultaRepository) {
         this.cpf = cpf;
         this.consultaRepository = consultaRepository;
     }
 
+    public RelatorioConsultaPacienteService(){}
 
     @Override
     public void gerarRelatorio() {
@@ -26,12 +26,12 @@ public class RelatorioConsultaPacienteService extends RelatorioService{
             System.out.println("Nenhuma consulta encontrada para este paciente.");
         }else{
             for (ConsultaEntity consulta : consultasPorPaciente) {
-                System.out.println("Data/Hora: " + consulta.getDataHora());
-                System.out.println("Medico: " + consulta.getMedico());
-                System.out.println("Motivo: " + consulta.getMotivo());
+                System.out.println("Data/Hora: " + consulta.getLocalDateTime());
+                System.out.println("Medico: " + consulta.getMedico().getNomeCompleto());
+                System.out.println("Especialidade:" + consulta.getMedico().getEspecialidade());
                 System.out.println("Status: " + consulta.getStatus());
-                System.out.println("Médico: " + consulta.getMedico().getNome());
                 System.out.println("------------------------");
+            }
         }
     }
 }
