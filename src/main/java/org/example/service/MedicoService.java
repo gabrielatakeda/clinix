@@ -72,12 +72,23 @@ public class MedicoService {
         }
     }
 
+    public void atualizarMedicoCRM(String crm, String novoNome) {
+        MedicoEntity medico = medicoRepository.buscarPorCrm(crm);
+        if (medico != null) {
+            medico.setNomeCompleto(novoNome);
+            medicoRepository.atualizar(medico);
+            System.out.println("Médico atualizado com sucesso!");
+        } else {
+            System.out.println("Médico com CRM " + crm + " não encontrado.");
+        }
+    }
+
     public List<MedicoEntity> listarMedicos() {
         return medicoRepository.buscarTodos();
     }
 
     public void printMenu(Scanner sc, MedicoService service) {
-
+        var medicos = service.listarMedicos();
         while (true) {
             System.out.println("\n=== MENU MÉDICO ===");
             System.out.println("1 - Cadastrar médico");
@@ -103,21 +114,27 @@ public class MedicoService {
                     service.salvarMedico(medico);
                     break;
                 case "2":
-                    var medicos = service.listarMedicos();
                     if (medicos.isEmpty()) {
                         System.out.println("Nenhum médico cadastrado.");
                     } else {
                         for (MedicoEntity m : medicos) {
-                            System.out.println("ID: " + m.getId() + ", Nome: " + m.getNomeCompleto());
+                            System.out.println("CRM: " + m.getCrm() + ", Nome: " + m.getNomeCompleto());
                         }
                     }
                     break;
                 case "3":
-                    System.out.print("Digite o ID do médico para atualizar: ");
-                    Long idAtualizar = Long.parseLong(sc.nextLine());
+                    if (medicos.isEmpty()) {
+                        System.out.println("Nenhum médico cadastrado.");
+                    } else {
+                        for (MedicoEntity m : medicos) {
+                            System.out.println("CRM: " + m.getCrm() + ", Nome: " + m.getNomeCompleto());
+                        }
+                    }
+                    System.out.print("Digite o CRM do médico para atualizar: ");
+                    String crmAtualizar = sc.nextLine();
                     System.out.print("Novo nome: ");
                     String novoNome = sc.nextLine();
-                    service.atualizarMedico(idAtualizar, novoNome);
+                    service.atualizarMedicoCRM(crmAtualizar, novoNome);
                     break;
                 case "4":
                     System.out.print("Digite o ID do médico para remover: ");
