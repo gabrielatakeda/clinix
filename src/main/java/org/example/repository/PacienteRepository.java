@@ -1,25 +1,57 @@
-package org.example.Repository;
+package org.example.repository;
 
-import org.example.Entity.PacienteEntity;
+import org.example.entity.PacienteEntity;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
-public class PacienteRepository {
+public class PacienteRepository{
 
     private javax.persistence.EntityManager em;
-
-    public PacienteRepository(javax.persistence.EntityManager em) {
+    public PacienteRepository(EntityManager em){
         this.em = em;
     }
 
-    public PacienteEntity findByID(Long id){
-        return em.find(PacienteEntity.class,id);
+    public PacienteEntity buscarPorId(Long id){
+        return em.find(PacienteEntity.class, id);
     }
 
-    public List<PacienteEntity> findByFk_usuario(Long fk_usuario){
-        return em.createQuery("SELECT p FROM PacienteEntity p WHERE p.fk_usuario = :fk_usuario", PacienteEntity.class)
-                .setParameter("fk_usuario", fk_usuario)
+    public void salvar(PacienteEntity paciente){
+        em.getTransaction().begin();
+        em.persist(paciente);
+        em.getTransaction().commit();
+    }
+
+    public List<PacienteEntity> buscarTodos(){
+        return em.createQuery("SELECT p FROM paciente p", PacienteEntity.class).getResultList();
+    }
+
+    public void atualizar(PacienteEntity paciente){
+        em.getTransaction().begin();
+        em.merge(paciente);
+        em.getTransaction().commit();
+    }
+
+    public void remover(PacienteEntity paciente){
+        em.getTransaction().begin();
+        em.remove(em.contains(paciente) ? paciente : em.merge(paciente));
+        em.getTransaction().commit();
+    }
+
+    public List<PacienteEntity> buscarPorNomeInicial(String prefixo){
+        return em.createQuery("SELECT p FROM paciente p WHERE p.nomeCompleto LIKE :prefixo", PacienteEntity.class)
+                .setParameter("prefixo", prefixo + "%")
                 .getResultList();
+    }
+
+    public PacienteEntity buscarPorCpf(String cpf){
+        try{
+            return em.createQuery("SELECT p FROM paciente p WHERE p.cpf = :cpf", PacienteEntity.class)
+                    .setParameter("cpf", cpf)
+                    .getSingleResult();
+        }catch(Exception e){
+            return null; //se não encontrar ninguém, retorna null
+        }
     }
 
 }

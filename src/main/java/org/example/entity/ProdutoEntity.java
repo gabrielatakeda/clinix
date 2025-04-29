@@ -4,31 +4,35 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "estoque") // Retornando para "produto"
+@Table(name = "estoque")
 public class ProdutoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estoque") // Ajuste para corresponder ao banco de dados
     private Long idProduto;
 
-    @Column(nullable = false)
+    @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro;
 
-    @Column(nullable = false)
+    @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
-    @Column(nullable = false)
+    @Column(name = "estoque_minimo", nullable = false) // Ajuste para corresponder à tabela SQL
     private int nivelMinimo;
 
-    @Column
+    @Column(name = "data_validade")
     private LocalDate dataValidade;
 
-    @Column(nullable = false)
+    @Column(name = "nome_produto", nullable = false)
     private String nome;
 
     public ProdutoEntity() {}
 
     public ProdutoEntity(LocalDate dataCadastro, int quantidade, int nivelMinimo, LocalDate dataValidade, String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Erro: Nome do produto não pode ser nulo ou vazio!");
+        }
         this.dataCadastro = dataCadastro;
         this.quantidade = quantidade;
         this.nivelMinimo = nivelMinimo;
@@ -37,36 +41,48 @@ public class ProdutoEntity {
     }
 
     // Getters e Setters
-    public Long getIdProduto(){
+    public Long getIdProduto() {
         return idProduto;
     }
-    public LocalDate getDataCadastro(){
+
+    public LocalDate getDataCadastro() {
         return dataCadastro;
     }
-    public int getQuantidade(){
+
+    public int getQuantidade() {
         return quantidade;
     }
-    public int getNivelMinimo(){
+
+    public int getNivelMinimo() {
         return nivelMinimo;
     }
-    public LocalDate getDataValidade(){
+
+    public LocalDate getDataValidade() {
         return dataValidade;
     }
-    public String getNome(){
+
+    public String getNome() {
         return nome;
     }
 
-    public void setQuantidade(int quantidade){
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    public void setNivelMinimo(int nivelMinimo){
+
+    public void setNivelMinimo(int nivelMinimo) {
         this.nivelMinimo = nivelMinimo;
     }
-    public void setDataValidade(LocalDate dataValidade){
+
+    public void setDataValidade(LocalDate dataValidade) {
         this.dataValidade = dataValidade;
     }
-    public void setNome(String nome){
-        this.nome = nome;}
+
+    public void setNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Erro: Nome do produto não pode ser nulo ou vazio!");
+        }
+        this.nome = nome;
+    }
 
     @Override
     public String toString() {

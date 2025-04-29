@@ -1,12 +1,12 @@
 package org.example.entity;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "medico")
 public class MedicoEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,68 +24,68 @@ public class MedicoEntity {
     @Column(name = "telefone")
     private String telefone;
 
-    @OneToMany(mappedBy = "medico")
-    private List<ConsultaEntity> consultas = new ArrayList<>();
+    // @OneToMany(mappedBy = "medico")
+    // private List<ConsultaEntity> consultas = new ArrayList<>();
 
     public MedicoEntity(){
-
     }
 
-    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone, List<ConsultaEntity> consultas) {
+    public MedicoEntity(Long id, String nomeCompleto, String crm, String especialidade, String telefone /*,List<ConsultaEntity> consultas*/){
+
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.crm = crm;
         this.especialidade = especialidade;
         this.telefone = telefone;
-        this.consultas = consultas;
+        //this.consultas = consultas;
     }
 
-    public Long getId() {
+    public Long getId(){
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    public String getNomeCompleto() {
+    public String getNomeCompleto(){
         return nomeCompleto;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
+    public void setNomeCompleto(String nomeCompleto){
         this.nomeCompleto = nomeCompleto;
     }
 
-    public String getCrm() {
+    public String getCrm(){
         return crm;
     }
 
-    public void setCrm(String crm) {
+    public void setCrm(String crm){
         this.crm = crm;
     }
 
-    public String getEspecialidade() {
+    public String getEspecialidade(){
         return especialidade;
     }
 
-    public void setEspecialidade(String especialidade) {
+    public void setEspecialidade(String especialidade){
         this.especialidade = especialidade;
     }
 
-    public String getTelefone() {
+    public String getTelefone(){
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone){
         this.telefone = telefone;
     }
 
-    public List<ConsultaEntity> getConsultas() {
-        return consultas;
-    }
+    //public List<ConsultaEntity> getConsultas(){
+    //     return consultas;
+    // }
 
-    public void setConsultas(List<ConsultaEntity> consultas) {
-        this.consultas = consultas;
-    }
+    //public void setConsultas(List<ConsultaEntity> consultas){
+    //     this.consultas = consultas;
+    // }
 }
 

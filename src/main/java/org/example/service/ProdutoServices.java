@@ -8,11 +8,13 @@ import java.util.Scanner;
 
 public class ProdutoServices {
     private ProdutoRepository produtoRepository;
-    private Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public ProdutoServices(ProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
     }
+
+    public ProdutoServices(){}
 
     public void cadastrarProduto(){
         System.out.print("Nome do Produto: ");
@@ -103,5 +105,41 @@ public class ProdutoServices {
 
         produtoRepository.removerProduto(id);
         System.out.println("Produto removido com sucesso!");
+    }
+
+    public void printMenu(Scanner sc, ProdutoServices produtoServices){
+        boolean saida = true;
+        while (saida) {
+            System.out.println("\n=== Controle de Estoque ===");
+            System.out.println("1 - Cadastrar Produto");
+            System.out.println("2 - Listar Estoque");
+            System.out.println("3 - Atualizar Quantidade");
+            System.out.println("4 - Remover Produto");
+            System.out.println("5 - Sair");
+            System.out.print("Escolha uma opção: ");
+            int opcao = sc.nextInt();
+            switch (opcao) {
+                case 1:
+                    produtoServices.cadastrarProduto();
+                    break;
+                case 2:
+                    produtoServices.listarProdutos();
+                    break;
+                case 3:
+                    produtoServices.atualizarQuantidade();
+                    break;
+                case 4:
+                    produtoServices.removerProduto();
+                    break;
+                case 5:
+                    System.out.println("Voltando...");
+                    saida = false;
+                    break;
+                default:
+                    System.out.println("\nOpção inválida! Digite um número entre 1 e 5.");
+                    break;
+            }
+        }
+
     }
 }

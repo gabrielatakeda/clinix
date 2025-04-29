@@ -1,82 +1,58 @@
 package org.example;
 
-
-import org.example.Entity.ConsultaEntity;
-import org.example.Entity.PacienteEntity;
-import org.example.Repository.ConsultaRepository;
-import org.example.Repository.CustomizerFactory;
-import org.example.Repository.PacienteRepository;
+import org.example.entity.AmostrasLabEntity;
+import org.example.entity.ConsultaEntity;
+import org.example.service.AmostrasLabService;
 import org.example.service.ConsultaService;
-import org.example.service.PacienteService;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-
-import org.example.entity.EnderecoEntity;
-import org.example.entity.PacienteEntity;
-import org.example.repository.CustomizerFactory;
-import org.example.repository.PacienteRepository;
-
-
-import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-
 
 import org.example.repository.*;
-import org.example.service.ProdutoServices;
-import org.example.service.UsuarioServices;
-import org.hibernate.Session;
+import org.example.service.*;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.example.entity.RelatorioEntity;
-import org.example.service.RelatorioService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
-import javax.security.auth.login.Configuration;
-import java.time.LocalDate;
-
+import javax.persistence.EntityManagerFactory;
 import java.util.Scanner;
 
-
 public class Main {
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         boolean executando = true;
-        //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
 
-        //joao vitor
-        //talvez isso nao possa ficar aqui, vai dar conflito com o customizerfactor usado pelos outros
-        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        Session session = factory.openSession();
+        // Inicializa Hibernate
+        EntityManagerFactory entityManagerFactory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .buildSessionFactory();
 
-        UsuarioRepository usuarioRepository = new UsuarioRepository(session);
+        EntityManager em = entityManagerFactory.createEntityManager(); // Correção: Criando EntityManager corretamente
+
+        if (em == null) {
+            throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
+        }
+
+        // Instancia os repositórios passando EntityManager onde necessário
+        UsuarioRepository usuarioRepository = new UsuarioRepository(em);
         UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
-      
-        ProdutoRepository produtoRepository = new ProdutoRepository(session);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository(em);
         ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
 
-        //gabriela takeda
-        EntityManager em = CustomizerFactory.getEntityManager();
+        AmostrasLabRepository amostraRepository = new AmostrasLabRepository(em);
         RelatorioRepository relatorioRepository = new RelatorioRepository(em);
         ConsultaRepository consultaRepository = new ConsultaRepository(em);
-        
-  
-        //polyana
+
         PacienteService pacienteService = new PacienteService();
-
-        //joao martinazzo
-        ConsultaRepository consultaRepository = new ConsultaRepository(em);
-
         ConsultaService consultaService = new ConsultaService();
 
-        while (executando) {
+        // Criando MenuService com EntityManager correto
+        MenuService menu = new MenuService(em);
 
-            System.out.println("\n=== Sistema de Login ===");
+        while (executando) {
+            System.out.println("---BEM VINDO AO CLINIX---");
+            System.out.println("\n===CADASTRO / LOGIN ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Login");
             System.out.println("3 - Sair");
@@ -84,19 +60,16 @@ public class Main {
 
             String entrada = sc.nextLine();
 
-
             if (!entrada.matches("\\d+")) {
                 System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
-
                 continue;
             }
 
             int opcao = Integer.parseInt(entrada);
             switch (opcao) {
                 case 1:
-                    usuarioServices.cadastrarUsuario(); // Retorna para o cadastro
+                    usuarioServices.cadastrarUsuario();
                     break;
-
                 case 2:
                     System.out.print("\nDigite seu e-mail ou CPF: ");
                     String loginOuCpf = sc.nextLine();
@@ -106,55 +79,22 @@ public class Main {
 
                     if (usuarioServices.autenticarUsuario(loginOuCpf, senha)) {
                         System.out.println("\nLogin bem-sucedido!");
-
-
+                        menu.abrirMenu();
                     } else {
                         System.out.println("\nLogin falhou. Verifique suas credenciais.");
                     }
                     break;
-
                 case 3:
                     System.out.println("\nSaindo...");
-
                     sc.close();
-                    session.close();
-                    factory.close();
+                    em.close(); // Fecha EntityManager
+                    entityManagerFactory.close(); // Fecha Factory
                     System.exit(0);
                     break;
                 default:
                     System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
                     break;
-
-
-        //os nomes sendo utilizados são meramente irrelevantes, devo trocar na implementação como:
-        // consulta ao invez de paciente etc...
-
-        EntityManager em = CustomizerFactory.getEntityManager();
-        PacienteRepository pacienteRepository = new PacienteRepository(em);
-
-        PacienteService pacienteService = new PacienteService();
-
-        List<PacienteEntity> pacientes = pacienteRepository.findByFk_usuario(1L);
-
-        for (PacienteEntity paciente : pacientes) {
-            pacienteService.exibirConsulta(paciente);
-        }
-
-        // a partir daqui é a parte de consulta, acima é apenas teste
-
-        ConsultaRepository consultaRepository = new ConsultaRepository(em);
-
-        ConsultaService consultaService = new ConsultaService();
-
-        List<ConsultaEntity> consultas = consultaService.findByNome();
-
-        for (ConsultaEntity consulta : consultas){
-            consultaService.exibirConsultas(consulta);
-        }
-
-
             }
         }
-
     }
 }
