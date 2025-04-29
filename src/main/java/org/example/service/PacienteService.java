@@ -116,6 +116,12 @@ public class PacienteService {
         }
     }
 
+    public List<PacienteEntity> buscarPorNomeInicial(String prefixo){
+        return em.createQuery("SELECT p FROM paciente p WHERE p.nomeCompleto LIKE :prefixo", PacienteEntity.class)
+                .setParameter("prefixo", prefixo + "%")
+                .getResultList();
+    }
+
     private void cadastrarPaciente(Scanner sc, PacienteService service) {
         System.out.print("Nome completo: ");
         String nome = sc.nextLine();

@@ -58,6 +58,38 @@ public class MedicoService {
     //     }
     // }
 
+    public MedicoEntity selecionarMedico() {
+        List<MedicoEntity> medicos = listarMedicos();
+
+        if (medicos.isEmpty()) {
+            System.out.println("Nenhum médico cadastrado para seleção.");
+            return null;
+        }
+
+        System.out.println("\n=== SELECIONAR MÉDICO ===");
+        for (int i = 0; i < medicos.size(); i++) {
+            MedicoEntity m = medicos.get(i);
+            System.out.println((i + 1) + " - " + m.getNomeCompleto() + " (CRM: " + m.getCrm() + ")");
+        }
+
+        int escolha = -1;
+        while (true) {
+            System.out.print("Digite o número do médico: ");
+            if (sc.hasNextInt()) {
+                escolha = sc.nextInt();
+                sc.nextLine();
+                if (escolha >= 1 && escolha <= medicos.size()) {
+                    return medicos.get(escolha - 1);
+                } else {
+                    System.out.println("Número inválido. Tente novamente.");
+                }
+            } else {
+                System.out.println("Entrada inválida. Digite um número!");
+                sc.next();
+            }
+        }
+    }
+
     public void removerMedicoCRM(String crm) {
         MedicoEntity medico = medicoRepository.buscarPorCrm(crm);
         if (medico != null) {

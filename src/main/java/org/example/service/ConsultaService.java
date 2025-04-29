@@ -134,12 +134,23 @@ public class ConsultaService {
                 AmostrasLabEntity novaAmostra = new AmostrasLabEntity();
 
                 try {
-                    System.out.print("Data da consulta (dd/MM/yyyy HH:mm): ");
+                    System.out.println("AGENDAMENTO DE CONSULTA");
+                    System.out.println("Insira as informacoes necessarias:");
+                    System.out.println("Nome do Paciente: ");
+                    String nomePaciente = sc.nextLine();
+                    PacienteService pacientes = new PacienteService();
+                    var pacienteSelecionado = pacientes.buscarPorNomeInicial(nomePaciente);
+                    System.out.println("Selecione o medico que deseja se consultar: ");
+                    MedicoService medicos = new MedicoService();
+                    var medicoSelecionado = medicos.selecionarMedico();
+                    System.out.println("Data da consulta (dd/MM/yyyy HH:mm): ");
                     String dataConsultaStr = sc.nextLine();
 
                     LocalDateTime dataConsulta = LocalDateTime.parse(dataConsultaStr, formatter);
 
                     novaConsulta.setData_consulta(dataConsulta);
+                    novaConsulta.setMedico(medicoSelecionado);
+
                 } catch (Exception e) {
                     System.out.println("\nErro: Formato de data inválido. Use o formato dd/MM/yyyy HH:mm.");
                     return;
