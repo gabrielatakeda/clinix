@@ -44,7 +44,7 @@ public class Main {
         UsuarioRepository usuarioRepository = new UsuarioRepository(session);
         UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
 
-        ProdutoRepository produtoRepository = new ProdutoRepository(session);
+        ProdutoRepository produtoRepository = new ProdutoRepository(em);
         ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
 
         AmostrasLabRepository amostraRepository = new AmostrasLabRepository(em);
@@ -99,6 +99,7 @@ public class Main {
                     session.close();
                     factory.close();
                     System.exit(0);
+
                     break;
                 default:
                     System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");

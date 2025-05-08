@@ -92,7 +92,7 @@ public class PacienteService {
                         System.out.println("Nenhum paciente encontrado.");
                     } else {
                         for (PacienteEntity p : lista) {
-                            System.out.println("ID: " + p.getId() + ", Nome: " + p.getNomeCompleto());
+                            System.out.println("CPF: " + p.getCpf() + ", Nome: " + p.getNomeCompleto());
                         }
                     }
                     break;
