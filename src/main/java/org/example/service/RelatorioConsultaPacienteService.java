@@ -28,7 +28,7 @@ public class RelatorioConsultaPacienteService extends RelatorioService{
             for (ConsultaEntity consulta : consultasPorPaciente) {
                 System.out.println("Data/Hora: " + consulta.getLocalDateTime());
                 System.out.println("Medico: " + consulta.getMedico().getNomeCompleto());
-                System.out.println("Motivo: " + consulta.getMotivo());
+                System.out.println("Especialidade:" + consulta.getMedico().getEspecialidade());
                 System.out.println("Status: " + consulta.getStatus());
                 System.out.println("------------------------");
             }

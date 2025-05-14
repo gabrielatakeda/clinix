@@ -1,22 +1,23 @@
 package org.example.service;
 
-import org.example.entity.EnderecoEntity;
-import org.example.entity.PacienteEntity;
 import org.example.repository.ConsultaRepository;
 import org.example.repository.ProdutoRepository;
 
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.EntityManager;
 import java.util.Scanner;
 
 public class MenuService {
 
-    public void abrirMenu() {
+    private final EntityManager em;
 
+    public MenuService(EntityManager em) {
+        if (em == null) {
+            throw new IllegalArgumentException("Erro: EntityManager não pode ser nulo!");
+        }
+        this.em = em;
+    }
+
+    public void abrirMenu() {
         Scanner sc = new Scanner(System.in);
         boolean executando = true;
         while (executando) {
@@ -56,21 +57,23 @@ public class MenuService {
                 case 4:
                     System.out.println("Prontuarios");
                     ConsultaService prontuarioService = new ConsultaService();
-                    prontuarioService.printMenu(sc, prontuarioService);
+                    // prontuarioService.printMenu(sc, prontuarioService);
                     break;
+
                 case 5:
                     System.out.println("Gerenciar Estoque");
-                    ProdutoRepository produtoRepository = new ProdutoRepository();
+                    ProdutoRepository produtoRepository = new ProdutoRepository(em); // Passando EntityManager corretamente
                     ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
 
                     produtoServices.printMenu(sc, produtoServices);
-
                     break;
+
                 case 6:
                     System.out.println("Exame");
                     break;
+
                 case 7:
-                    ConsultaRepository consultaRepository = new ConsultaRepository();
+                    ConsultaRepository consultaRepository = new ConsultaRepository(em); // Passando EntityManager
                     boolean saida = true;
                     while (saida) {
                         System.out.println("\n=== Relatorios. ===");
@@ -79,18 +82,18 @@ public class MenuService {
                         System.out.println("3 - Sair");
                         System.out.print("Escolha uma opção: ");
                         int op = sc.nextInt();
+                        sc.nextLine();
+
                         switch (op) {
                             case 1:
                                 System.out.println("Relatório de Pacientes por Médico");
-                                System.out.print("Digite o CRM do medico para gerar o relatório: ");
-                                String crm;
-                                crm = sc.nextLine();
+                                System.out.print("Digite o CRM do médico para gerar o relatório: ");
+                                String crm = sc.nextLine();
                                 RelatorioPacienteMedicoService relatorioPacienteMedicoService = new RelatorioPacienteMedicoService(crm, consultaRepository);
                                 relatorioPacienteMedicoService.gerarRelatorio();
                                 break;
                             case 2:
                                 System.out.println("Relatório de Consultas por Paciente");
-//                            ConsultaRepository consultaRepository = new ConsultaRepository(em);
                                 System.out.print("Digite o CPF do paciente para gerar o relatório: ");
                                 String cpf = sc.nextLine();
                                 RelatorioConsultaPacienteService relatorioConsultaPacienteService = new RelatorioConsultaPacienteService(cpf, consultaRepository);
@@ -101,7 +104,7 @@ public class MenuService {
                                 saida = false;
                                 break;
                             default:
-                                System.out.println("Opcao Invalida");
+                                System.out.println("Opção inválida!");
                                 break;
                         }
                     }
@@ -110,10 +113,9 @@ public class MenuService {
                 case 8:
                     System.out.println("\nSaindo...");
                     sc.close();
-//                session.close();
-//                factory.close();
                     System.exit(0);
                     break;
+
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }

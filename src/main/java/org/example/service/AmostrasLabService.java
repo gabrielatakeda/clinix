@@ -1,17 +1,22 @@
 package org.example.service;
 
 import org.example.entity.AmostrasLabEntity;
+import org.example.entity.ConsultaEntity;
 import org.example.repository.AmostrasLabRepository;
 import org.example.repository.CustomizerFactory;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class AmostrasLabService {
 
     EntityManager em = CustomizerFactory.getEntityManager();
     AmostrasLabRepository amostraRepository = new AmostrasLabRepository(em);
+
     // Adicione o formatter na parte superior da classe para usar em todo o código
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -59,5 +64,35 @@ public class AmostrasLabService {
         }
     }
 
+    public void printMenu(Scanner sc, AmostrasLabService amostrasLabService) {
 
+        int opcao;
+        System.out.println("\n==== MENU AMOSTRAS ====");
+        System.out.println("1. Atualizar amostra");
+        System.out.println("2. Listar todas as amostras");
+        System.out.println("3. Cancelar/Deletar amostras");
+        System.out.println("4. Retornar ao menu anterior");
+        System.out.print("Escolha uma opção: ");
+        opcao = sc.nextInt();
+        sc.nextLine(); // limpar buffer
+
+        switch (opcao) {
+            case 1:
+                break;
+            case 2:
+                amostrasLabService.exibirAmostras();
+                break;
+            case 3:
+                System.out.print("\nDigite o ID da consulta que deseja deletar: ");
+                Long id = sc.nextLong();
+                sc.nextLine(); // limpar buffer
+                amostrasLabService.removerPorId(id);
+                break;
+            case 4:
+                System.out.println("Saindo...");
+                break;
+            default:
+                System.out.println("Opção inválida.");
+        }
+    }
 }
