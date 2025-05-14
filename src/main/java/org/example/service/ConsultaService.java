@@ -44,7 +44,6 @@ public class ConsultaService {
     }
 
 
-
     public ConsultaEntity salvarConsulta(ConsultaEntity consulta) {
         List<ConsultaEntity> todasConsultas = consultaRepository.findAll();
 

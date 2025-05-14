@@ -1,6 +1,5 @@
     package org.example.repository;
 
-    import org.example.entity.AmostrasLabEntity;
     import org.example.entity.ConsultaEntity;
 
     import javax.persistence.EntityManager;
