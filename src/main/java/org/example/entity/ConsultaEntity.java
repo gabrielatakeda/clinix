@@ -1,8 +1,7 @@
 package org.example.entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +13,6 @@ public class ConsultaEntity {
     @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AmostrasLabEntity> amostras = new ArrayList<>();
 
-
-import java.time.LocalDateTime;
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID_Consulta;
@@ -27,6 +21,8 @@ import java.time.LocalDateTime;
     @Column(name = "data_consulta")
     private LocalDateTime data_consulta;
 
+
+    //NOME DO QUE???????????
     @Column(name = "nome")
     private String nome;
 
@@ -41,40 +37,41 @@ import java.time.LocalDateTime;
     @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
-
-    @Column(name = "motivo")
-    private String motivo;
+    // @Column(name = "motivo")
+    // private String motivo;
 
     @Column(name = "status")
     private String status;
 
-    @Column(name = "prescricao")
-    private String prescricao;
+    // @Column(name = "prescricao")
+    // private String prescricao;
 
-    @Column(name = "observacoes")
-    private String observacoes;
-
+    // @Column(name = "observacoes")
+    // private String observacoes;
 
 
     public ConsultaEntity (){
-
     }
 
-    public ConsultaEntity(List<AmostrasLabEntity> amostras, Long ID_Consulta, LocalDateTime data_consulta, String motivo, String status, String prescricao, String observacoes) {
-        this.amostras = amostras;
+    public ConsultaEntity(Long ID_Consulta, LocalDateTime data_consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String status) {
         this.ID_Consulta = ID_Consulta;
         this.data_consulta = data_consulta;
-
-    public ConsultaEntity(Long ID_Consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String motivo, String status, String prescricao, String observacoes) {
-        this.ID_Consulta = ID_Consulta;
         this.nome = nome;
         this.localDateTime = localDateTime;
         this.medico = medico;
         this.paciente = paciente;
-        this.motivo = motivo;
         this.status = status;
-        this.prescricao = prescricao;
-        this.observacoes = observacoes;
+    }
+
+
+
+
+    public List<AmostrasLabEntity> getAmostras() {
+        return amostras;
+    }
+
+    public void setAmostras(List<AmostrasLabEntity> amostras) {
+        this.amostras = amostras;
     }
 
     public Long getID_Consulta() {
@@ -85,12 +82,13 @@ import java.time.LocalDateTime;
         this.ID_Consulta = ID_Consulta;
     }
 
-
     public LocalDateTime getData_consulta() {
         return data_consulta;
     }
 
     public void setData_consulta(LocalDateTime data_consulta) {
+        this.data_consulta = data_consulta;
+    }
 
     public String getNome() {
         return nome;
@@ -106,39 +104,6 @@ import java.time.LocalDateTime;
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
-
-    }
-
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getPrescricao() {
-        return prescricao;
-    }
-
-    public void setPrescricao(String prescricao) {
-        this.prescricao = prescricao;
-    }
-
-    public String getObservacoes() {
-        return observacoes;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
     }
 
     public MedicoEntity getMedico() {
@@ -157,4 +122,11 @@ import java.time.LocalDateTime;
         this.paciente = paciente;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
