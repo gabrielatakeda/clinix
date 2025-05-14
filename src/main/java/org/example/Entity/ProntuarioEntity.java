@@ -11,11 +11,17 @@ public class ProntuarioEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", updatable = false, insertable = false)
     private String nome;
 
-    @Column(name = "data")
-    private LocalDateTime localDateTime;
+    @Column(name = "idade", updatable = false, insertable = false)
+    private Integer idade;
+
+    @Column(name = "medico", updatable = false, insertable = false)
+    private String medico;
+
+    @Column(name = "datamarcada", updatable = false, insertable = false)
+    private LocalDateTime dataMarcada;
 
     @Column(name = "motivo")
     private String motivo;
@@ -26,13 +32,25 @@ public class ProntuarioEntity {
     @Column(name = "observacoes")
     private String observacoes;
 
-    public ProntuarioEntity(Long id, String nome, LocalDateTime localDateTime, String motivo, String prescricao, String observacoes) {
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "datarealizada")
+    private LocalDateTime dataRealizada;
+
+    public ProntuarioEntity(Long id, String nome, Integer idade, String medico, LocalDateTime dataMarcada,
+                            String motivo, String prescricao, String observacoes, String status,
+                            LocalDateTime dataRealizada) {
         this.id = id;
         this.nome = nome;
-        this.localDateTime = localDateTime;
+        this.idade = idade;
+        this.medico = medico;
+        this.dataMarcada = dataMarcada;
         this.motivo = motivo;
         this.prescricao = prescricao;
         this.observacoes = observacoes;
+        this.status = status;
+        this.dataRealizada = dataRealizada;
     }
 
     public Long getId() {
@@ -41,10 +59,6 @@ public class ProntuarioEntity {
 
     public String getNome() {
         return nome;
-    }
-
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
     }
 
     public String getMotivo() {
@@ -59,16 +73,32 @@ public class ProntuarioEntity {
         return observacoes;
     }
 
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public LocalDateTime getDataMarcada() {
+        return dataMarcada;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getDataRealizada() {
+        return dataRealizada;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
     }
 
     public void setMotivo(String motivo) {
@@ -83,4 +113,23 @@ public class ProntuarioEntity {
         this.observacoes = observacoes;
     }
 
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public void setMedico(String medico) {
+        this.medico = medico;
+    }
+
+    public void setDataMarcada(LocalDateTime dataMarcada) {
+        this.dataMarcada = dataMarcada;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setDataRealizada(LocalDateTime dataRealizada) {
+        this.dataRealizada = dataRealizada;
+    }
 }

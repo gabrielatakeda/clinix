@@ -12,6 +12,6 @@ public class ProntuarioRepository {
         this.em = em;
     }
 
-    // O REPOSITORIO NAO ESTA PRONTO AINDA 
+    // O REPOSITORIO NAO ESTA PRONTO AINDA
 
 }
