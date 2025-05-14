@@ -1,61 +1,56 @@
-    package org.example.repository;
+package org.example.Repository;
 
-    import org.example.entity.AmostrasLabEntity;
-    import org.example.entity.ConsultaEntity;
+import org.example.Entity.ConsultaEntity;
+import javax.persistence.EntityManager;
+import java.util.List;
 
-    import javax.persistence.EntityManager;
-    import javax.persistence.NoResultException;
-    import java.time.LocalDate;
-    import java.util.List;
+public class ConsultaRepository {
 
-    public class ConsultaRepository {
+    private EntityManager em;
 
-        private EntityManager em;
+    public  ConsultaRepository(){}
 
-        public ConsultaRepository(EntityManager em) {
-            this.em = em;
-        }
-
-        public ConsultaEntity buscarPorId(Long ID_Consulta){
-            return em.find(ConsultaEntity.class,ID_Consulta);
-        }
-
-        public List<ConsultaEntity> findAll(){
-        return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
-        }
-
-        public ConsultaEntity buscarPorHorario(LocalDate data_consulta) {
-            try {
-                return em.createQuery(
-                                "SELECT c FROM ConsultaEntity c WHERE c.data_consulta = :horario",
-                                ConsultaEntity.class)
-                        .setParameter("horario", data_consulta)
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                return null; // Nenhuma consulta encontrada nesse horário
-            }
-        }
-
-
-        public ConsultaEntity salvar(ConsultaEntity consulta){
-            em.getTransaction().begin();
-            consulta = em.merge(consulta);
-            em.getTransaction().commit();
-            return consulta;
-        }
-
-        public void atualizar (ConsultaEntity consulta){
-            em.getTransaction().begin();
-            em.merge(consulta);
-            em.getTransaction().commit();
-        }
-
-        public void remover (ConsultaEntity consulta){
-            em.getTransaction().begin();
-            em.remove(em.contains(consulta)? consulta : em.merge(consulta));
-            em.getTransaction().commit();
-        }
-
-
-
+    public ConsultaRepository(EntityManager em) {
+        this.em = em;
     }
+
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    public ConsultaEntity buscarPorId(Long ID_Consulta){
+        return em.find(ConsultaEntity.class,ID_Consulta);
+    }
+
+    public void salvar(ConsultaEntity consulta){
+        em.getTransaction().begin();
+        em.persist(consulta);
+        em.getTransaction().commit();
+    }
+
+    public List<ConsultaEntity> buscarTodos() {
+        return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
+    }
+
+    public List<ConsultaEntity>buscarPorNomeInicial(String nome){
+        return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.nome LIKE :nome",ConsultaEntity.class)
+                .setParameter("nome", nome + "%")
+                .getResultList();
+    }
+
+    public void atualizar(ConsultaEntity consulta){
+        em.getTransaction().begin();
+        em.merge(consulta);
+        em.getTransaction().commit();
+    }
+
+    public void remover(ConsultaEntity consulta){
+        em.getTransaction().begin();
+        em.remove(em.contains(consulta) ? consulta : em.merge(consulta));
+        em.getTransaction().commit();
+    }
+}
