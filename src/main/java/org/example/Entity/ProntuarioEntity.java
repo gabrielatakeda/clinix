@@ -3,7 +3,7 @@ package org.example.Entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "prontuario")
 @Table(name = "prontuario")
 public class ProntuarioEntity {
 
@@ -14,44 +14,62 @@ public class ProntuarioEntity {
     @Column(name = "nome", updatable = false, insertable = false)
     private String nome;
 
+    @Column(name = "cpf", updatable = false, insertable = false)
+    private String cpf;
+
     @Column(name = "idade", updatable = false, insertable = false)
     private Integer idade;
 
     @Column(name = "medico", updatable = false, insertable = false)
     private String medico;
 
-    @Column(name = "datamarcada", updatable = false, insertable = false)
-    private LocalDateTime dataMarcada;
+    @Column(name = "data", updatable = false, insertable = false)
+    private LocalDateTime data;
 
     @Column(name = "motivo")
     private String motivo;
 
-    @Column(name = "prescricao")
-    private String prescricao;
+    @Column(name = "diagnostico")
+    private String diagnostico;
 
-    @Column(name = "observacoes")
-    private String observacoes;
+    @Column(name = "exame")
+    private String exame;
+
+    @Column(name = "status_exame")
+    private String status_exame;
+
+    @Column(name = "resultado_exame")
+    private String resultado_exame;
+
+    @Column(name = "exame_necessario")
+    private String exame_necessario;
 
     @Column(name = "status")
     private String status;
 
-    @Column(name = "datarealizada")
-    private LocalDateTime dataRealizada;
+    //--------------------CONSTRUTORES----------------------------
 
-    public ProntuarioEntity(Long id, String nome, Integer idade, String medico, LocalDateTime dataMarcada,
-                            String motivo, String prescricao, String observacoes, String status,
-                            LocalDateTime dataRealizada) {
+    public ProntuarioEntity(){
+
+    }
+
+    public ProntuarioEntity(Long id, String nome, String cpf, Integer idade, String medico, LocalDateTime data, String motivo, String diagnostico, String exame, String status_exame, String resultado_exame, String exame_necessario, String status) {
         this.id = id;
         this.nome = nome;
+        this.cpf = cpf;
         this.idade = idade;
         this.medico = medico;
-        this.dataMarcada = dataMarcada;
+        this.data = data;
         this.motivo = motivo;
-        this.prescricao = prescricao;
-        this.observacoes = observacoes;
+        this.diagnostico = diagnostico;
+        this.exame = exame;
+        this.status_exame = status_exame;
+        this.resultado_exame = resultado_exame;
+        this.exame_necessario = exame_necessario;
         this.status = status;
-        this.dataRealizada = dataRealizada;
     }
+
+    //--------------------GETTERS---------------------------------
 
     public Long getId() {
         return id;
@@ -65,14 +83,6 @@ public class ProntuarioEntity {
         return motivo;
     }
 
-    public String getPrescricao() {
-        return prescricao;
-    }
-
-    public String getObservacoes() {
-        return observacoes;
-    }
-
     public Integer getIdade() {
         return idade;
     }
@@ -81,17 +91,39 @@ public class ProntuarioEntity {
         return medico;
     }
 
-    public LocalDateTime getDataMarcada() {
-        return dataMarcada;
+    public LocalDateTime getData() {
+        return data;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public LocalDateTime getDataRealizada() {
-        return dataRealizada;
+    public String getCpf() {
+        return cpf;
     }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public String getExame() {
+        return exame;
+    }
+
+    public String getStatus_exame() {
+        return status_exame;
+    }
+
+    public String getResultado_exame() {
+        return resultado_exame;
+    }
+
+    public String getExame_necessario() {
+        return exame_necessario;
+    }
+
+    //------------------------SETTERS---------------------------------------------
 
     public void setId(Long id) {
         this.id = id;
@@ -105,14 +137,6 @@ public class ProntuarioEntity {
         this.motivo = motivo;
     }
 
-    public void setPrescricao(String prescricao) {
-        this.prescricao = prescricao;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
-    }
-
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
@@ -121,15 +145,35 @@ public class ProntuarioEntity {
         this.medico = medico;
     }
 
-    public void setDataMarcada(LocalDateTime dataMarcada) {
-        this.dataMarcada = dataMarcada;
+    public void setData(LocalDateTime data) {
+        this.data = data;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public void setDataRealizada(LocalDateTime dataRealizada) {
-        this.dataRealizada = dataRealizada;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public void setExame(String exame) {
+        this.exame = exame;
+    }
+
+    public void setStatus_exame(String status_exame) {
+        this.status_exame = status_exame;
+    }
+
+    public void setResultado_exame(String resultado_exame) {
+        this.resultado_exame = resultado_exame;
+    }
+
+    public void setExame_necessario(String exame_necessario) {
+        this.exame_necessario = exame_necessario;
     }
 }
