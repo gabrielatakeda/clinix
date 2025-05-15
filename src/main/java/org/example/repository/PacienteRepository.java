@@ -1,15 +1,14 @@
-package org.example.repository;
+package org.example.Repository;
 
-import org.example.entity.PacienteEntity;
+import org.example.Entity.PacienteEntity;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-public class PacienteRepository{
+public class PacienteRepository {
 
-    private EntityManager em;
+    private javax.persistence.EntityManager em;
 
-    public PacienteRepository(EntityManager em){
+    public PacienteRepository(javax.persistence.EntityManager em) {
         this.em = em;
     }
 
@@ -53,5 +52,11 @@ public class PacienteRepository{
         }catch(Exception e){
             return null; //Se não encontrar ninguém, retorna null
         }
+    }
+
+    public List<PacienteEntity> findByFk_usuario(Long fk_usuario){
+        return em.createQuery("SELECT p FROM PacienteEntity p WHERE p.fk_usuario = :fk_usuario", PacienteEntity.class)
+                .setParameter("fk_usuario", fk_usuario)
+                .getResultList();
     }
 }

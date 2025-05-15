@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "medico")
-public class MedicoEntity{
+public class MedicoEntity {
+
 
     @Id //Chave primária da tabela
     @GeneratedValue(strategy = GenerationType.AUTO) //Gera o ID automaticamente
@@ -87,3 +88,4 @@ public class MedicoEntity{
     //     this.consultas = consultas;
     // }
 }
+

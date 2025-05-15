@@ -1,23 +1,22 @@
 package org.example.repository;
 
 import org.example.entity.MedicoEntity;
-import org.example.entity.PacienteEntity;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class MedicoRepository{
+public class MedicoRepository {
     private EntityManager em;
 
-    public MedicoRepository(EntityManager em){
+    public MedicoRepository(EntityManager em) {
         this.em = em;
     }
 
-    public MedicoEntity buscarPorId(Long id){ //Busca um médico no banco de dados pelo id
-        return em.find(MedicoEntity.class, id); //Busca usando a chave primária (id)
+    public MedicoEntity buscarPorId(Long id) {
+        return em.find(MedicoEntity.class, id);
     }
 
-    public void salvar(MedicoEntity medico){ //Cria um novo médico no banco de dados
+    public void salvar(MedicoEntity medico) {
         em.getTransaction().begin();
         em.persist(medico);
         em.getTransaction().commit();
@@ -29,15 +28,29 @@ public class MedicoRepository{
         em.getTransaction().commit();
     }
 
-    public void remover(MedicoEntity medico){ //Remove um médico do banco de dados
+
+    public void remover(MedicoEntity medico) {
         em.getTransaction().begin();
         em.remove(em.contains(medico) ? medico : em.merge(medico));
         em.getTransaction().commit();
     }
 
-    public List<MedicoEntity> buscarTodos(){ //Retorna uma lista com todos os médicos cadastrados no banco
-        //Cria uma consulta para buscar todos os médicos
+    public List<MedicoEntity> buscarTodos() {
         return em.createQuery("SELECT m FROM medico m", MedicoEntity.class).getResultList();
+
+    }
+
+    public MedicoEntity buscarPorCrm(String crm){
+        List<MedicoEntity> resultado = em.createQuery(
+                        "SELECT m FROM medico m WHERE LOWER(m.crm) = LOWER(:crm)", MedicoEntity.class)
+                .setParameter("crm", crm)
+                .getResultList();
+
+        if(resultado.isEmpty()){
+            return null;
+        }
+
+        return resultado.get(0);
     }
 
     public MedicoEntity buscarPorCrm(String crm){

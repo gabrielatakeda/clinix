@@ -14,8 +14,6 @@ public class PacienteEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf", unique = true) //CPF é único, não pode se repetir
-    private String cpf;
     @Column(name = "idade")
     private int idade;
 
@@ -25,19 +23,12 @@ public class PacienteEntity {
     @Column(name = "data")
     private LocalDate data;
 
-    //Um paciente pode ter vários endereços
-    //Salvar, atualizar ou deletar o paciente, essas ações também afetam os endereços
-    //Se um endereço for removido da lista, ele também será removido do banco
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EnderecoEntity> enderecos = new ArrayList<>();
     @Column(name = "fk_usuario")
     private Long fk_usuario;
+
     public PacienteEntity(){}
 
-    }
-
-    public PacienteEntity(Long id, String nomeCompleto, String cpf, LocalDate dataNascimento, String telefone, List<EnderecoEntity> enderecos){ //Construtor com os atributos
-
+    public PacienteEntity(Long id, String nome, int idade, String medico, LocalDate data, Long fk_usuario) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -45,8 +36,8 @@ public class PacienteEntity {
         this.data = data;
         this.fk_usuario = fk_usuario;
     }
-    //Metodos getters e setters, permitem acessar e modificar os atributos
-    public Long getId(){
+
+    public Long getId() {
         return id;
     }
 

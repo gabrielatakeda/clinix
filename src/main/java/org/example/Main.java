@@ -1,12 +1,12 @@
 package org.example;
 
-import org.example.entity.*;
-import org.example.service.PacienteService;
-import org.example.service.MedicoService;
+import org.example.entity.AmostrasLabEntity;
+import org.example.entity.ConsultaEntity;
+import org.example.service.AmostrasLabService;
+import org.example.service.ConsultaService;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import org.example.repository.*;
+import org.example.service.*;
 
 public class Main{ //Código principal
     public static void main(String[] args){
@@ -37,9 +37,13 @@ public class Main{ //Código principal
                 default:
                     System.out.println("Opção inválida!");
             }
-        }
-    }
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import java.util.Scanner;
+          
     private static void menuPaciente(Scanner sc, PacienteService service){ //Submenu de paciente
         while(true){
             System.out.println("\n=== MENU PACIENTE ===");
@@ -149,15 +153,56 @@ public class Main{ //Código principal
 
                     MedicoEntity medico = new MedicoEntity(null, nome, crm, esp, tel);
                     service.salvarMedico(medico); //Salva o médico
+
+        // Instancia os repositórios passando EntityManager onde necessário
+        UsuarioRepository usuarioRepository = new UsuarioRepository(em);
+        UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository(em);
+        ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
+
+        AmostrasLabRepository amostraRepository = new AmostrasLabRepository(em);
+        RelatorioRepository relatorioRepository = new RelatorioRepository(em);
+        ConsultaRepository consultaRepository = new ConsultaRepository(em);
+
+        PacienteService pacienteService = new PacienteService();
+        ConsultaService consultaService = new ConsultaService();
+
+        // Criando MenuService com EntityManager correto
+        MenuService menu = new MenuService(em);
+
+        while (executando) {
+            System.out.println("---BEM VINDO AO CLINIX---");
+            System.out.println("\n===CADASTRO / LOGIN ===");
+            System.out.println("1 - Cadastrar");
+            System.out.println("2 - Login");
+            System.out.println("3 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            String entrada = sc.nextLine();
+
+            if (!entrada.matches("\\d+")) {
+                System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
+                continue;
+            }
+
+            int opcao = Integer.parseInt(entrada);
+            switch (opcao) {
+                case 1:
+                    usuarioServices.cadastrarUsuario();
                     break;
-                case "2":
-                    var medicos = service.listarMedicos();
-                    if(medicos.isEmpty()){
-                        System.out.println("Nenhum médico cadastrado.");
-                    }else{
-                        for(MedicoEntity m : medicos){
-                            System.out.println("ID: " + m.getId() + ", Nome: " + m.getNomeCompleto());
-                        }
+                case 2:
+                    System.out.print("\nDigite seu e-mail ou CPF: ");
+                    String loginOuCpf = sc.nextLine();
+
+                    System.out.print("Senha: ");
+                    String senha = sc.nextLine();
+
+                    if (usuarioServices.autenticarUsuario(loginOuCpf, senha)) {
+                        System.out.println("\nLogin bem-sucedido!");
+                        menu.abrirMenu();
+                    } else {
+                        System.out.println("\nLogin falhou. Verifique suas credenciais.");
                     }
                     break;
                 case "3":
@@ -186,10 +231,9 @@ public class Main{ //Código principal
                         System.out.println("Nenhum médico encontrado com o CRM informado.");
                     }
                     break;
-                case "0":
-                    return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
+                    break;
             }
         }
     }

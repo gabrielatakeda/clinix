@@ -9,21 +9,21 @@ import javax.persistence.EntityManagerFactory;
 
 public class CustomizerFactory {
 
-    private static final EntityManagerFactory emf; //Cria conexões com o banco
+    private static final EntityManagerFactory emf;
 
     static {
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml") //Configurações do hibernate
+                .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
         emf = sessionFactory.unwrap(EntityManagerFactory.class);
     }
 
-    public static EntityManager getEntityManager(){ //Executa operações no banco
+    public static EntityManager getEntityManager (){
         return emf.createEntityManager();
     }
 
-    public static void fechar(){ //Fecha o EntityManager
+    public static void fechar(){
         emf.close();
     }
 
