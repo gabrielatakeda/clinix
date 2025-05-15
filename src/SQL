@@ -1,0 +1,61 @@
+CREATE TABLE prontuario (
+    id SERIAL PRIMARY key not null,
+    nome VARCHAR(255) not null,
+    cpf VARCHAR(256) not null,
+    idade INT not null,
+    data DATE not null,
+    medico VARCHAR(255) not null,
+    motivo VARCHAR(255),
+    diagnostico VARCHAR(255),
+    status VARCHAR(20),
+    exame VARCHAR(255),
+    status_exame VARCHAR(255),
+    resultado_exame VARCHAR(255),
+    exame_necessario VARCHAR(255)
+);
+
+create table consulta (
+	id serial primary key not null,
+	nome VARCHAR(255) not null,
+    cpf VARCHAR(256) not null,
+    idade INT not null,
+    data DATE not null,
+    medico VARCHAR(255) not null,
+);
+
+
+CREATE OR REPLACE FUNCTION inserir_prontuario()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO prontuario (
+         nome, data, medico, idade, cpf
+    )
+    VALUES (
+         NEW.nome, NEW.data, NEW.medico, NEW.idade, NEW.cpf
+    );
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_inserir_prontuario
+AFTER INSERT ON consulta
+FOR EACH ROW
+EXECUTE FUNCTION inserir_prontuario();
+
+
+
+CREATE OR REPLACE FUNCTION atualizar_status_prontuario()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.status = 'marcada' THEN
+        NEW.status := 'realizada';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_atualiza_status_prontuario
+BEFORE UPDATE ON prontuario
+FOR EACH ROW
+EXECUTE FUNCTION atualizar_status_prontuario();
