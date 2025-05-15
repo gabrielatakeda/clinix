@@ -47,7 +47,7 @@ public class ProntuarioService {
 
                     //printa apenas se o exame ja foi concluido
                     if (!entidade.getStatus_exame().equals("aguardando")){
-                        System.out.println("Resultado do Exame: "+ entidade.getResultado_exame());
+                        System.out.println("Resultado do Exame: "+ entidade.getResultado_exame()+"\n");
                     }
 
                 }
@@ -69,13 +69,13 @@ public class ProntuarioService {
                 + "Idade: " + entidade.getIdade() + "\n"
                 + "Cpf: " + entidade.getCpf() + "\n"
                 + "Médico: " + entidade.getMedico() + "\n"
-                + "Status da Consulta: " + entidade.getStatus() + "\n");
+                + "Status da Consulta: " + entidade.getStatus());
 
         //printa so se a consulta ja foi realizada
         if (entidade.getStatus().equals("realizada")) {
             System.out.print("Motivo da consulta: " + entidade.getMotivo() + "\n"
                     + "Diagnóstico levantado: " + entidade.getDiagnostico() + "\n"
-                    + "Exame Requerido? : " + entidade.getExame_necessario());
+                    + "Exame Requerido? : " + entidade.getExame_necessario()+"\n");
 
             //printa apenas se foi necessário algum exame
             if (entidade.getExame_necessario().equalsIgnoreCase("sim")
@@ -85,7 +85,7 @@ public class ProntuarioService {
 
                 //printa apenas se o exame ja foi concluido
                 if (!entidade.getStatus_exame().equals("aguardando")) {
-                    System.out.print("Resultado do Exame: " + entidade.getResultado_exame());
+                    System.out.print("Resultado do Exame: " + entidade.getResultado_exame()+"\n");
                 }
 
             }
