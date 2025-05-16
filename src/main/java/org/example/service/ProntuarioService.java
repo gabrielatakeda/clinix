@@ -137,4 +137,123 @@ public class ProntuarioService {
 
     }
 
+    public void menuPronutuario (String cpf){
+
+        //declaração da lista de prontuarios de que será procurada por CPF
+        List<ProntuarioEntity> lista = new ArrayList<>();
+
+        //buscando os prontuarios de um paciente e os listando em "lista"
+        lista = repository.buscarCpfProntuario(cpf);
+
+        //declarando a classe Service para as funções
+        ProntuarioService service = new ProntuarioService();
+
+        //variavel para o switch case
+        int op;
+
+        do {
+
+            //exibe toda a lista de consultas de "lista"
+            service.exibirProntuarios(lista);
+
+            System.out.println("O que deseja fazer ?" + "\n"
+                    + "-(1) alterar uma consulta" + "\n"
+                    + "-(2) exculuir uma consulta" + "\n"
+                    + "-(3) sair");
+
+            //declarando o prontuario que foi selecionado para ser alterado
+            ProntuarioEntity consulta = new ProntuarioEntity();
+
+            op = sc.nextInt();
+
+            switch (op) {
+                case 1: {
+                    while (true) {
+                        System.out.println("\nSelecione o número da consulta que deseja editar : ");
+
+                        //selecionando um prontuario expecifico para alteração pelo seu numero
+                        consulta = repository.buscarPorId(sc.nextLong());
+
+                        //faz sua exibição
+                        service.exibirProntuario(consulta);
+
+                        System.out.println("\nEsta é a consulta que deseja editar?" + "\n"
+                                + "-(1) SIM" + "\n"
+                                + "-(2) NÃO" + "\n"
+                                + "-(3) SAIR" + "\n");
+                        int op2;
+
+                        op2 = sc.nextInt();
+
+                        if (op2 == 1) {
+                            //aciona a função de alteração do prontuario de Service
+                            service.atualizacaoProntuario(consulta);
+                            break;
+
+                        } else if (op2 == 2) {
+                            continue;
+
+                        } else if (op2 == 3) {
+                            break;
+
+                        } else {
+                            System.out.println("Por favor selecione uma opção válida");
+                            continue;
+
+                        }
+                    }
+                    break;
+                }
+                case 2: {
+                    int op2;
+
+                    while (true) {
+                        System.out.println("\nSelecione o número da cunsulta que deseja excluir : ");
+
+                        consulta = repository.buscarPorId(sc.nextLong());
+
+                        service.exibirProntuario(consulta);
+
+                        System.out.println("\nEsta é a consulta que deseja excluir?" + "\n"
+                                + "-(1) SIM" + "\n"
+                                + "-(2) NÃO" + "\n"
+                                + "-(3) SAIR" + "\n");
+
+                        op2 = sc.nextInt();
+
+                        if (op2 == 1) {
+                            repository.remover(consulta);
+
+                            System.out.println("Consulta removida com sucesso");
+                            break;
+
+                        } else if (op2 == 2) {
+                            continue;
+
+                        } else if (op2 == 3) {
+                            break;
+
+                        } else {
+                            System.out.println("Por favor selecione uma opção válida");
+                            continue;
+                        }
+
+                    }
+
+                    break;
+
+                }
+                case 3: {
+                    break;
+                }
+                default: {
+                    System.out.println("Por favor selecione uma opção válida");
+                    break;
+                }
+            }
+
+        }while(op != 3);
+
+    }
+
 }
