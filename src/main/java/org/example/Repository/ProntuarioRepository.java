@@ -47,4 +47,14 @@ public class ProntuarioRepository {
         em.getTransaction().commit();
     }
 
+    //PARTE FEITA APENAS PARA EXAME E NAO NECESSARIAMENTE UTILIZADA NO FINAL
+
+    public List<ProntuarioEntity> buscarPorExameNecessario() {
+        String jpql = "SELECT p FROM prontuario p WHERE p.exame_necessario = :exame";
+        TypedQuery<ProntuarioEntity> query = em.createQuery(jpql, ProntuarioEntity.class);
+        query.setParameter("exame", "sim");
+        return query.getResultList();
+    }
+
+
 }

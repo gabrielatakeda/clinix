@@ -103,6 +103,27 @@ public class Main {
             }
         }
 
+        //A PARTIR DAQUI É PARTE DE TESTE PARA A PARTE DE EXAME
+
+        System.out.println("PARTE TESTE PARA EXAME\n");
+
+        List<ProntuarioEntity> listaExames = new ArrayList<>();
+
+        listaExames = repository.buscarPorExameNecessario();
+
+        service.exibirExames(listaExames);
+
+        System.out.println("Qual a consulta que deseja realizar o exame? : ");
+
+        ProntuarioEntity exame = new ProntuarioEntity();
+
+        exame = repository.buscarPorId(sc.nextLong());
+
+        System.out.println("Qual o resultado do exame? : ");
+        sc.nextLine();
+        exame.setResultado_exame(sc.nextLine());
+        exame.setStatus_exame("finalizado");
+        repository.atualizar(exame);
 
     }
 }

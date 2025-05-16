@@ -43,7 +43,7 @@ public class ProntuarioService {
                 if (entidade.getExame_necessario().equalsIgnoreCase("sim")
                         || entidade.getExame_necessario().equalsIgnoreCase("s")) {
                     System.out.println("Exame Solicitado: "+ entidade.getExame()+"\n"
-                    +"Status do Exame: "+ entidade.getStatus_exame()+"\n");
+                    +"Status do Exame: "+ entidade.getStatus_exame());
 
                     //printa apenas se o exame ja foi concluido
                     if (!entidade.getStatus_exame().equals("aguardando")){
@@ -81,7 +81,7 @@ public class ProntuarioService {
             if (entidade.getExame_necessario().equalsIgnoreCase("sim")
                     || entidade.getExame_necessario().equalsIgnoreCase("s")) {
                 System.out.println("Exame Solicitado: " + entidade.getExame() + "\n"
-                        + "Status do Exame: " + entidade.getStatus_exame() + "\n");
+                        + "Status do Exame: " + entidade.getStatus_exame());
 
                 //printa apenas se o exame ja foi concluido
                 if (!entidade.getStatus_exame().equals("aguardando")) {
@@ -123,6 +123,18 @@ public class ProntuarioService {
             repository.atualizar(entidade);
 
         }
+    }
+
+    public void exibirExames (List<ProntuarioEntity> lista){
+
+        for (ProntuarioEntity entidade : lista){
+            System.out.println("Numero da Consulta: "+ entidade.getId()+"\n"
+            +"Paciente: "+ entidade.getNome()+"\n"
+            +"Medico: "+ entidade.getMedico()+"\n"
+            +"Exame Necessário: "+ entidade.getExame()+"\n"
+            +"----------------------------------------------------");
+        }
+
     }
 
 }
