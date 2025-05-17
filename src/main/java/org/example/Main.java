@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.entity.AmostrasLabEntity;
 import org.example.entity.ConsultaEntity;
+import org.example.enums.TypeUser;
 import org.example.service.AmostrasLabService;
 import org.example.service.ConsultaService;
 
@@ -17,6 +18,8 @@ import java.util.Scanner;
 
 public class Main {
 
+
+    //testando
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -71,25 +74,82 @@ public class Main {
                     usuarioServices.cadastrarUsuario();
                     break;
                 case 2:
-                    System.out.print("\nDigite seu e-mail ou CPF: ");
-                    String loginOuCpf = sc.nextLine();
+                    System.out.println("\n=== LOGIN ===");
+                    System.out.print("Informe o tipo de usuário para login (ADMIN, PACIENTE, MEDICO, LAB, RECEPCAO): ");
+                    String tipoLoginInput = sc.nextLine().toUpperCase();
 
+                    TypeUser tipoLogin;
+                    try {
+                        tipoLogin = TypeUser.valueOf(tipoLoginInput);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Tipo de usuário inválido. Tente novamente.");
+                        break;
+                    }
+
+                    String identificador = null;
                     System.out.print("Senha: ");
                     String senha = sc.nextLine();
 
-                    if (usuarioServices.autenticarUsuario(loginOuCpf, senha)) {
-                        System.out.println("\nLogin bem-sucedido!");
+                    switch (tipoLogin) {
+                        case PACIENTE:
+                            System.out.print("Digite seu CPF (somente números): ");
+                            identificador = sc.nextLine();
+                            if (!identificador.matches("\\d{11}")) {
+                                System.out.println("CPF inválido.");
+                                break;
+                            }
+                            break;
+
+                        case MEDICO:
+                            System.out.print("Digite seu CRM: ");
+                            identificador = sc.nextLine();
+                            if (identificador == null || identificador.trim().isEmpty()) {
+                                System.out.println("CRM inválido.");
+                                break;
+                            }
+                            break;
+
+                        case LAB:
+                        case RECEPCAO:
+                            System.out.print("Digite seu nome de usuário: ");
+                            identificador = sc.nextLine();
+                            if (identificador == null || identificador.trim().isEmpty()) {
+                                System.out.println("Usuário inválido.");
+                                break;
+                            }
+                            break;
+
+                        case ADMIN:
+                            System.out.print("Digite seu e-mail: ");
+                            identificador = sc.nextLine();
+                            if (!identificador.contains("@")) {
+                                System.out.println("E-mail inválido.");
+                                break;
+                            }
+                            break;
+                    }
+
+                    if (identificador == null || identificador.trim().isEmpty()) {
+                        System.out.println("Identificador inválido. Tente novamente.");
+                        break;
+                    }
+
+                    // Passa o tipo também para autenticar corretamente
+                    if (usuarioServices.autenticarUsuario(tipoLogin, identificador, senha)) {
                         menu.abrirMenu();
                     } else {
-                        System.out.println("\nLogin falhou. Verifique suas credenciais.");
+                        System.out.println("Falha no login.");
                     }
+
                     break;
+
                 case 3:
                     System.out.println("\nSaindo...");
                     sc.close();
                     em.close(); // Fecha EntityManager
                     entityManagerFactory.close(); // Fecha Factory
                     System.exit(0);
+
                     break;
                 default:
                     System.out.println("\nOpção inválida! Digite um número entre 1 e 3.");
