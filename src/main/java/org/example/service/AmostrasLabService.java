@@ -1,12 +1,10 @@
 package org.example.service;
 
-import org.example.entity.AmostrasLabEntity;
-import org.example.entity.ConsultaEntity;
-import org.example.repository.AmostrasLabRepository;
-import org.example.repository.CustomizerFactory;
+import org.example.Entity.AmostrasLabEntity;
+import org.example.Repository.AmostrasLabRepository;
+import org.example.Repository.CustomizerFactory;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;

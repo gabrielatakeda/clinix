@@ -1,14 +1,13 @@
 package org.example.service;
 
-import net.bytebuddy.asm.Advice;
-import org.example.entity.AmostrasLabEntity;
-import org.example.entity.ConsultaEntity;
+import org.example.Entity.AmostrasLabEntity;
+import org.example.Entity.ConsultaEntity;
 
-import org.example.repository.ConsultaRepository;
-import org.example.repository.CustomizerFactory;
+import org.example.Repository.ConsultaRepository;
+import org.example.Repository.CustomizerFactory;
+import org.example.Repository.MedicoRepository;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,6 +21,7 @@ public class ConsultaService {
 
     EntityManager em = CustomizerFactory.getEntityManager();
     ConsultaRepository consultaRepository = new ConsultaRepository(em);
+    MedicoService medicoService = new MedicoService();
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -135,38 +135,35 @@ public class ConsultaService {
 
                 try {
                     System.out.println("AGENDAMENTO DE CONSULTA");
-                    System.out.println("Insira as informacoes necessarias:");
-                    System.out.println("Nome do Paciente: ");
+                    System.out.println("Insira o nome do paciente: ");
                     String nomePaciente = sc.nextLine();
                     PacienteService pacientes = new PacienteService();
                     var pacienteSelecionado = pacientes.buscarPorNomeInicial(nomePaciente);
-                    System.out.println("Selecione o medico que deseja se consultar: ");
-                    MedicoService medicos = new MedicoService();
-                    var medicoSelecionado = medicos.selecionarMedico();
-                    System.out.println("Data da consulta (dd/MM/yyyy HH:mm): ");
-                    String dataConsultaStr = sc.nextLine();
+                    if(pacienteSelecionado == null) {
+                        System.out.println("\nNome não encontrado! Cadastre o Paciente");
+                    }else{
+                        System.out.println("\nMedicos disponiveis: ");
+                        medicoService.selecionarMedico();
+                        MedicoService medicos = new MedicoService();
+                        var medicoSelecionado = medicos.selecionarMedico();
+                        System.out.println("Data da consulta (dd/MM/yyyy HH:mm): ");
+                        String dataConsultaStr = sc.nextLine();
+                        if (dataConsultaStr == null || dataConsultaStr.trim().isEmpty()) {
+                            System.out.println("⚠️ Data inválida. Digite no formato dd/MM/yyyy.");
+                            return; // ou pedir novamente
+                        }
 
-                    LocalDateTime dataConsulta = LocalDateTime.parse(dataConsultaStr, formatter);
+                        LocalDateTime dataConsulta = LocalDateTime.parse(dataConsultaStr, formatter);
 
-                    novaConsulta.setData_consulta(dataConsulta);
-                    novaConsulta.setMedico(medicoSelecionado);
+                        novaConsulta.setData_consulta(dataConsulta);
+                        novaConsulta.setMedico(medicoSelecionado);
+                    }
 
                 } catch (Exception e) {
                     System.out.println("\nErro: Formato de data inválido. Use o formato dd/MM/yyyy HH:mm.");
                     return;
                 }
 
-                // System.out.print("Motivo: ");
-                // novaConsulta.setMotivo(sc.nextLine());
-
-                // System.out.print("Status: ");
-                // novaConsulta.setStatus(sc.nextLine());
-
-                // System.out.print("Prescrição: ");
-                // novaConsulta.setPrescricao(sc.nextLine());
-
-                // System.out.print("Observações: ");
-                // novaConsulta.setObservacoes(sc.nextLine());
 
                 ConsultaEntity salvo = consultaService.salvarConsulta(novaConsulta);
 

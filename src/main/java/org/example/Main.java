@@ -1,14 +1,10 @@
 package org.example;
 
-import org.example.entity.AmostrasLabEntity;
-import org.example.entity.ConsultaEntity;
-import org.example.service.AmostrasLabService;
 import org.example.service.ConsultaService;
 
-import org.example.repository.*;
+import org.example.Repository.*;
 import org.example.service.*;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
@@ -73,7 +69,7 @@ public class Main {
                     usuarioServices.cadastrarUsuario();
                     break;
                 case 2:
-                    System.out.print("\nDigite seu e-mail ou CPF: ");
+                    System.out.print("\nDigite seu login(e-mail ou nome) ou CPF: ");
                     String loginOuCpf = sc.nextLine();
 
                     System.out.print("Senha: ");

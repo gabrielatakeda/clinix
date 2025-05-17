@@ -2,6 +2,8 @@ package org.example.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pessoa")
@@ -17,6 +19,9 @@ public class PacienteEntity {
     @Column(name = "idade")
     private int idade;
 
+    @Column(name = "cpf", unique = true) //CPF é único, não pode se repetir
+    private String cpf;
+
     @Column(name = "medico")
     private String medico;
 
@@ -26,15 +31,17 @@ public class PacienteEntity {
     @Column(name = "fk_usuario")
     private Long fk_usuario;
 
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnderecoEntity> endereco = new ArrayList<>();
+
     public PacienteEntity(){}
 
-    public PacienteEntity(Long id, String nome, int idade, String medico, LocalDate data, Long fk_usuario) {
+    public PacienteEntity(Long id, String nome, int idade, LocalDate data, String cpf) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
-        this.medico = medico;
         this.data = data;
-        this.fk_usuario = fk_usuario;
+        this.cpf = cpf;
     }
 
     public Long getId() {
@@ -61,6 +68,10 @@ public class PacienteEntity {
         return fk_usuario;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -83,6 +94,18 @@ public class PacienteEntity {
 
     public void setFk_usuario(Long fk_usuario) {
         this.fk_usuario = fk_usuario;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<EnderecoEntity> getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(List<EnderecoEntity> endereco) {
+        this.endereco = endereco;
     }
 
     @Override

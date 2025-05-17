@@ -1,8 +1,6 @@
-package org.example.entity;
+package org.example.Entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "medico")
 public class MedicoEntity {

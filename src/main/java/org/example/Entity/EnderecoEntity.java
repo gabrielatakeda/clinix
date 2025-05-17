@@ -1,7 +1,6 @@
-package org.example.entity;
+package org.example.Entity;
 
 import javax.persistence.*;
-import org.example.entity.PacienteEntity;
 
 @Entity(name = "endereco")
 public class EnderecoEntity{
@@ -21,6 +20,7 @@ public class EnderecoEntity{
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
     private PacienteEntity paciente;
+
 
     public EnderecoEntity(){} //Construtor vazio
 

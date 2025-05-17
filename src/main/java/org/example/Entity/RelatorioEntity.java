@@ -1,6 +1,4 @@
-package org.example.entity;
-
-import jdk.jfr.Enabled;
+package org.example.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

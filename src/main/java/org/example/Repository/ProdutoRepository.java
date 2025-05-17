@@ -1,6 +1,6 @@
-package org.example.repository;
+package org.example.Repository;
 
-import org.example.entity.ProdutoEntity;
+import org.example.Entity.ProdutoEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;

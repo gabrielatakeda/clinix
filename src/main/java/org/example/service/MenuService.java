@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.repository.ConsultaRepository;
-import org.example.repository.ProdutoRepository;
+import org.example.Repository.ConsultaRepository;
+import org.example.Repository.ProdutoRepository;
 
 import javax.persistence.EntityManager;
 import java.util.Scanner;

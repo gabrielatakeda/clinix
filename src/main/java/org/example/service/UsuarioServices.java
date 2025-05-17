@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.entity.UsuarioEntity;
-import org.example.repository.UsuarioRepository;
+import org.example.Entity.UsuarioEntity;
+import org.example.Repository.UsuarioRepository;
 
 import java.util.Optional;
 import java.util.Scanner;

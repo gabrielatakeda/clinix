@@ -1,8 +1,6 @@
 package org.example.service;
 
-import org.example.repository.*;
-
-import java.util.Scanner;
+import org.example.Repository.*;
 
 public abstract class RelatorioService {
 

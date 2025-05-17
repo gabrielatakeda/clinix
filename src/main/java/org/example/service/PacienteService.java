@@ -1,9 +1,9 @@
 package org.example.service;
 
-import org.example.entity.PacienteEntity;
-import org.example.repository.CustomizerFactory;
-import org.example.repository.PacienteRepository;
-import org.example.entity.EnderecoEntity;
+import org.example.Entity.PacienteEntity;
+import org.example.Repository.CustomizerFactory;
+import org.example.Repository.PacienteRepository;
+import org.example.Entity.EnderecoEntity;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -20,16 +20,16 @@ public class PacienteService {
     public PacienteEntity salvarPaciente(PacienteEntity paciente, List<EnderecoEntity> endereços) {
         PacienteEntity existente = pacienteRepository.buscarPorCpf(paciente.getCpf());
         if (existente != null) {
-            System.out.println("CPF já cadastrado! Paciente existente: " + existente.getNomeCompleto());
+            System.out.println("CPF já cadastrado! Paciente existente: " + existente.getNome());
             return existente;
         }
 
         for (EnderecoEntity x : endereços) {
             x.setPaciente(paciente);
-            paciente.getEnderecos().add(x);
+            paciente.getEndereco().add(x);
         }
         pacienteRepository.salvar(paciente);
-        var lista = pacienteRepository.buscarPorNomeInicial(paciente.getNomeCompleto());
+        var lista = pacienteRepository.buscarPorNomeInicial(paciente.getNome());
         for (PacienteEntity x : lista) {
             if (x.getCpf().equalsIgnoreCase(paciente.getCpf())) {
                 return x;
@@ -49,7 +49,7 @@ public class PacienteService {
     public void atualizarPacienteCPF(String cpf, String novoNome) {
         PacienteEntity paciente = pacienteRepository.buscarPorCpf(cpf);
         if (paciente != null) {
-            paciente.setNomeCompleto(novoNome);
+            paciente.setNome(novoNome);
             pacienteRepository.atualizar(paciente);
             System.out.println("Paciente atualizado com sucesso!");
         } else {
@@ -92,7 +92,7 @@ public class PacienteService {
                         System.out.println("Nenhum paciente encontrado.");
                     } else {
                         for (PacienteEntity p : lista) {
-                            System.out.println("CPF: " + p.getCpf() + ", Nome: " + p.getNomeCompleto());
+                            System.out.println("CPF: " + p.getCpf() + ", Nome: " + p.getNome());
                         }
                     }
                     break;
@@ -127,12 +127,14 @@ public class PacienteService {
         String nome = sc.nextLine();
         System.out.print("CPF: ");
         String cpf = sc.nextLine();
+        System.out.print("Idade: ");
+        int idade = sc.nextInt();
+        sc.nextLine();
         System.out.print("Data de nascimento (dd/MM/yyyy): ");
-        LocalDate dataNasc = LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        System.out.print("Telefone: ");
+        LocalDate data = LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String telefone = sc.nextLine();
 
-        PacienteEntity paciente = new PacienteEntity(null, nome, cpf, dataNasc, telefone, new ArrayList<>());
+        PacienteEntity paciente = new PacienteEntity(null, nome, idade, data, cpf);
 
         List<EnderecoEntity> enderecos = new ArrayList<>();
         while (true) {

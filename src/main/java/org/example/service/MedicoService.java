@@ -1,8 +1,8 @@
 package org.example.service;
 
-import org.example.entity.MedicoEntity;
-import org.example.repository.CustomizerFactory;
-import org.example.repository.MedicoRepository;
+import org.example.Entity.MedicoEntity;
+import org.example.Repository.CustomizerFactory;
+import org.example.Repository.MedicoRepository;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Scanner;

@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.entity.ConsultaEntity;
-import org.example.repository.ConsultaRepository;
+import org.example.Entity.ConsultaEntity;
+import org.example.Repository.ConsultaRepository;
 import java.util.List;
 
 public class RelatorioPacienteMedicoService extends RelatorioService {
@@ -23,7 +23,7 @@ public class RelatorioPacienteMedicoService extends RelatorioService {
             System.out.println("Nenhum paciente encontrado para este medico.");
         } else{
             for(ConsultaEntity consulta : pacientePorMedico) {
-                System.out.println("Paciente: " + consulta.getPaciente().getNomeCompleto());
+                System.out.println("Paciente: " + consulta.getPaciente().getNome());
                 System.out.println("CPF: " + consulta.getPaciente().getCpf());
                 System.out.println("Data da consulta: " + consulta.getLocalDateTime());
                 System.out.println("------------------------");

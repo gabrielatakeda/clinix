@@ -1,6 +1,6 @@
-package org.example.repository;
+package org.example.Repository;
 
-import org.example.entity.AmostrasLabEntity;
+import org.example.Entity.AmostrasLabEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 

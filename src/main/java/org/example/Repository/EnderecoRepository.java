@@ -1,6 +1,6 @@
-package org.example.repository;
+package org.example.Repository;
 
-import org.example.entity.EnderecoEntity;
+import org.example.Entity.EnderecoEntity;
 import javax.persistence.EntityManager;
 
 public class EnderecoRepository{
