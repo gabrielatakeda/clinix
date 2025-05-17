@@ -1,6 +1,8 @@
-package org.example.Entity;
+package org.example.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "medico")
 public class MedicoEntity {
@@ -22,8 +24,8 @@ public class MedicoEntity {
     @Column(name = "telefone")
     private String telefone;
 
-    // @OneToMany(mappedBy = "medico")
-    // private List<ConsultaEntity> consultas = new ArrayList<>();
+    @OneToMany(mappedBy = "medico")
+     private List<ConsultaEntity> consultas = new ArrayList<>();
 
     public MedicoEntity(){
     }
@@ -78,12 +80,9 @@ public class MedicoEntity {
         this.telefone = telefone;
     }
 
-    //public List<ConsultaEntity> getConsultas(){
-    //     return consultas;
-    // }
-
-    //public void setConsultas(List<ConsultaEntity> consultas){
-    //     this.consultas = consultas;
-    // }
+    @Override
+    public String toString() {
+        return "Nome: " + nomeCompleto + "\nCRM : " + "(" + crm + ")" + "\nEspecialidade: " + especialidade;
+    }
 }
 

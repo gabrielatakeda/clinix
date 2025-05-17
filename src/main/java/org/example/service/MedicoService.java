@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.Entity.MedicoEntity;
+import org.example.entity.MedicoEntity;
 import org.example.Repository.CustomizerFactory;
 import org.example.Repository.MedicoRepository;
 import javax.persistence.EntityManager;
@@ -40,24 +40,6 @@ public class MedicoService {
         return medicoRepository.buscarTodos();
     }
 
-//    public MedicoEntity buscarPorId(Long id) {
-//        return medicoRepository.buscarPorId(id);
-//    }
-
-//    public MedicoEntity buscarPorCrm(String crm){
-//        return medicoRepository.buscarPorCrm(crm);
-//    }
-
-    // public void removerMedico(Long id) {
-    //     MedicoEntity medico = medicoRepository.buscarPorId(id);
-    //     if (medico != null) {
-    //         medicoRepository.remover(medico);
-    //         System.out.println("Médico removido com sucesso!");
-    //     } else {
-    //         System.out.println("Médico com ID " + id + " não encontrado.");
-    //     }
-    // }
-
     public MedicoEntity selecionarMedico() {
         List<MedicoEntity> medicos = listarMedicos();
 
@@ -69,7 +51,7 @@ public class MedicoService {
         System.out.println("\n=== SELECIONAR MÉDICO ===");
         for (int i = 0; i < medicos.size(); i++) {
             MedicoEntity m = medicos.get(i);
-            System.out.println((i + 1) + " - " + m.getNomeCompleto() + " (CRM: " + m.getCrm() + ")");
+            System.out.println((i + 1) + " - " + m.getNomeCompleto() + " (CRM: " + m.getCrm() + ")" + "Especialidade :" + m.getEspecialidade());
         }
 
         int escolha = -1;

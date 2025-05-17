@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.Entity.ConsultaEntity;
+import org.example.entity.ConsultaEntity;
 import org.example.Repository.ConsultaRepository;
 import java.util.List;
 

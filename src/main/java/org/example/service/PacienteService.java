@@ -1,9 +1,9 @@
 package org.example.service;
 
-import org.example.Entity.PacienteEntity;
+import org.example.entity.PacienteEntity;
 import org.example.Repository.CustomizerFactory;
 import org.example.Repository.PacienteRepository;
-import org.example.Entity.EnderecoEntity;
+import org.example.entity.EnderecoEntity;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -117,7 +117,7 @@ public class PacienteService {
     }
 
     public List<PacienteEntity> buscarPorNomeInicial(String prefixo){
-        return em.createQuery("SELECT p FROM paciente p WHERE p.nomeCompleto LIKE :prefixo", PacienteEntity.class)
+        return em.createQuery("SELECT p FROM PacienteEntity p WHERE p.nome LIKE :prefixo", PacienteEntity.class)
                 .setParameter("prefixo", prefixo + "%")
                 .getResultList();
     }
@@ -127,15 +127,22 @@ public class PacienteService {
         String nome = sc.nextLine();
         System.out.print("CPF: ");
         String cpf = sc.nextLine();
+        // Cria o objeto com os dados parciais (outros virão depois)
+        PacienteEntity paciente = new PacienteEntity();
+        paciente.setNome(nome);
+        paciente.setCpf(cpf);
+
+    // Verifica duplicidade antes de persistir
+        if (pacienteRepository.buscarPorCpf(paciente.getCpf()) != null) {
+            System.out.println("Paciente com CPF " + paciente.getCpf() + " já está cadastrado.");
+            return;
+        }
         System.out.print("Idade: ");
         int idade = sc.nextInt();
-        sc.nextLine();
+        paciente.setIdade(idade);
         System.out.print("Data de nascimento (dd/MM/yyyy): ");
         LocalDate data = LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String telefone = sc.nextLine();
-
-        PacienteEntity paciente = new PacienteEntity(null, nome, idade, data, cpf);
-
+        paciente.setData(data);
         List<EnderecoEntity> enderecos = new ArrayList<>();
         while (true) {
             System.out.print("Logradouro: ");

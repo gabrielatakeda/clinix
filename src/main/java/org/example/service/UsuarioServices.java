@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.Entity.UsuarioEntity;
+import org.example.entity.UsuarioEntity;
 import org.example.Repository.UsuarioRepository;
 
 import java.util.Optional;

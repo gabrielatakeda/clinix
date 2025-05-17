@@ -56,8 +56,8 @@ public class MenuService {
 
                 case 4:
                     System.out.println("Prontuarios");
-                    ConsultaService prontuarioService = new ConsultaService();
-                    // prontuarioService.printMenu(sc, prontuarioService);
+                    ProntuarioService prontuarioService = new ProntuarioService();
+                    prontuarioService.printMenu(sc);
                     break;
 
                 case 5:

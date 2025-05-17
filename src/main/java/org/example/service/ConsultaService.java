@@ -1,15 +1,16 @@
 package org.example.service;
 
-import org.example.Entity.AmostrasLabEntity;
-import org.example.Entity.ConsultaEntity;
+import org.example.entity.AmostrasLabEntity;
+import org.example.entity.ConsultaEntity;
 
+import org.example.entity.PacienteEntity;
 import org.example.Repository.ConsultaRepository;
 import org.example.Repository.CustomizerFactory;
-import org.example.Repository.MedicoRepository;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.example.enums.StatusConsulta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,26 +26,16 @@ public class ConsultaService {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-//    public ConsultaEntity buscarPorId(Long id) {
-//        return consultaRepository.buscarPorId(id);
-//    }
-
-//    public List<ConsultaEntity> findByNome(String nome) {
-//        return em.createQuery("SELECT p FROM ConsultaEntity p WHERE p.nome = :nome", ConsultaEntity.class)
-//                .setParameter("nome", nome + "%")
-//                .getResultList();
-//    }
-
     public void exibirConsultas() {
-        List<ConsultaEntity> consultas = consultaRepository.findAll();
+        List<ConsultaEntity> consultas = consultaRepository.listarTodos();
 
         if (consultas.isEmpty()) {
             System.out.println("\nNenhuma consulta encontrada.");
         } else {
             for (ConsultaEntity c : consultas) {
-                System.out.println("\nData: " + c.getData_consulta().format(formatter));
-                System.out.println("Paciente: " + c.getPaciente());
-                System.out.println("Médico: " + c.getMedico());
+                System.out.println("==Paciente==\n" + c.getPaciente());
+                System.out.println("==Médico==\n" + c.getMedico());
+                System.out.println("\nData Consulta: " + c.getData_consulta().format(formatter));
                 System.out.println("Status: " + c.getStatus());
                 System.out.println("------------------------------");
             }
@@ -53,7 +44,7 @@ public class ConsultaService {
 
 
     public ConsultaEntity salvarConsulta(ConsultaEntity consulta) {
-        List<ConsultaEntity> todasConsultas = consultaRepository.findAll();
+        List<ConsultaEntity> todasConsultas = consultaRepository.listarTodos();
 
         for (ConsultaEntity c : todasConsultas) {
             if (c.getData_consulta().equals(consulta.getData_consulta())) {
@@ -61,38 +52,13 @@ public class ConsultaService {
                 return c; // retorna a consulta existente
             }
         }
+        consultaRepository.salvar(consulta);
         return consulta;
-        //precisa mesmo retornar? sabendo que a funcao salvar e void????
-        //return consultaRepository.salvar(consulta);
     }
 
     public List<ConsultaEntity> listarConsultas() {
-        return consultaRepository.findAll();
+        return consultaRepository.listarTodos();
     }
-
-
-
-    //INUTIL
-    // public void atualizarMotivoConsulta(Long id, String novoMotivo) {
-    //     ConsultaEntity consulta = consultaRepository.buscarPorId(id);
-    //     if (consulta != null) {
-    //         consulta.setMotivo(novoMotivo);
-    //         consultaRepository.atualizar(consulta);
-    //         System.out.println("Motivo da consulta atualizado com sucesso!");
-    //     } else {
-    //         System.out.println("Consulta com ID " + id + " não encontrada.");
-    //     }
-    // }
-
-//    public void removerPorId(Long id) {
-//        ConsultaEntity consulta = consultaRepository.buscarPorId(id);
-//        if (consulta != null) {
-//            consultaRepository.remover(consulta);
-//            System.out.println("Consulta removida com sucesso.");
-//        } else {
-//            System.out.println("Consulta com ID " + id + " não encontrada.");
-//        }
-//    }
 
     public void removerPorData(String data) {
         try {
@@ -132,66 +98,43 @@ public class ConsultaService {
             case 1:
                 ConsultaEntity novaConsulta = new ConsultaEntity();
                 AmostrasLabEntity novaAmostra = new AmostrasLabEntity();
+                PacienteEntity pacienteSelecionado;
 
                 try {
                     System.out.println("AGENDAMENTO DE CONSULTA");
-                    System.out.println("Insira o nome do paciente: ");
-                    String nomePaciente = sc.nextLine();
-                    PacienteService pacientes = new PacienteService();
-                    var pacienteSelecionado = pacientes.buscarPorNomeInicial(nomePaciente);
-                    if(pacienteSelecionado == null) {
-                        System.out.println("\nNome não encontrado! Cadastre o Paciente");
-                    }else{
-                        System.out.println("\nMedicos disponiveis: ");
-                        medicoService.selecionarMedico();
-                        MedicoService medicos = new MedicoService();
-                        var medicoSelecionado = medicos.selecionarMedico();
+                    System.out.print("Insira o CPF do paciente: ");
+                    String cpf = sc.nextLine().trim();
+
+                    // VERIFICA O PACIENTE CADASTRADO POR CPF
+                    PacienteService pacienteService = new PacienteService();
+                    pacienteSelecionado = pacienteService.buscarPorCpf(cpf);
+
+                    if (pacienteSelecionado == null) {
+                        System.out.println("\nPaciente não encontrado! Cadastre o paciente primeiro.");
+                        return;
+                    }
+                        var medicoSelecionado = medicoService.selecionarMedico();
                         System.out.println("Data da consulta (dd/MM/yyyy HH:mm): ");
                         String dataConsultaStr = sc.nextLine();
                         if (dataConsultaStr == null || dataConsultaStr.trim().isEmpty()) {
-                            System.out.println("⚠️ Data inválida. Digite no formato dd/MM/yyyy.");
+                            System.out.println("Data inválida. Digite no formato dd/MM/yyyy.");
                             return; // ou pedir novamente
-                        }
+                        }else{
 
                         LocalDateTime dataConsulta = LocalDateTime.parse(dataConsultaStr, formatter);
 
                         novaConsulta.setData_consulta(dataConsulta);
                         novaConsulta.setMedico(medicoSelecionado);
-                    }
+                        novaConsulta.setPaciente(pacienteSelecionado);
+                        novaConsulta.setStatus(StatusConsulta.AGENDADA);
 
+                        ConsultaEntity salvo = consultaService.salvarConsulta(novaConsulta);
+                        System.out.println(salvo.getID_Consulta() != null ? "Consulta agendada com sucesso!" : "Erro ao salvar.");
+                        }
                 } catch (Exception e) {
                     System.out.println("\nErro: Formato de data inválido. Use o formato dd/MM/yyyy HH:mm.");
                     return;
                 }
-
-
-                ConsultaEntity salvo = consultaService.salvarConsulta(novaConsulta);
-
-//                System.out.println("\n\tDejesa encaminhar algum exame?(s/n) ");
-//                String resposta = sc.nextLine();
-//                if (resposta.equalsIgnoreCase("s")) {
-//
-//
-//                    novaAmostra.setDataColeta(salvo.getData_consulta()); // pega a mesma data da consulta
-//                    System.out.print("Data da amostra : " + novaAmostra.getDataColeta().format(formatter));
-//
-//
-//                    System.out.print("\nTipo: ");
-//                    novaAmostra.setTipoExame(sc.nextLine());
-//
-//                    System.out.print("Resultado: ");
-//                    novaAmostra.setResultado(sc.nextLine());
-//
-//                    novaAmostra.setConsulta(salvo); // associa a amostra à consulta
-//
-//                    AmostrasLabEntity amostraSalva = amostrasLabService.salvarAmostra(novaAmostra);
-//
-//                    System.out.println(amostraSalva.getId_amostralab() != null ? "Amostra cadastrada com sucesso!" : "Erro ao salvar a amostra.");
-//                } else if (!resposta.equalsIgnoreCase("n")) {
-//                    System.out.println("\n\tOpcao invalida!");
-//
-//                }
-                System.out.println(salvo.getID_Consulta() != null ? "Consulta agendada com sucesso!" : "Erro ao salvar.");
                 break;
             case 2:
                 System.out.println("Editar consulta.");

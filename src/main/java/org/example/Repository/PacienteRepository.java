@@ -1,6 +1,6 @@
 package org.example.Repository;
 
-import org.example.Entity.PacienteEntity;
+import org.example.entity.PacienteEntity;
 import javax.persistence.EntityManager;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class PacienteRepository {
     }
 
     public List<PacienteEntity> buscarTodos(){ //Retorna todos os pacientes cadastrados
-        return em.createQuery("SELECT p FROM paciente p", PacienteEntity.class).getResultList();
+        return em.createQuery("SELECT p FROM PacienteEntity p", PacienteEntity.class).getResultList();
     }
 
     public void atualizar(PacienteEntity paciente){ //Atualiza um paciente existente no banco
@@ -40,7 +40,7 @@ public class PacienteRepository {
     }
 
     public List<PacienteEntity> buscarPorNomeInicial(String prefixo){ //Busca pacientes cujo nome completo começa com um determinado prefixo
-        return em.createQuery("SELECT p FROM paciente p WHERE p.nomeCompleto LIKE :prefixo", PacienteEntity.class)
+        return em.createQuery("SELECT p FROM PacienteEntity p WHERE p.nome LIKE :prefixo", PacienteEntity.class)
                 .setParameter("prefixo", prefixo + "%")
                 .getResultList();
     }

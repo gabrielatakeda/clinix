@@ -1,4 +1,4 @@
-package org.example.Entity;
+package org.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -33,6 +33,12 @@ public class PacienteEntity {
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EnderecoEntity> endereco = new ArrayList<>();
+
+    @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnderecoEntity> consulta = new ArrayList<>();
+
+    @OneToMany(mappedBy = "amostralab", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnderecoEntity> amostralab = new ArrayList<>();
 
     public PacienteEntity(){}
 
@@ -110,13 +116,7 @@ public class PacienteEntity {
 
     @Override
     public String toString() {
-        return "PacienteEntity{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", idade='" + idade + '\'' +
-                ", data=" + data +
-                ", medico=" + medico +
-                '}';
+        return "Nome: "  + nome +
+               "\nIdade: " + idade ;
     }
-
 }

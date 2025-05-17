@@ -1,6 +1,6 @@
 package org.example.Repository;
 
-import org.example.Entity.RelatorioEntity;
+import org.example.entity.RelatorioEntity;
 
 import javax.persistence.EntityManager;
 

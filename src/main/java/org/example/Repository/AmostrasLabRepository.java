@@ -1,6 +1,6 @@
 package org.example.Repository;
 
-import org.example.Entity.AmostrasLabEntity;
+import org.example.entity.AmostrasLabEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class AmostrasLabRepository {
     public List<AmostrasLabEntity> findAll(){
         return em.createQuery("SELECT c FROM AmostrasLabEntity c", AmostrasLabEntity.class).getResultList();
     }
+
 
     public AmostrasLabEntity salvar(AmostrasLabEntity amostra){
         em.getTransaction().begin();

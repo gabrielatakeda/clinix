@@ -1,6 +1,7 @@
 package org.example.Repository;
 
-import org.example.Entity.ConsultaEntity;
+import org.example.entity.ConsultaEntity;
+import org.example.entity.PacienteEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -22,9 +23,6 @@ public class ConsultaRepository {
         return em.find(ConsultaEntity.class,ID_Consulta);
     }
 
-    public List<ConsultaEntity> findAll(){
-        return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
-    }
 
     public void salvar(ConsultaEntity consulta){
         em.getTransaction().begin();
@@ -56,6 +54,20 @@ public class ConsultaRepository {
         }
     }
 
+    public ConsultaEntity buscarConsultaPorPaciente(PacienteEntity paciente) {
+        try {
+            return em.createQuery(
+                            "SELECT c FROM ConsultaEntity c WHERE c.paciente = :paciente ORDER BY c.data_consulta DESC",
+                            ConsultaEntity.class)
+                    .setParameter("paciente", paciente)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+
     public List<ConsultaEntity> buscarPacientesPorMedico(String crm) {
         return em.createQuery("SELECT c FROM ConsultaEntity c WHERE c.medico.crm = :crm", ConsultaEntity.class)
                 .setParameter("crm", crm)
@@ -68,7 +80,7 @@ public class ConsultaRepository {
                 .getResultList();
     }
 
-    public List<ConsultaEntity> buscarTodos() {
+    public List<ConsultaEntity> listarTodos() {
         return em.createQuery("SELECT c FROM ConsultaEntity c", ConsultaEntity.class).getResultList();
     }
 

@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.Entity.ProdutoEntity;
+import org.example.entity.ProdutoEntity;
 import org.example.Repository.ProdutoRepository;
 import java.time.LocalDate;
 import java.util.List;

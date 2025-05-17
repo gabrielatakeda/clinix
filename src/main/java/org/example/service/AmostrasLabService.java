@@ -1,11 +1,17 @@
 package org.example.service;
 
-import org.example.Entity.AmostrasLabEntity;
+import org.example.entity.AmostrasLabEntity;
+import org.example.entity.ConsultaEntity;
+import org.example.entity.PacienteEntity;
 import org.example.Repository.AmostrasLabRepository;
+import org.example.Repository.ConsultaRepository;
 import org.example.Repository.CustomizerFactory;
+import org.example.enums.StatusAmostraLab;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,6 +24,74 @@ public class AmostrasLabService {
     // Adicione o formatter na parte superior da classe para usar em todo o código
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
+
+    public void cadastrarExame(Scanner sc) {
+        System.out.println("\n===== CADASTRAR NOVO EXAME =====");
+
+        System.out.print("Insira o CPF do paciente: ");
+        String cpf = sc.nextLine().trim();
+
+        // VERIFICA O PACIENTE CADASTRADO POR CPF
+        PacienteService pacienteService = new PacienteService();
+        PacienteEntity pacienteSelecionado = pacienteService.buscarPorCpf(cpf);
+
+        if (pacienteSelecionado == null) {
+            System.out.println("\nPaciente não encontrado! Cadastre o paciente primeiro.");
+            return;
+        }
+
+        // Busca a consulta mais recente associada ao paciente
+        ConsultaRepository consultaRepository = new ConsultaRepository(em);
+        ConsultaEntity consulta = consultaRepository.buscarConsultaPorPaciente(pacienteSelecionado);
+
+        // Busca a consulta associada à amostra
+        AmostrasLabEntity novaAmostra = new AmostrasLabEntity();
+
+        if (consulta == null) {
+            System.out.println("Consulta não encontrada ou inválida.");
+            return;
+        }
+        novaAmostra.setConsulta(consulta);
+
+        System.out.print("Tipo do Exame: ");
+        String tipoExame = sc.nextLine();
+        novaAmostra.setTipoExame(tipoExame);
+
+//        System.out.print("Resultado do Exame: ");
+//        String resultado = sc.nextLine();
+//        novaAmostra.setResultado(resultado);
+
+        // Solicita a data da coleta
+        System.out.print("Data da Coleta (formato: dd/MM/yyyy HH:mm): ");
+        String dataStr = sc.nextLine();
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime dataColeta = LocalDateTime.parse(dataStr, formatter);
+
+            // Verifica se a data da consulta está disponível
+            LocalDateTime dataConsulta = consulta.getData_consulta(); // Supondo que seja LocalDateTime
+            if (dataColeta.isBefore(dataConsulta)) {
+                System.out.println("Erro: A data da coleta não pode ser anterior à data da consulta (" +
+                        dataConsulta.format(formatter) + ").");
+                return;
+            }
+
+            novaAmostra.setDataColeta(dataColeta);
+        } catch (DateTimeParseException e) {
+            System.out.println("Data em formato inválido! Use o formato dd/MM/yyyy HH:mm.");
+            return;
+        }
+
+        novaAmostra.setStatus(StatusAmostraLab.PENDENTE);
+
+        AmostrasLabEntity salvo = salvarAmostra(novaAmostra);
+        if (salvo.getId_amostralab() != null) {
+            System.out.println("Amostra cadastrada com sucesso!");
+        } else {
+            System.out.println("Erro ao salvar a amostra.");
+        }
+    }
 
     public AmostrasLabEntity salvarAmostra(AmostrasLabEntity amostra) {
         List<AmostrasLabEntity> todasAmostras = amostraRepository.findAll();

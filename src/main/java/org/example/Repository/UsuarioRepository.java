@@ -1,6 +1,6 @@
 package org.example.Repository;
 
-import org.example.Entity.UsuarioEntity;
+import org.example.entity.UsuarioEntity;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
