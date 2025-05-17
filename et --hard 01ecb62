@@ -1,0 +1,25 @@
+[33m01ecb62[m[33m ([m[1;36mHEAD[m[33m, [m[1;32mexame[m[33m)[m HEAD@{0}: reset: moving to 01ecb62
+[33mab1d254[m[33m ([m[1;31morigin/exame[m[33m)[m HEAD@{1}: pull --rebase origin exame (start): checkout ab1d25425133a8860f4a57638ac74a3418be0972
+[33m01ecb62[m[33m ([m[1;36mHEAD[m[33m, [m[1;32mexame[m[33m)[m HEAD@{2}: commit: cadastro de consultas e exames separados
+[33m28e624e[m HEAD@{3}: commit: alteração econusulta e ajuste do cod todo
+[33m24ed714[m HEAD@{4}: commit (merge): resolução de conflitos
+[33mddff17c[m HEAD@{5}: commit: ele que quer
+[33m4feb624[m HEAD@{6}: reset: moving to HEAD
+[33m4feb624[m HEAD@{7}: reset: moving to HEAD
+[33m4feb624[m HEAD@{8}: reset: moving to HEAD
+[33m4feb624[m HEAD@{9}: reset: moving to HEAD
+[33m4feb624[m HEAD@{10}: reset: moving to HEAD
+[33m4feb624[m HEAD@{11}: commit (merge): Merge branch 'exame' of https://github.com/gabrielatakeda/clinix into exame
+[33m9571ffd[m HEAD@{12}: commit: salvando alterações
+[33m9ced632[m HEAD@{13}: commit: arrumei vizualmente
+[33m9100eeb[m HEAD@{14}: commit: ajustei as datas
+[33mfa591d7[m HEAD@{15}: commit: tirei imports desnecessarios
+[33m10f151d[m HEAD@{16}: commit: crud amostras ok
+[33m250725a[m HEAD@{17}: commit: crud funcionando
+[33m9bdc18d[m HEAD@{18}: commit: cadastro, listagem e atualizar
+[33m687ddcd[m HEAD@{19}: commit: service
+[33m5c423f4[m HEAD@{20}: commit: alerei amostras
+[33md869502[m[33m ([m[1;32ma-[m[33m)[m HEAD@{21}: checkout: moving from consulta to exame
+[33meb27ee4[m[33m ([m[1;31morigin/consulta[m[33m, [m[1;32mconsulta[m[33m)[m HEAD@{22}: commit: implementei repository, entity e iniciei o crud
+[33m328c97c[m HEAD@{23}: checkout: moving from main to consulta
+[33mfce4b08[m[33m ([m[1;32mmain[m[33m)[m HEAD@{24}: clone: from https://github.com/gabrielatakeda/clinix.git

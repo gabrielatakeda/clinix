@@ -116,4 +116,12 @@ public class AmostrasLabEntity {
     public void setStatus(StatusAmostraLab status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + id_amostralab +
+                "\nNome Paciente: "  + paciente +
+                "\nMedico: " + medico +
+                "\nData: " + dataColeta;
+    }
 }

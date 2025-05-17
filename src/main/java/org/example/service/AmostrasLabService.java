@@ -136,35 +136,149 @@ public class AmostrasLabService {
         }
     }
 
-    public void printMenu(Scanner sc, AmostrasLabService amostrasLabService) {
+    public void printMenu(Scanner sc) {
+        int opcao = -1;
+        StatusAmostraLab status = null;
+
+        while (opcao != 0) {
+            System.out.println("\n==== MENU AMOSTRAS ====");
+            System.out.println("1. Listar amostras por status");
+            System.out.println("2. Atualizar status da amostra");
+            System.out.println("3. Deletar amostra");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha uma opção: ");
+            opcao = sc.nextInt();
+            sc.nextLine(); // limpar buffer
+
+            switch (opcao) {
+                case 1:
+                    printMenuListagem(sc,status);
+                    break;
+                case 2:
+                    status = StatusAmostraLab.PENDENTE;
+                    atualizarStatus(status,sc);
+                    break;
+                case 3:
+                    deletarAmostra(sc);
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu anterior...");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
+    }
+
+
+    public void printMenuListagem(Scanner sc,StatusAmostraLab status) {
+        AmostrasLabService amostrasLabService = new AmostrasLabService();
 
         int opcao;
-        System.out.println("\n==== MENU AMOSTRAS ====");
-        System.out.println("1. Atualizar amostra");
-        System.out.println("2. Listar todas as amostras");
-        System.out.println("3. Cancelar/Deletar amostras");
-        System.out.println("4. Retornar ao menu anterior");
+        System.out.println("\n==== MENU LISTAGEM AMOSTRAS ====");
+        System.out.println("--Lista de exames por status--");
+        System.out.println("1. Concluídos");
+        System.out.println("2. Pendentes");
+        System.out.println("3. Inconclusivo");
+        System.out.println("0. Voltar");
         System.out.print("Escolha uma opção: ");
         opcao = sc.nextInt();
         sc.nextLine(); // limpar buffer
 
+
+
         switch (opcao) {
             case 1:
+                listarPorStatus(StatusAmostraLab.CONCLUIDO, sc);
                 break;
             case 2:
-                amostrasLabService.exibirAmostras();
+                listarPorStatus(StatusAmostraLab.PENDENTE, sc);
                 break;
             case 3:
-                System.out.print("\nDigite o ID da consulta que deseja deletar: ");
-                Long id = sc.nextLong();
-                sc.nextLine(); // limpar buffer
-                amostrasLabService.removerPorId(id);
+                listarPorStatus(StatusAmostraLab.INCONCLUSIVO, sc);
                 break;
-            case 4:
+            case 0:
                 System.out.println("Saindo...");
                 break;
             default:
                 System.out.println("Opção inválida.");
         }
-    }
-}
+        }
+
+        public void listarPorStatus(StatusAmostraLab status, Scanner sc) {
+            List<AmostrasLabEntity> amostras = amostraRepository.buscarPorStatus(status);
+
+            if (amostras.isEmpty()) {
+                System.out.println("Nenhuma amostra com status " + status + " encontrada.");
+                return;
+            }
+
+            System.out.println("\n=== Amostras com status: " + status + " ===");
+            for (AmostrasLabEntity a : amostras) {
+                System.out.println("ID: " + a.getId_amostralab());
+                System.out.println("Paciente: " + a.getPaciente());
+                System.out.println("Medico: " + a.getMedico());
+                System.out.println("Tipo do Exame: " + a.getTipoExame());
+                System.out.println("Data da Coleta: " + a.getDataColeta().format(formatter));
+                if (a.getResultado() != null && !a.getResultado().trim().isEmpty()) {
+                    System.out.println("Resultado: " + a.getResultado());
+                }
+                System.out.println("Status: " + a.getStatus());
+                System.out.println("----------------------------");
+            }
+
+        }
+
+
+            public void atualizarStatus(StatusAmostraLab status,Scanner sc) {
+                listarPorStatus(status, sc);
+                AmostrasLabEntity amostra = new AmostrasLabEntity();
+
+                System.out.println("Digite o ID do exame que quer atualizar: ");
+                System.out.println("Status atual: " + amostra.getStatus());
+                System.out.println("Escolha o novo status:");
+                System.out.println("1. Concluido");
+                System.out.println("2. Inconclusivel");
+                System.out.print("Escolha uma opção");
+                var opcao = sc.nextInt();
+                StatusAmostraLab novoStatus  = null;
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Qual o resultado do exame? ");
+                        String resul = sc.nextLine();
+                        amostra.setResultado(resul);
+                        novoStatus = StatusAmostraLab.CONCLUIDO;
+                    break;
+                    case 2:
+                        novoStatus = StatusAmostraLab.INCONCLUSIVO;
+                    break;
+                    default:
+                        System.out.println("Opçao invalida!");
+                    break;
+                }
+
+                try {
+                    if (novoStatus != null) {
+                        amostra.setStatus(novoStatus);
+                        amostraRepository.atualizar(amostra);
+                        System.out.println("Status atualizado com sucesso!");
+                    } else {
+                        System.out.println("Erro ao atualizar: status inválido.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Status inválido.");
+                }
+            }
+
+            public void deletarAmostra(Scanner sc){
+            listarAmostra();
+
+                System.out.println("Digite o ID do exame a ser excluido ");
+                Long opcao = sc.nextLong();
+                sc.nextLine();
+                removerPorId(opcao);
+            }
+
+        }
+
+

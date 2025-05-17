@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.Repository.AmostrasLabRepository;
 import org.example.Repository.ConsultaRepository;
 import org.example.Repository.ProdutoRepository;
 
@@ -64,14 +65,14 @@ public class MenuService {
                     System.out.println("Gerenciar Estoque");
                     ProdutoRepository produtoRepository = new ProdutoRepository(em); // Passando EntityManager corretamente
                     ProdutoServices produtoServices = new ProdutoServices(produtoRepository);
-
                     produtoServices.printMenu(sc, produtoServices);
                     break;
 
                 case 6:
                     System.out.println("Exame");
+                    AmostrasLabService amostrasServices = new AmostrasLabService();
+                    amostrasServices.printMenu(sc);
                     break;
-
                 case 7:
                     ConsultaRepository consultaRepository = new ConsultaRepository(em); // Passando EntityManager
                     boolean saida = true;
