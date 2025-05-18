@@ -1,25 +1,16 @@
 package org.example;
 
-import org.example.entity.AmostrasLabEntity;
-import org.example.entity.ConsultaEntity;
 import org.example.enums.TypeUser;
-import org.example.service.AmostrasLabService;
 import org.example.service.ConsultaService;
-
 import org.example.repository.*;
 import org.example.service.*;
-
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Scanner;
 
 public class Main {
 
-
-    //testando
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -36,7 +27,7 @@ public class Main {
             throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
         }
 
-        // Instancia os repositórios passando EntityManager onde necessário
+
         UsuarioRepository usuarioRepository = new UsuarioRepository(em);
         UsuarioServices usuarioServices = new UsuarioServices(usuarioRepository);
 

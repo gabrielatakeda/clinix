@@ -1,6 +1,6 @@
 package org.example.service;
 
-import net.bytebuddy.asm.Advice;
+
 import org.example.entity.AmostrasLabEntity;
 import org.example.entity.ConsultaEntity;
 
@@ -8,7 +8,6 @@ import org.example.repository.ConsultaRepository;
 import org.example.repository.CustomizerFactory;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -36,7 +35,7 @@ public class ConsultaService {
 //    }
 
     public void exibirConsultas() {
-        List<ConsultaEntity> consultas = consultaRepository.findAll();
+        List<ConsultaEntity> consultas = consultaRepository.listarTodos();
 
         if (consultas.isEmpty()) {
             System.out.println("\nNenhuma consulta encontrada.");
@@ -53,7 +52,7 @@ public class ConsultaService {
 
 
     public ConsultaEntity salvarConsulta(ConsultaEntity consulta) {
-        List<ConsultaEntity> todasConsultas = consultaRepository.findAll();
+        List<ConsultaEntity> todasConsultas = consultaRepository.listarTodos();
 
         for (ConsultaEntity c : todasConsultas) {
             if (c.getData_consulta().equals(consulta.getData_consulta())) {
@@ -66,9 +65,9 @@ public class ConsultaService {
         //return consultaRepository.salvar(consulta);
     }
 
-    public List<ConsultaEntity> listarConsultas() {
-        return consultaRepository.findAll();
-    }
+//    public List<ConsultaEntity> listarConsultas() {
+//        return consultaRepository.listarTodos();
+//    }
 
 
 

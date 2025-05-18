@@ -27,6 +27,15 @@ public class PacienteEntity{
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EnderecoEntity> enderecos = new ArrayList<>();
 
+
+
+//    @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<EnderecoEntity> consulta = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "amostralab", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<EnderecoEntity> amostralab = new ArrayList<>();
+
+
     public PacienteEntity(){ //Construtor vazio
 
     }

@@ -23,24 +23,24 @@
         <property name="connection.username">postgres</property> 
         <property name="connection.password">nevefofa</property> 
         -->
+        <!--
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/clinix</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">triotwix123</property>
+        -->
 
-        <!--
         <property name="connection.url">jdbc:postgresql://localhost:5432/clinix</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">nevefofa</property>
-        -->
-        <!-- Dialeto do PostgreSQL -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
-        <!-- Estratégia de atualização do schema -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <property name="hibernate.show_sql">true</property>
- 
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> <!-- DB Dialect -->
+        <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
+
+        <property name="show_sql">true</property> <!-- Show SQL in console -->
+        <property name="format_sql">true</property> <!-- Show SQL formatted -->
+
         <!-- Classes mapeadas -->
         <mapping class="org.example.entity.UsuarioEntity"/>
         <mapping class="org.example.entity.RelatorioEntity"/>

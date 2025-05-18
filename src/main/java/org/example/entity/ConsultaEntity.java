@@ -1,12 +1,15 @@
 package org.example.entity;
 
+import org.example.enums.StatusConsulta;
+import org.example.entity.PacienteEntity;
+
 import java.time.LocalDateTime;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "consulta",schema = "consultorio")
+@Table(name = "consulta")
 public class ConsultaEntity {
 
 
@@ -17,12 +20,9 @@ public class ConsultaEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID_Consulta;
 
-
     @Column(name = "data_consulta")
     private LocalDateTime data_consulta;
 
-
-    //NOME DO QUE???????????
     @Column(name = "nome")
     private String nome;
 
@@ -37,23 +37,13 @@ public class ConsultaEntity {
     @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
-    // @Column(name = "motivo")
-    // private String motivo;
-
     @Column(name = "status")
-    private String status;
-
-    // @Column(name = "prescricao")
-    // private String prescricao;
-
-    // @Column(name = "observacoes")
-    // private String observacoes;
-
+    private StatusConsulta status;
 
     public ConsultaEntity (){
     }
 
-    public ConsultaEntity(Long ID_Consulta, LocalDateTime data_consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, String status) {
+    public ConsultaEntity(Long ID_Consulta, LocalDateTime data_consulta, String nome, LocalDateTime localDateTime, MedicoEntity medico, PacienteEntity paciente, StatusConsulta status) {
         this.ID_Consulta = ID_Consulta;
         this.data_consulta = data_consulta;
         this.nome = nome;
@@ -122,11 +112,20 @@ public class ConsultaEntity {
         this.paciente = paciente;
     }
 
-    public String getStatus() {
+    public StatusConsulta getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusConsulta status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + ID_Consulta +
+                "\nNome Paciente: "  + paciente +
+                "\nMedico: " + medico +
+                "\nData: " + data_consulta;
+    }
+
 }
