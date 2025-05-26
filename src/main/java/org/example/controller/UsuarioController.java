@@ -20,9 +20,9 @@ public class UsuarioController {
 //        this.usuarioRepository = usuarioRepository;
 //    }
 
-//    private final EntityManager em = CustomizerFactory.getEntityManager();
-//    private final UsuarioRepository usuarioRepository = new UsuarioRepository(em);
-    UsuarioRepository usuarioRepository = new UsuarioRepository();
+    private final EntityManager em = CustomizerFactory.getEntityManager();
+    private final UsuarioRepository usuarioRepository = new UsuarioRepository(em);
+//    UsuarioRepository usuarioRepository = new UsuarioRepository();
 
     public void cadastrarUsuario() {
         while (true) {

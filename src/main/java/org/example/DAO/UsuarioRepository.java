@@ -9,7 +9,7 @@ import java.util.Optional;
 public class UsuarioRepository {
     private EntityManager em;
 
-    public UsuarioRepository(){}
+    public UsuarioRepository() {}
 
     public UsuarioRepository(EntityManager em) {
         this.em = em;
@@ -18,12 +18,11 @@ public class UsuarioRepository {
     public Optional<Usuario> buscarPorCpf(String cpf) {
         try {
             List<Usuario> results = em.createQuery(
-                            "SELECT u FROM UsuarioEntity u WHERE u.cpf = :cpf", Usuario.class)
+                            "SELECT u FROM Usuario u WHERE u.cpf = :cpf", Usuario.class)
                     .setParameter("cpf", cpf)
                     .getResultList();
 
-            if (results.isEmpty()) return Optional.empty();
-            return Optional.of(results.get(0));
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
         } catch (Exception e) {
             System.out.println("Erro ao buscar por CPF: " + e.getMessage());
             return Optional.empty();
@@ -33,12 +32,11 @@ public class UsuarioRepository {
     public Optional<Usuario> buscarPorCrm(String crm) {
         try {
             List<Usuario> results = em.createQuery(
-                            "SELECT u FROM UsuarioEntity u WHERE u.crm = :crm", Usuario.class)
+                            "SELECT u FROM Usuario u WHERE u.crm = :crm", Usuario.class)
                     .setParameter("crm", crm)
                     .getResultList();
 
-            if (results.isEmpty()) return Optional.empty();
-            return Optional.of(results.get(0));
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
         } catch (Exception e) {
             System.out.println("Erro ao buscar por CRM: " + e.getMessage());
             return Optional.empty();
@@ -48,12 +46,11 @@ public class UsuarioRepository {
     public Optional<Usuario> buscarPorUsuario(String usuario) {
         try {
             List<Usuario> results = em.createQuery(
-                            "SELECT u FROM UsuarioEntity u WHERE u.usuario = :usuario", Usuario.class)
+                            "SELECT u FROM Usuario u WHERE u.usuario = :usuario", Usuario.class)
                     .setParameter("usuario", usuario)
                     .getResultList();
 
-            if (results.isEmpty()) return Optional.empty();
-            return Optional.of(results.get(0));
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
         } catch (Exception e) {
             System.out.println("Erro ao buscar por nome de usuário: " + e.getMessage());
             return Optional.empty();
@@ -63,12 +60,11 @@ public class UsuarioRepository {
     public Optional<Usuario> buscarPorLogin(String login) {
         try {
             List<Usuario> results = em.createQuery(
-                            "SELECT u FROM UsuarioEntity u WHERE u.login = :login", Usuario.class)
+                            "SELECT u FROM Usuario u WHERE u.login = :login", Usuario.class)
                     .setParameter("login", login)
                     .getResultList();
 
-            if (results.isEmpty()) return Optional.empty();
-            return Optional.of(results.get(0));
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
         } catch (Exception e) {
             System.out.println("Erro ao buscar por login: " + e.getMessage());
             return Optional.empty();
