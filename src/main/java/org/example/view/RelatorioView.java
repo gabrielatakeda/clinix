@@ -25,15 +25,15 @@ public class RelatorioView {
                     System.out.println("Relatório de Pacientes por Médico");
                     System.out.print("Digite o CRM do médico para gerar o relatório: ");
                     String crm = sc.nextLine();
-                    RelatorioPacienteMedicoController relatorioPacienteMedicoController = new RelatorioPacienteMedicoController(crm);
-                    relatorioPacienteMedicoController.gerarRelatorio();
+                    RelatorioPacienteMedicoController relatorioPacienteMedicoController = new RelatorioPacienteMedicoController();
+                    relatorioPacienteMedicoController.gerarRelatorio(crm);
                     break;
                 case 2:
                     System.out.println("Relatório de Consultas por Paciente");
                     System.out.print("Digite o CPF do paciente para gerar o relatório: ");
                     String cpf = sc.nextLine();
-                    RelatorioConsultaPacienteController relatorioConsultaPacienteController = new RelatorioConsultaPacienteController(cpf);
-                    relatorioConsultaPacienteController.gerarRelatorio();
+                    RelatorioConsultaPacienteController relatorioConsultaPacienteController = new RelatorioConsultaPacienteController();
+                    relatorioConsultaPacienteController.gerarRelatorio(cpf);
                     break;
                 case 3:
                     System.out.println("Voltando...");
