@@ -27,7 +27,7 @@ public class MainMenuView {
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setVisible(false);
-                //CadastroView.showCadastroScreen();
+                UsuarioView.showCadastroScreen();
             }
         });
 
