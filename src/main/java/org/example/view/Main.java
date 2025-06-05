@@ -1,11 +1,9 @@
 package org.example.view;
 
-import org.example.DAO.UsuarioRepository;
-import org.example.controller.UsuarioController;
 import org.hibernate.cfg.Configuration;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.Scanner;
 
 public class Main {
 
@@ -21,11 +19,10 @@ public class Main {
             throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
         }
 
-        try (Scanner sc = new Scanner(System.in)) {
-            LoginView loginView = new LoginView();
-            loginView.iniciar(sc);
-        } catch (Exception e){
-            System.out.println("Erro para iniciar o Sistema.");
+        try {
+            MainMenuView.showMainMenu();
+        } catch (Exception e) {
+            System.out.println("Erro ao iniciar o Sistema.");
             em.close();
         }
     }
