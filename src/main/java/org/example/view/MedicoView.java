@@ -16,9 +16,9 @@ public class MedicoView {
     public void exibirMenu() {
         JFrame frame = new JFrame("Menu Médico");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 400); // Tamanho fixo ideal
+        frame.setSize(600, 400); // Tamanho fixo ideal
         frame.setLocationRelativeTo(null); // Centraliza na tela
-        frame.setLayout(new GridBagLayout()); // Centraliza conteúdo vertical e horizontal
+        frame.setLayout(new BorderLayout()); // Centraliza conteúdo vertical e horizontal
 
         // Painel com os botões e título
         JPanel painelConteudo = new JPanel();

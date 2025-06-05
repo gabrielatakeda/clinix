@@ -19,29 +19,54 @@ public class PacienteView {
 
     public void exibirMenu() {
         JFrame frame = new JFrame("Menu Paciente");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new GridLayout(6, 1));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
 
-        JButton btnCadastrar = new JButton("Cadastrar Paciente");
-        JButton btnListar = new JButton("Listar Pacientes");
-        JButton btnAtualizar = new JButton("Atualizar Paciente");
-        JButton btnRemover = new JButton("Remover Paciente");
-        JButton btnSair = new JButton("Sair");
+        // Painel de fundo (cor diferente para destacar o "quadrado branco")
+        JPanel painelFundo = new JPanel(new GridBagLayout());
+        painelFundo.setBackground(new Color(240, 240, 240)); // cinza claro
 
-        frame.add(new JLabel("MENU PACIENTE", SwingConstants.CENTER));
-        frame.add(btnCadastrar);
-        frame.add(btnListar);
-        frame.add(btnAtualizar);
-        frame.add(btnRemover);
-        frame.add(btnSair);
+        // Painel branco centralizado com conteúdo
+        JPanel painelConteudo = new JPanel();
+        painelConteudo.setLayout(new BoxLayout(painelConteudo, BoxLayout.Y_AXIS));
+        painelConteudo.setBackground(Color.WHITE);
+        painelConteudo.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1), // borda fina cinza
+                BorderFactory.createEmptyBorder(20, 50, 20, 50) // margem interna
+        ));
 
-        btnCadastrar.addActionListener(e -> cadastrarPaciente());
-        btnListar.addActionListener(e -> listarPacientes());
-        btnAtualizar.addActionListener(e -> atualizarPaciente());
-        btnRemover.addActionListener(e -> removerPaciente());
-        btnSair.addActionListener(e -> frame.dispose());
+        JLabel titulo = new JLabel("MENU PACIENTE", SwingConstants.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 22));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        painelConteudo.add(titulo);
+        painelConteudo.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        String[] nomes = {"Cadastrar Paciente", "Listar Pacientes", "Atualizar Paciente", "Remover Paciente", "Sair"};
+        JButton[] botoes = new JButton[nomes.length];
+
+        for (int i = 0; i < nomes.length; i++) {
+            botoes[i] = new JButton(nomes[i]);
+            botoes[i].setMaximumSize(new Dimension(200, 30));
+            botoes[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+            botoes[i].setFocusPainted(false);
+            painelConteudo.add(botoes[i]);
+            painelConteudo.add(Box.createRigidArea(new Dimension(0, 10)));
+        }
+
+        // Ações dos botões
+        botoes[0].addActionListener(e -> cadastrarPaciente());
+        botoes[1].addActionListener(e -> listarPacientes());
+        botoes[2].addActionListener(e -> atualizarPaciente());
+        botoes[3].addActionListener(e -> removerPaciente());
+        botoes[4].addActionListener(e -> frame.dispose());
+
+        // Adiciona o painel branco ao painel de fundo
+        painelFundo.add(painelConteudo, new GridBagConstraints());
+
+        // Define o painel de fundo como conteúdo principal da janela
+        frame.setContentPane(painelFundo);
         frame.setVisible(true);
     }
 
@@ -160,10 +185,15 @@ public class PacienteView {
     private void removerPaciente() {
         String cpf = JOptionPane.showInputDialog("Digite o CPF do paciente para remover:");
         if (cpf != null) {
-            pacienteController.removerPacienteCPF(cpf);
-            JOptionPane.showMessageDialog(null, "Paciente removido com sucesso!");
-        }
+            boolean removido = pacienteController.removerPacienteCPF(cpf);
+            if (removido) {
+                JOptionPane.showMessageDialog(null, "Paciente removido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Paciente não encontrado com esse CPF.");
+            }
     }
+}
+
 }
 
 //    PacienteController pacienteController = new PacienteController();

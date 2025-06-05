@@ -53,13 +53,15 @@ public class PacienteController {
         }
     }
 
-    public void removerPacienteCPF(String cpf) {
+    public boolean removerPacienteCPF(String cpf) {
         Paciente paciente = pacienteRepository.buscarPorCpf(cpf);
         if (paciente != null) {
             pacienteRepository.remover(paciente);
             System.out.println("Paciente removido com sucesso!");
+            return true;
         } else {
             System.out.println("Paciente com CPF " + cpf + " não encontrado.");
+            return false;
         }
     }
 
