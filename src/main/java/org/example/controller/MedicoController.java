@@ -34,13 +34,15 @@ public class MedicoController {
         return medicoRepository.buscarTodos();
     }
 
-    public void removerMedicoCRM(String crm) {
+    public boolean removerMedicoCRM(String crm) {
         Medico medico = medicoRepository.buscarPorCrm(crm);
         if (medico != null) {
             medicoRepository.remover(medico);
             System.out.println("Médico removido com sucesso!");
+            return true;
         } else {
             System.out.println("Médico com CRM " + crm + " não encontrado.");
+            return false;
         }
     }
 

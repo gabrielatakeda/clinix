@@ -27,11 +27,11 @@ public class MenuView {
             switch (opcao) {
                 case 1:
                     PacienteView pacienteView = new PacienteView();
-                    pacienteView.printMenu();
+                    pacienteView.exibirMenu();
                     break;
                 case 2:
                     MedicoView medicoView = new MedicoView();
-                    medicoView.printMenu();
+                    medicoView.exibirMenu();
                     break;
                 case 3:
                     ConsultaView consultaView = new ConsultaView();
