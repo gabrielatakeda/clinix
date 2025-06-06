@@ -11,22 +11,25 @@ public class Main {
 
     public static void main(String[] args) {
 
-        EntityManagerFactory entityManagerFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .buildSessionFactory();
+//        EntityManagerFactory entityManagerFactory = new Configuration()
+//                .configure("hibernate.cfg.xml")
+//                .buildSessionFactory();
+//
+//        EntityManager em = entityManagerFactory.createEntityManager();
+//
+//        if (em == null) {
+//            throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
+//        }
+//
+//        try (Scanner sc = new Scanner(System.in)) {
+//            LoginView loginView = new LoginView();
+//            loginView.iniciar(sc);
+//        } catch (Exception e){
+//            System.out.println("Erro para iniciar o Sistema.");
+//            em.close();
+//        }
+    ConsultaView consultaView = new ConsultaView();
+    consultaView.printMenu();
 
-        EntityManager em = entityManagerFactory.createEntityManager();
-
-        if (em == null) {
-            throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
-        }
-
-        try (Scanner sc = new Scanner(System.in)) {
-            LoginView loginView = new LoginView();
-            loginView.iniciar(sc);
-        } catch (Exception e){
-            System.out.println("Erro para iniciar o Sistema.");
-            em.close();
-        }
     }
 }
