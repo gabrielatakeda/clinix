@@ -73,18 +73,6 @@ public class ExameController {
 
     }
 
-//    public AmostrasLabEntity salvarAmostra(AmostrasLabEntity amostra) {
-//        List<AmostrasLabEntity> todasAmostras = amostraRepository.findAll();
-//
-//        for (AmostrasLabEntity c : todasAmostras) {
-//            if (c.getDataColeta().equals(amostra.getDataColeta())) {
-//                System.out.println("\n\tConsulta já existente nessa data! ");
-//                return c; // retorna a consulta existente
-//            }
-//        }
-//        return amostraRepository.salvar(amostra);
-//    }
-
     public List<Exame> listarAmostra() {
         return amostraRepository.findAll();
     }
@@ -113,8 +101,6 @@ public class ExameController {
             System.out.println("Consulta com ID " + id + " não encontrada.");
         }
     }
-
-
 
 
     public void listarPorStatus(StatusAmostraLab status) {
