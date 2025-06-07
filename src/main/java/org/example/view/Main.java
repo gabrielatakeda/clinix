@@ -20,16 +20,16 @@ public class Main {
 //        if (em == null) {
 //            throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
 //        }
+//            em.close();
+//        }
+        ConsultaView consultaView = new ConsultaView();
+        consultaView.printMenu();
+
+    }
+}
 //
 //        try (Scanner sc = new Scanner(System.in)) {
 //            LoginView loginView = new LoginView();
 //            loginView.iniciar(sc);
 //        } catch (Exception e){
 //            System.out.println("Erro para iniciar o Sistema.");
-//            em.close();
-//        }
-    ConsultaView consultaView = new ConsultaView();
-    consultaView.printMenu();
-
-    }
-}

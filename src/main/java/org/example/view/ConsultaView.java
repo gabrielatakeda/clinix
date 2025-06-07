@@ -102,7 +102,7 @@ public class ConsultaView {
         public void printMenu() {
             JFrame frame = new JFrame("MENU CONSULTA");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setSize(600, 400); // Tamanho fixo ideal
+            frame.setSize(300, 300); // Tamanho fixo ideal
             frame.setLocationRelativeTo(null); // Centraliza na tela
             frame.setLayout(new BorderLayout()); // Centraliza conteúdo vertical e horizontal
 
@@ -113,7 +113,7 @@ public class ConsultaView {
             painel.setBackground(Color.WHITE);
 
             JLabel titulo = new JLabel("MENU CONSULTA", SwingConstants.CENTER);
-            titulo.setFont(new Font("Arial", Font.BOLD, 22));
+            titulo.setFont(new Font("Arial", Font.BOLD, 20));
             titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             painel.add(titulo);
@@ -218,15 +218,143 @@ public class ConsultaView {
         }
     private void editarConsulta(){
 
+        JFrame frame = new JFrame();
+        frame.setSize(390, 200);
+        frame.getContentPane().setLayout(null);
+        frame.setLocationRelativeTo(null); // Centraliza na tela
 
+        JLabel editarLabel = new JLabel("EDITAR CONSULTA");
+        editarLabel.setBounds(128, 15, 124, 14);
+        frame.getContentPane().add(editarLabel);
+
+        JLabel idLabel = new JLabel("ID da consulta:");
+        idLabel.setBounds(21, 40, 124, 14);
+        frame.getContentPane().add(idLabel);
+
+        JTextField idField = new JTextField();
+        idField.setBounds(165, 37, 195, 20);
+        frame.getContentPane().add(idField);
+        idField.setColumns(10);
+
+        JLabel lblNewLabel_2 = new JLabel("Nova data(dd/mm/aaaa):");
+        lblNewLabel_2.setBounds(21, 76, 151, 14);
+        frame.getContentPane().add(lblNewLabel_2);
+
+        JTextField dataField = new JTextField();
+        dataField.setBounds(165, 73, 195, 20);
+        frame.getContentPane().add(dataField);
+        dataField.setColumns(10);
+
+        JButton btnNewButton = new JButton("Confirmar");
+        btnNewButton.setBounds(248, 131, 102, 23);
+        frame.getContentPane().add(btnNewButton);
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (idField.getText().trim().isEmpty() || dataField.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Se os campos estiverem preenchidos:
+                JOptionPane.showMessageDialog(null, "Consulta editada com sucesso!");
+                frame.setVisible(false);
+                printMenu();
+            }
+        });
+
+        JButton btnNewButton_1 = new JButton("Voltar");
+        btnNewButton_1.setBounds(10, 131, 89, 23);
+        frame.getContentPane().add(btnNewButton_1);
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+               printMenu();
+            }
+        });
+
+        frame.setVisible(true);
     }
     private void listarConsulta(){
 
+        JFrame frame = new JFrame();
+        frame.setSize(300, 246);
+        frame.getContentPane().setLayout(null);
+        frame.setLocationRelativeTo(null); // Centraliza na tela
 
+
+        JLabel listagemLabel = new JLabel("Listagem consultas agendadas");
+        listagemLabel.setBounds(63, 11, 183, 14);
+        frame.getContentPane().add(listagemLabel);
+
+        JScrollBar scrollBar = new JScrollBar();
+        scrollBar.setBounds(257, 29, 17, 167);
+        frame.getContentPane().add(scrollBar);
+
+        JLabel lblNewLabel_1 = new JLabel("aqui havera consultas");
+        lblNewLabel_1.setBounds(38, 62, 183, 14);
+        frame.getContentPane().add(lblNewLabel_1);
+
+        JButton btnNewButton = new JButton("Voltar");
+        btnNewButton.setBounds(10, 173, 89, 23);
+        frame.getContentPane().add(btnNewButton);
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                printMenu();
+            }
+        });
+
+        frame.setVisible(true);
     }
+
     private void cancelarConsulta(){
+        JFrame frame = new JFrame();
+        frame.setSize(310, 194);
+        frame.getContentPane().setLayout(null);
+        frame.setLocationRelativeTo(null); // Centraliza na tela
+
+        JLabel cancelamentoLabel = new JLabel("CANCELAMENTO DE CONSULTAS");
+        cancelamentoLabel.setBounds(52, 11, 198, 14);
+        frame.getContentPane().add(cancelamentoLabel);
+
+        JLabel dataLabel = new JLabel("Informe a data da consulta que deseja deletar:        ");
+        dataLabel.setBounds(22, 47, 293, 14);
+        frame.getContentPane().add(dataLabel);
+
+        JTextField dataField = new JTextField();
+        dataField.setText("(dd/mm/aaaa)");
+        dataField.setBounds(22, 72, 238, 20);
+        frame.getContentPane().add(dataField);
+        dataField.setColumns(10);
+
+        JButton btnNewButton = new JButton("Voltar");
+        btnNewButton.setBounds(22, 110, 89, 23);
+        frame.getContentPane().add(btnNewButton);
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+            printMenu();
+            }
+        });
 
 
+        JButton btnNewButton_1 = new JButton("Concluir");
+        btnNewButton_1.setBounds(161, 110, 99, 23);
+        frame.getContentPane().add(btnNewButton_1);
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (dataField.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                // Se os campos estiverem preenchidos:
+                JOptionPane.showMessageDialog(null, "Consulta cancelada com sucesso!");
+                frame.setVisible(false);
+                printMenu();
+            }
+        });
+
+        frame.setVisible(true);
     }
 
 }
