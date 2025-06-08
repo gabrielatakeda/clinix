@@ -22,8 +22,10 @@ public class Main {
 //        }
 //            em.close();
 //        }
-        ConsultaView consultaView = new ConsultaView();
-        consultaView.printMenu();
+//        ConsultaView consultaView = new ConsultaView();
+//        consultaView.printMenu();
+        ExameView exameView = new ExameView();
+        exameView.printMenu();
 
     }
 }

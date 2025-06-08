@@ -151,7 +151,12 @@ public class ConsultaView {
                 frame.getContentPane().setLayout(null);
                  frame.setLocationRelativeTo(null); // Centraliza na tela
 
-                JLabel cpfLabel = new JLabel("Insira o CPF do paciente: ");
+            JLabel lblNewLabel_3 = new JLabel("AGENDAMENTO DE CONSULTA");
+            lblNewLabel_3.setBounds(132, 11, 217, 14);
+            frame.getContentPane().add(lblNewLabel_3);
+
+
+            JLabel cpfLabel = new JLabel("Insira o CPF do paciente: ");
                 cpfLabel.setBounds(10, 40, 153, 14);
                 frame.getContentPane().add(cpfLabel);
 
@@ -181,24 +186,20 @@ public class ConsultaView {
                 dataField.setColumns(10);
 
 
-                JButton btnNewButton = new JButton("Voltar");
-                btnNewButton.setBounds(10, 159, 99, 23);
-                frame.getContentPane().add(btnNewButton);
-                btnNewButton.addActionListener(new ActionListener() {
+                JButton voltarButton = new JButton("Voltar");
+                voltarButton.setBounds(10, 159, 99, 23);
+                frame.getContentPane().add(voltarButton);
+                voltarButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         frame.setVisible(false);
                         printMenu();
                     }
                 });
 
-                JLabel lblNewLabel_3 = new JLabel("AGENDAMENTO DE CONSULTA");
-                lblNewLabel_3.setBounds(132, 11, 217, 14);
-                frame.getContentPane().add(lblNewLabel_3);
-
-                JButton btnNewButton_1 = new JButton("Confirmar");
-                btnNewButton_1.setBounds(294, 159, 110, 23);
-                frame.getContentPane().add(btnNewButton_1);
-                btnNewButton_1.addActionListener(new ActionListener() {
+                JButton confirmarButton = new JButton("Confirmar");
+                confirmarButton.setBounds(294, 159, 110, 23);
+                frame.getContentPane().add(confirmarButton);
+                confirmarButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         if (cpfField.getText().trim().isEmpty() || crmField.getText().trim().isEmpty() || dataField.getText().trim().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
@@ -245,10 +246,10 @@ public class ConsultaView {
         frame.getContentPane().add(dataField);
         dataField.setColumns(10);
 
-        JButton btnNewButton = new JButton("Confirmar");
-        btnNewButton.setBounds(248, 131, 102, 23);
-        frame.getContentPane().add(btnNewButton);
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.setBounds(248, 131, 102, 23);
+        frame.getContentPane().add(confirmarButton);
+        confirmarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (idField.getText().trim().isEmpty() || dataField.getText().trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
@@ -262,10 +263,10 @@ public class ConsultaView {
             }
         });
 
-        JButton btnNewButton_1 = new JButton("Voltar");
-        btnNewButton_1.setBounds(10, 131, 89, 23);
-        frame.getContentPane().add(btnNewButton_1);
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton voltarButton = new JButton("Voltar");
+        voltarButton.setBounds(10, 131, 89, 23);
+        frame.getContentPane().add(voltarButton);
+        voltarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                printMenu();
@@ -294,10 +295,10 @@ public class ConsultaView {
         lblNewLabel_1.setBounds(38, 62, 183, 14);
         frame.getContentPane().add(lblNewLabel_1);
 
-        JButton btnNewButton = new JButton("Voltar");
-        btnNewButton.setBounds(10, 173, 89, 23);
-        frame.getContentPane().add(btnNewButton);
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton voltarButton = new JButton("Voltar");
+        voltarButton.setBounds(10, 173, 89, 23);
+        frame.getContentPane().add(voltarButton);
+        voltarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 printMenu();
@@ -327,21 +328,20 @@ public class ConsultaView {
         frame.getContentPane().add(dataField);
         dataField.setColumns(10);
 
-        JButton btnNewButton = new JButton("Voltar");
-        btnNewButton.setBounds(22, 110, 89, 23);
-        frame.getContentPane().add(btnNewButton);
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton voltarButton = new JButton("Voltar");
+        voltarButton.setBounds(10, 173, 89, 23);
+        frame.getContentPane().add(voltarButton);
+        voltarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-            printMenu();
+                printMenu();
             }
         });
 
-
-        JButton btnNewButton_1 = new JButton("Concluir");
-        btnNewButton_1.setBounds(161, 110, 99, 23);
-        frame.getContentPane().add(btnNewButton_1);
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton concluirButton = new JButton("Concluir");
+        concluirButton.setBounds(161, 110, 99, 23);
+        frame.getContentPane().add(concluirButton);
+        concluirButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (dataField.getText().trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);

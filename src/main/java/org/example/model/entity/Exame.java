@@ -15,9 +15,6 @@ public class Exame {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_amostralab;
 
-//    @Column(name = "datacoleta")
-//    private LocalDateTime dataColeta;
-
     @Column(name = "tipo")
     private String tipoExame;
 
@@ -27,15 +24,6 @@ public class Exame {
     @Column(name = "status")
     @Enumerated(EnumType.STRING) // OU ORDINAL
     private StatusAmostraLab status;
-
-//    @ManyToOne
-//    @JoinColumn(name = "id_medico") // nome da coluna da FK no banco
-//    private MedicoEntity medico;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "id_paciente")
-//    private PacienteEntity paciente;
-
 
     @ManyToOne
     @JoinColumn(name = "id_prontuario")
