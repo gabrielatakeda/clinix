@@ -35,7 +35,7 @@ public class MenuView {
                     break;
                 case 3:
                     ConsultaView consultaView = new ConsultaView();
-                    consultaView.printMenu();
+                    consultaView.exibirMenu();
                     break;
                 case 4:
                     ProntuarioView prontuarioView = new ProntuarioView();
