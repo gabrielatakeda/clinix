@@ -21,11 +21,11 @@ public class Main {
             throw new IllegalStateException("Erro crítico: EntityManager está nulo. Verifique a inicialização.");
         }
 
-        try (Scanner sc = new Scanner(System.in)) {
+        try {
             LoginView loginView = new LoginView();
-            loginView.iniciar(sc);
-        } catch (Exception e){
-            System.out.println("Erro para iniciar o Sistema.");
+            loginView.exibirMenu();
+        } catch (Exception e) {
+            System.out.println("Erro ao iniciar o Sistema.");
             em.close();
         }
     }

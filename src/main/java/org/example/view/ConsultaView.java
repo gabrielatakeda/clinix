@@ -18,7 +18,6 @@ import java.util.Scanner;
 
 public class ConsultaView {
 
-//    Scanner sc = new Scanner(System.in);
     ConsultaController consultaController = new ConsultaController();
 
     public void exibirMenu() {
