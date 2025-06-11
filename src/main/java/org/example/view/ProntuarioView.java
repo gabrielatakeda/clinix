@@ -5,6 +5,7 @@ import org.example.model.entity.Prontuario;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
@@ -20,8 +21,45 @@ public class ProntuarioView extends JFrame {
     private JTextField cpfField;
 
 
-    public void exibirMenu(){
+    public void exibirMenu() {
+        setTitle("CLINIX - Menu Prontuários");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        setLocationRelativeTo(null); // centraliza a janela
 
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel titulo = new JLabel("Menu de Prontuários");
+        titulo.setFont(new Font("Yu Gothic UI", Font.BOLD, 18));
+        titulo.setBounds(120, 20, 250, 30);
+        contentPane.add(titulo);
+
+        JButton btnBuscarPorCPF = new JButton("Buscar por CPF");
+        btnBuscarPorCPF.setBounds(125, 70, 200, 35);
+        contentPane.add(btnBuscarPorCPF);
+        btnBuscarPorCPF.addActionListener(e -> prontuarioCPF());
+
+        JButton btnListarProntuarios = new JButton("Listar Prontuários");
+        btnListarProntuarios.setBounds(125, 120, 200, 35);
+        contentPane.add(btnListarProntuarios);
+        btnListarProntuarios.addActionListener(e -> listarProntuario());
+
+        JButton btnEditarProntuario = new JButton("Editar Prontuário");
+        btnEditarProntuario.setBounds(125, 170, 200, 35);
+        contentPane.add(btnEditarProntuario);
+        btnEditarProntuario.addActionListener(e -> editarProntuario());
+
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.setBounds(10, 10, 80, 20);
+        contentPane.add(btnVoltar);
+        btnVoltar.addActionListener(e -> {
+            dispose(); // aqui você pode voltar ao menu principal do sistema geral
+        });
+
+        setVisible(true);
     }
 
     public void prontuarioCPF(){
